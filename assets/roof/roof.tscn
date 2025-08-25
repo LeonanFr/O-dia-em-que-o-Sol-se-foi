@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=3 uid="uid://drl6b52qrcn66"]
+
+[ext_resource type="Texture2D" uid="uid://d27vnuywgsyhp" path="res://assets/roof/modern_bedroom_10.jpg" id="1_t0u0n"]
+[ext_resource type="Texture2D" uid="uid://c2ai2cysgvnv6" path="res://assets/roof/modern_bedroom_14.png" id="2_kk34a"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1uu7i"]
+resource_name = "Ceiling"
+albedo_texture = ExtResource("1_t0u0n")
+roughness = 0.821115
+normal_enabled = true
+normal_texture = ExtResource("2_kk34a")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_sgfnw"]
+_surfaces = [{
+"aabb": AABB(-65.37, -1, 19.7301, 130.74, 2, 1e-05),
+"format": 34896654337,
+"index_count": 6,
+"index_data": PackedByteArray(0, 0, 1, 0, 2, 0, 0, 0, 3, 0, 1, 0),
+"name": "Ceiling",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray(0, 0, 255, 255, 0, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_nf88f"]
+resource_name = "Sketchfab_Scene_Modern Bedroom_Ceiling_0"
+_surfaces = [{
+"aabb": AABB(-65.37, -1, 19.7301, 130.74, 2, 1e-05),
+"attribute_data": PackedByteArray(255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 128, 63),
+"format": 34896654455,
+"index_count": 6,
+"index_data": PackedByteArray(0, 0, 1, 0, 2, 0, 0, 0, 3, 0, 1, 0),
+"material": SubResource("StandardMaterial3D_1uu7i"),
+"name": "Ceiling",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray(0, 0, 255, 255, 0, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 191, 255, 191, 255, 191, 255, 191, 255, 191, 255, 191, 255, 191, 255, 191)
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_sgfnw")
+
+[node name="Roof" type="Node3D"]
+
+[node name="Modern Bedroom_Ceiling_0" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.0552386, 5.26036e-07, 1.08554e-15, 0, -1.52281e-07, 0.16447, 8.3408e-09, 3.48378, 7.18923e-09, 0, -3.23826, 0)
+mesh = SubResource("ArrayMesh_nf88f")
+skeleton = NodePath("")

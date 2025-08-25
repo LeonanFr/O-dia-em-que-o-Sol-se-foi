@@ -1,0 +1,102 @@
+[gd_scene load_steps=6 format=3 uid="uid://ooqeffs4hcg4"]
+
+[ext_resource type="PackedScene" uid="uid://cws13unueg4ld" path="res://assets/wooden_floor/wooden_floor.glb" id="1_bmbfo"]
+[ext_resource type="PackedScene" uid="uid://bxv3wdu5pmdk7" path="res://assets/wall/wall_door.tscn" id="2_v0oeq"]
+[ext_resource type="PackedScene" uid="uid://bpxgf84bkwueg" path="res://assets/wall/wall_flat.tscn" id="3_lb5by"]
+[ext_resource type="PackedScene" uid="uid://drl6b52qrcn66" path="res://assets/roof/roof.tscn" id="4_dryon"]
+
+[sub_resource type="Environment" id="Environment_dryon"]
+background_mode = 2
+ambient_light_source = 1
+
+[node name="Room" type="Node3D"]
+
+[node name="Structure" type="Node3D" parent="."]
+
+[node name="Floor" parent="Structure" instance=ExtResource("1_bmbfo")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+
+[node name="EastWalls" type="Node3D" parent="Structure"]
+
+[node name="Wall_Flat5" parent="Structure/EastWalls" instance=ExtResource("3_lb5by")]
+transform = Transform3D(-2.62268e-07, 0, 6, 0, 6, 0, -6, 0, -2.62268e-07, -25.4, 0, -7.2)
+
+[node name="Wall_Flat7" parent="Structure/EastWalls" instance=ExtResource("3_lb5by")]
+transform = Transform3D(-2.62268e-07, 0, 6, 0, 6, 0, -6, 0, -2.62268e-07, -25.4, 0, 4.8)
+
+[node name="Wall_Flat8" parent="Structure/EastWalls" instance=ExtResource("3_lb5by")]
+transform = Transform3D(-2.62268e-07, 0, 6, 0, 6, 0, -6, 0, -2.62268e-07, -25.412, 0, 16.8)
+
+[node name="Wall_Flat9" parent="Structure/EastWalls" instance=ExtResource("3_lb5by")]
+transform = Transform3D(-2.62268e-07, 0, 6, 0, 6, 0, -6, 0, -2.62268e-07, -25.42, 0, 19.6)
+
+[node name="Wall_Flat6" parent="Structure/EastWalls" instance=ExtResource("3_lb5by")]
+transform = Transform3D(-2.62268e-07, 0, 6, 0, 6, 0, -6, 0, -2.62268e-07, -25.4, 0, -19.2)
+
+[node name="WestWalls" type="Node3D" parent="Structure"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="Wall_Flat5" parent="Structure/WestWalls" instance=ExtResource("3_lb5by")]
+transform = Transform3D(-2.62268e-07, 0, 6, 0, 6, 0, -6, 0, -2.62268e-07, -25.4, 0, -7.2)
+
+[node name="Wall_Flat7" parent="Structure/WestWalls" instance=ExtResource("3_lb5by")]
+transform = Transform3D(-2.62268e-07, 0, 6, 0, 6, 0, -6, 0, -2.62268e-07, -25.4, 0, 4.8)
+
+[node name="Wall_Flat8" parent="Structure/WestWalls" instance=ExtResource("3_lb5by")]
+transform = Transform3D(-2.62268e-07, 0, 6, 0, 6, 0, -6, 0, -2.62268e-07, -25.412, 0, 16.8)
+
+[node name="Wall_Flat9" parent="Structure/WestWalls" instance=ExtResource("3_lb5by")]
+transform = Transform3D(-2.62268e-07, 0, 6, 0, 6, 0, -6, 0, -2.62268e-07, -25.42, 0, 19.6)
+
+[node name="Wall_Flat6" parent="Structure/WestWalls" instance=ExtResource("3_lb5by")]
+transform = Transform3D(-2.62268e-07, 0, 6, 0, 6, 0, -6, 0, -2.62268e-07, -25.4, 0, -19.2)
+
+[node name="NorthWalls" type="Node3D" parent="Structure"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="Wall_Flat5" parent="Structure/NorthWalls" instance=ExtResource("3_lb5by")]
+transform = Transform3D(-2.62268e-07, 0, 6, 0, 6, 0, -6, 0, -2.62268e-07, -25.4, 0, -7.2)
+
+[node name="Wall_Flat7" parent="Structure/NorthWalls" instance=ExtResource("3_lb5by")]
+transform = Transform3D(-2.62268e-07, 0, 6, 0, 6, 0, -6, 0, -2.62268e-07, -25.4, 0, 4.8)
+
+[node name="Wall_Flat8" parent="Structure/NorthWalls" instance=ExtResource("3_lb5by")]
+transform = Transform3D(-2.62268e-07, 0, 6, 0, 6, 0, -6, 0, -2.62268e-07, -25.412, 0, 16.8)
+
+[node name="Wall_Flat9" parent="Structure/NorthWalls" instance=ExtResource("3_lb5by")]
+transform = Transform3D(-2.62268e-07, 0, 6, 0, 6, 0, -6, 0, -2.62268e-07, -25.42, 0, 19.6)
+
+[node name="Wall_Flat6" parent="Structure/NorthWalls" instance=ExtResource("3_lb5by")]
+transform = Transform3D(-2.62268e-07, 0, 6, 0, 6, 0, -6, 0, -2.62268e-07, -25.4, 0, -19.2)
+
+[node name="SouthWalls" type="Node3D" parent="Structure"]
+
+[node name="Wall_Door" parent="Structure/SouthWalls" instance=ExtResource("2_v0oeq")]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 0, 0, -25.4)
+
+[node name="Wall_Flat" parent="Structure/SouthWalls" instance=ExtResource("3_lb5by")]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 12, 0, -25.4)
+
+[node name="Wall_Flat4" parent="Structure/SouthWalls" instance=ExtResource("3_lb5by")]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 19.6, 0, -25.401)
+
+[node name="Wall_Flat2" parent="Structure/SouthWalls" instance=ExtResource("3_lb5by")]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, -12, 0, -25.4)
+
+[node name="Wall_Flat3" parent="Structure/SouthWalls" instance=ExtResource("3_lb5by")]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, -19.6, 0, -25.401)
+
+[node name="Roof" parent="Structure" instance=ExtResource("4_dryon")]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 12, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.11665, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_dryon")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0282871, 5.50823, -0.000918388)
+light_energy = 2.5
+omni_range = 45.0
+omni_attenuation = 1.5
