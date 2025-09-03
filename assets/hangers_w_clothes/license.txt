@@ -1,0 +1,11 @@
+Model Information:
+* title:	Hangers W Clothes
+* source:	https://sketchfab.com/3d-models/hangers-w-clothes-6df08ef8a8504504911ef520cd870aa8
+* author:	melaamory (https://sketchfab.com/melaamory)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Hangers W Clothes" (https://sketchfab.com/3d-models/hangers-w-clothes-6df08ef8a8504504911ef520cd870aa8) by melaamory (https://sketchfab.com/melaamory) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

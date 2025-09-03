@@ -1,0 +1,11 @@
+Model Information:
+* title:	Desk
+* source:	https://sketchfab.com/3d-models/desk-36e27887358e45d3b400d4c4dd7ac7a8
+* author:	charles.cla (https://sketchfab.com/charles.cla)
+
+Model License:
+* license type:	CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)
+* requirements:	Author must be credited. No commercial use.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Desk" (https://sketchfab.com/3d-models/desk-36e27887358e45d3b400d4c4dd7ac7a8) by charles.cla (https://sketchfab.com/charles.cla) licensed under CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)

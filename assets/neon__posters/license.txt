@@ -1,0 +1,11 @@
+Model Information:
+* title:	Neon_ Posters
+* source:	https://sketchfab.com/3d-models/neon--posters-300c1b73ee5a4375a35cfb682534cba6
+* author:	Seniora_Kora (https://sketchfab.com/kora_pomidora)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Neon_ Posters" (https://sketchfab.com/3d-models/neon--posters-300c1b73ee5a4375a35cfb682534cba6) by Seniora_Kora (https://sketchfab.com/kora_pomidora) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

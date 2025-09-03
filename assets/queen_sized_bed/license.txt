@@ -1,0 +1,11 @@
+Model Information:
+* title:	Queen Sized Bed
+* source:	https://sketchfab.com/3d-models/queen-sized-bed-629b78957c5f442b875755c5cd3bcf57
+* author:	Cody.Lovorn (https://sketchfab.com/Cody.Lovorn)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Queen Sized Bed" (https://sketchfab.com/3d-models/queen-sized-bed-629b78957c5f442b875755c5cd3bcf57) by Cody.Lovorn (https://sketchfab.com/Cody.Lovorn) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

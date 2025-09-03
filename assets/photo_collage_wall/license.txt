@@ -1,0 +1,11 @@
+Model Information:
+* title:	photo collage, wall
+* source:	https://sketchfab.com/3d-models/photo-collage-wall-aac0daa4cb7f4d74972f45799e49d42e
+* author:	Christian (https://sketchfab.com/Enzi1984)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "photo collage, wall" (https://sketchfab.com/3d-models/photo-collage-wall-aac0daa4cb7f4d74972f45799e49d42e) by Christian (https://sketchfab.com/Enzi1984) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

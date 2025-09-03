@@ -1,0 +1,8 @@
+Model Information:
+* title:	[CC0] Free Cardboard Box
+* source:	https://sketchfab.com/3d-models/cc0-free-cardboard-box-e7a46c7b163c477296a3986323ccc826
+* author:	Sano (https://sketchfab.com/sanogdv)
+
+Model License:
+* license type:	SKETCHFAB Standard (https://sketchfab.com/licenses)
+* requirements:	Under basic restrictions, use worldwide, on all types of media, commercially or not, and in all types of derivative works

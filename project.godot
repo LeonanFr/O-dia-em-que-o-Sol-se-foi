@@ -11,6 +11,6 @@ config_version=5
 [application]
 
 config/name="Joguinho"
-run/main_scene="uid://ooqeffs4hcg4"
+run/main_scene="res://scenes/room_01.tscn"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"

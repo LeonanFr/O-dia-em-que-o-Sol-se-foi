@@ -1,0 +1,11 @@
+Model Information:
+* title:	Bunny plush toy
+* source:	https://sketchfab.com/3d-models/bunny-plush-toy-4e5df1084d524a83aa3bacdd41660fb7
+* author:	astistudio (https://sketchfab.com/astistudio)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Bunny plush toy" (https://sketchfab.com/3d-models/bunny-plush-toy-4e5df1084d524a83aa3bacdd41660fb7) by astistudio (https://sketchfab.com/astistudio) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
