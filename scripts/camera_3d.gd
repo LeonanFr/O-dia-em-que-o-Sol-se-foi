@@ -14,7 +14,3 @@ func _input(event):
 		target_rotation.y -= deg_to_rad(90)
 	elif event.is_action_pressed("ui_left"):
 		target_rotation.y += deg_to_rad(90)
-	elif event.is_action_pressed("ui_up"):
-		target_rotation.x -= deg_to_rad(90)
-	elif event.is_action_pressed("ui_down"):
-		target_rotation.x += deg_to_rad(90)

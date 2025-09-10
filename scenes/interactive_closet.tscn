@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dtt11w8mdq05t"]
+
+[ext_resource type="PackedScene" uid="uid://dmj82hxyhkb0n" path="res://assets/closet_m000230802/scene.gltf" id="1_tcrew"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qf4lh"]
+size = Vector3(7.15179, 8.89206, 2.18219)
+
+[node name="interactive_closet" type="StaticBody3D"]
+
+[node name="closet" parent="." instance=ExtResource("1_tcrew")]
+transform = Transform3D(-3.28559, 0, 1.20619, 0, 3.5, 0, -1.20619, 0, -3.28559, 2.475, 0, 2.6736)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.468597, 4.45033, 0.354291)
+shape = SubResource("BoxShape3D_qf4lh")

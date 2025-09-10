@@ -1,13 +1,13 @@
-[gd_scene load_steps=23 format=3 uid="uid://ooqeffs4hcg4"]
+[gd_scene load_steps=24 format=3 uid="uid://ooqeffs4hcg4"]
 
 [ext_resource type="PackedScene" uid="uid://cws13unueg4ld" path="res://assets/wooden_floor/wooden_floor.glb" id="1_bmbfo"]
+[ext_resource type="Script" uid="uid://dykjo6o0lfpj8" path="res://scenes/room.gd" id="1_c2e1c"]
 [ext_resource type="PackedScene" uid="uid://bxv3wdu5pmdk7" path="res://assets/wall/wall_door.tscn" id="2_v0oeq"]
 [ext_resource type="PackedScene" uid="uid://bpxgf84bkwueg" path="res://assets/wall/wall_flat.tscn" id="3_lb5by"]
 [ext_resource type="PackedScene" uid="uid://drl6b52qrcn66" path="res://assets/roof/roof.tscn" id="4_dryon"]
 [ext_resource type="PackedScene" uid="uid://dcer8iywmp7nh" path="res://assets/queen_sized_bed/scene.gltf" id="5_c7hb7"]
 [ext_resource type="Script" uid="uid://c5qlfhfw6uikh" path="res://scripts/camera_3d.gd" id="5_i170c"]
 [ext_resource type="PackedScene" uid="uid://c4rndmvcmg3ph" path="res://assets/desk/scene.gltf" id="6_xl46k"]
-[ext_resource type="PackedScene" uid="uid://dmj82hxyhkb0n" path="res://assets/closet_m000230802/scene.gltf" id="7_5x078"]
 [ext_resource type="PackedScene" uid="uid://6rxjugi62ovn" path="res://assets/office_desk_chair/scene.gltf" id="8_m6mxt"]
 [ext_resource type="PackedScene" uid="uid://cawgkrmm0imfy" path="res://assets/laundry_basket/scene.gltf" id="9_r23mb"]
 [ext_resource type="PackedScene" uid="uid://d1rdawa7hkkse" path="res://assets/desk_lamp/scene.gltf" id="10_q24kv"]
@@ -21,12 +21,17 @@
 [ext_resource type="PackedScene" uid="uid://cal34xhl46tpv" path="res://assets/rubix_cube/scene.gltf" id="19_c2e1c"]
 [ext_resource type="PackedScene" uid="uid://385iqtkfey5s" path="res://assets/monstera_1_low_poly/scene.gltf" id="20_vf70i"]
 [ext_resource type="PackedScene" uid="uid://djrfq5t7dx323" path="res://assets/mirror_b/scene.gltf" id="21_mjkbk"]
+[ext_resource type="PackedScene" uid="uid://b5o7b7mataj5d" path="res://scenes/closet.tscn" id="22_mpfnh"]
 
 [sub_resource type="Environment" id="Environment_dryon"]
 background_mode = 2
 ambient_light_source = 1
 
-[node name="Room" type="Node3D"]
+[node name="Room" type="Node3D" node_paths=PackedStringArray("camera", "closet_focus", "closet_anim_player")]
+script = ExtResource("1_c2e1c")
+camera = NodePath("Camera3D")
+closet_focus = NodePath("ClosetFocus")
+closet_anim_player = NodePath("InteractiveFurniture/closet/AnimationPlayer")
 
 [node name="Structure" type="Node3D" parent="."]
 
@@ -107,7 +112,7 @@ transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, -19.6, 0, -25.401)
 transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 12, 0)
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 5.11665, 0)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 5.1, 0)
 fov = 50.0
 script = ExtResource("5_i170c")
 
@@ -127,9 +132,6 @@ transform = Transform3D(0.057907, 0, 3.49952, 0, 3.5, 0, -3.49952, 0, 0.057907, 
 
 [node name="table" parent="furniture" instance=ExtResource("6_xl46k")]
 transform = Transform3D(0.04, 0, 0, 0, 0.04, 0, 0, 0, 0.04, 23.6499, 0, 0)
-
-[node name="closet" parent="furniture" instance=ExtResource("7_5x078")]
-transform = Transform3D(-3.28559, 0, 1.20619, 0, 3.5, 0, -1.20619, 0, -3.28559, 2.475, 0, 25.959)
 
 [node name="chair" parent="furniture" instance=ExtResource("8_m6mxt")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 20.421, 0, 4.59204)
@@ -181,3 +183,17 @@ transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -6.40362, 0, -23.6834)
 
 [node name="mirror" parent="furniture" instance=ExtResource("21_mjkbk")]
 transform = Transform3D(-4, 0, -3.49691e-07, 0, 4, 0, 3.49691e-07, 0, -4, -12.0382, 0, 24.8133)
+
+[node name="GameTimer" type="Timer" parent="."]
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="InteractiveFurniture" type="Node3D" parent="."]
+
+[node name="closet" parent="InteractiveFurniture" groups=["closet"] instance=ExtResource("22_mpfnh")]
+transform = Transform3D(-4, 0, -3.49691e-07, 0, 4, 0, 3.49691e-07, 0, -4, 4, 0, 25)
+
+[node name="ClosetFocus" type="Marker3D" parent="."]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 5.1, 11.5)
+
+[editable path="InteractiveFurniture/closet"]
