@@ -1956,8 +1956,8 @@ tracks/4/keys = PackedFloat32Array(0, 1, 0, -3.08149e-33, 0, 1, 0.266667, 1, 0, 
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hiyhx"]
 _data = {
-&"close": SubResource("Animation_d1eaf"),
-&"open": SubResource("Animation_7j5ra")
+"close": SubResource("Animation_d1eaf"),
+"open": SubResource("Animation_7j5ra")
 }
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7j5ra"]
@@ -1990,7 +1990,7 @@ mesh = SubResource("ArrayMesh_77wa5")
 skeleton = NodePath("")
 
 [node name="VIFS001" type="Node3D" parent="Sketchfab_model/7685ebc16e114b7ca2188a38870dcd12_fbx/Object_2/RootNode/Group011"]
-transform = Transform3D(1, -6.16298e-33, 9.18355e-40, 0, -1.19209e-07, -1, 6.16298e-33, 1, -1.19209e-07, -6.10352e-05, -263.162, -1250)
+transform = Transform3D(1, -6.16298e-33, 0, 0, -1.19209e-07, -1, 6.16298e-33, 1, -1.19209e-07, -6.10352e-05, -263.162, -1250)
 
 [node name="Object_9" type="Node3D" parent="Sketchfab_model/7685ebc16e114b7ca2188a38870dcd12_fbx/Object_2/RootNode/Group011/VIFS001"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1031, -30, -9.5)
@@ -2010,7 +2010,7 @@ mesh = SubResource("ArrayMesh_lb0w5")
 skeleton = NodePath("")
 
 [node name="VIFS035" type="Node3D" parent="Sketchfab_model/7685ebc16e114b7ca2188a38870dcd12_fbx/Object_2/RootNode/Group011"]
-transform = Transform3D(1, 6.16298e-33, 9.18355e-40, 0, -1.19209e-07, 1, 6.16298e-33, -1, -1.19209e-07, 23.5, 32.3373, 767.5)
+transform = Transform3D(1, 6.16298e-33, 0, 0, -1.19209e-07, 1, 6.16298e-33, -1, -1.19209e-07, 23.5, 32.3373, 767.5)
 
 [node name="Object_15" type="Node3D" parent="Sketchfab_model/7685ebc16e114b7ca2188a38870dcd12_fbx/Object_2/RootNode/Group011/VIFS035"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, -67.5, 1.95204e-05)
@@ -2030,7 +2030,7 @@ mesh = SubResource("ArrayMesh_jxumb")
 skeleton = NodePath("")
 
 [node name="Group005" type="Node3D" parent="Sketchfab_model/7685ebc16e114b7ca2188a38870dcd12_fbx/Object_2/RootNode/Group011"]
-transform = Transform3D(1, 0, -6.16298e-33, 0, 1, 0, 6.16298e-33, 0, 1, 515.5, 48.7075, -508.833)
+transform = Transform3D(1, 0, -6.16298e-33, 0, 1, 0, 6.16298e-33, 0, 1, 515.5, -343.423, -508.833)
 
 [node name="Line005" type="Node3D" parent="Sketchfab_model/7685ebc16e114b7ca2188a38870dcd12_fbx/Object_2/RootNode/Group011/Group005"]
 transform = Transform3D(-1.19209e-07, -1.49012e-07, -1, -1, 0, 1.49012e-07, -2.98023e-08, 1, -1.19209e-07, -232.956, -81.9463, 48.0734)
@@ -2075,7 +2075,7 @@ mesh = SubResource("ArrayMesh_sb7j2")
 skeleton = NodePath("")
 
 [node name="Box163" type="Node3D" parent="Sketchfab_model/7685ebc16e114b7ca2188a38870dcd12_fbx/Object_2/RootNode/Group011/Group005"]
-transform = Transform3D(-1.19209e-07, -1, -6.16298e-33, 1, -1.19209e-07, -9.18355e-40, 0, -6.16298e-33, 1, -281.956, 195, 25.0063)
+transform = Transform3D(-1.19209e-07, -1, -6.16298e-33, 1, -1.19209e-07, 0, 0, -6.16298e-33, 1, -281.956, 195, 25.0063)
 
 [node name="Box163_��������_0" type="MeshInstance3D" parent="Sketchfab_model/7685ebc16e114b7ca2188a38870dcd12_fbx/Object_2/RootNode/Group011/Group005/Box163"]
 mesh = SubResource("ArrayMesh_8iobs")
@@ -2102,7 +2102,7 @@ mesh = SubResource("ArrayMesh_7wfds")
 skeleton = NodePath("")
 
 [node name="VIFS006" type="Node3D" parent="Sketchfab_model/7685ebc16e114b7ca2188a38870dcd12_fbx/Object_2/RootNode/Group011/Group006"]
-transform = Transform3D(1, -3.08149e-33, 4.59177e-40, 0, -1.19209e-07, -1, 3.08149e-33, 1, -1.19209e-07, -515.5, 242, -1240.5)
+transform = Transform3D(1, -3.08149e-33, 0, 0, -1.19209e-07, -1, 3.08149e-33, 1, -1.19209e-07, -515.5, 242, -1240.5)
 
 [node name="Object_42" type="Node3D" parent="Sketchfab_model/7685ebc16e114b7ca2188a38870dcd12_fbx/Object_2/RootNode/Group011/Group006/VIFS006"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -534.5, -30, -8)
@@ -2112,7 +2112,7 @@ mesh = SubResource("ArrayMesh_cf2cb")
 skeleton = NodePath("")
 
 [node name="VIFS007" type="Node3D" parent="Sketchfab_model/7685ebc16e114b7ca2188a38870dcd12_fbx/Object_2/RootNode/Group011/Group006"]
-transform = Transform3D(1, -3.08149e-33, 4.59177e-40, 0, -1.19209e-07, -1, 3.08149e-33, 1, -1.19209e-07, -515.5, -282, -1240.5)
+transform = Transform3D(1, -3.08149e-33, 0, 0, -1.19209e-07, -1, 3.08149e-33, 1, -1.19209e-07, -515.5, -282, -1240.5)
 
 [node name="Object_45" type="Node3D" parent="Sketchfab_model/7685ebc16e114b7ca2188a38870dcd12_fbx/Object_2/RootNode/Group011/Group006/VIFS007"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -534.5, -30, -8)
@@ -2172,7 +2172,7 @@ mesh = SubResource("ArrayMesh_45sw8")
 skeleton = NodePath("")
 
 [node name="VIFS032" type="Node3D" parent="Sketchfab_model/7685ebc16e114b7ca2188a38870dcd12_fbx/Object_2/RootNode/Group011/Group006"]
-transform = Transform3D(1, -3.08149e-33, 4.59177e-40, 0, -1.19209e-07, -1, 3.08149e-33, 1, -1.19209e-07, 515.5, -282, -1240.5)
+transform = Transform3D(1, -3.08149e-33, 0, 0, -1.19209e-07, -1, 3.08149e-33, 1, -1.19209e-07, 515.5, -282, -1240.5)
 
 [node name="Object_63" type="Node3D" parent="Sketchfab_model/7685ebc16e114b7ca2188a38870dcd12_fbx/Object_2/RootNode/Group011/Group006/VIFS032"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 534.5, -30, -8)
@@ -2272,7 +2272,7 @@ mesh = SubResource("ArrayMesh_nyjg6")
 skeleton = NodePath("")
 
 [node name="VIFS033" type="Node3D" parent="Sketchfab_model/7685ebc16e114b7ca2188a38870dcd12_fbx/Object_2/RootNode/Group011/Group006"]
-transform = Transform3D(1, -3.08149e-33, 4.59177e-40, 0, -1.19209e-07, -1, 3.08149e-33, 1, -1.19209e-07, 515.5, 242, -1240.5)
+transform = Transform3D(1, -3.08149e-33, 0, 0, -1.19209e-07, -1, 3.08149e-33, 1, -1.19209e-07, 515.5, 242, -1240.5)
 
 [node name="Object_93" type="Node3D" parent="Sketchfab_model/7685ebc16e114b7ca2188a38870dcd12_fbx/Object_2/RootNode/Group011/Group006/VIFS033"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 534.5, -30, -8)
@@ -2342,7 +2342,7 @@ mesh = SubResource("ArrayMesh_8u5cp")
 skeleton = NodePath("")
 
 [node name="VIFS029" type="Node3D" parent="Sketchfab_model/7685ebc16e114b7ca2188a38870dcd12_fbx/Object_2/RootNode/Group011/Group006"]
-transform = Transform3D(1, -3.08149e-33, 4.59177e-40, 0, -1.19209e-07, -1, 3.08149e-33, 1, -1.19209e-07, 515.5, 285, 34)
+transform = Transform3D(1, -3.08149e-33, 0, 0, -1.19209e-07, -1, 3.08149e-33, 1, -1.19209e-07, 515.5, 285, 34)
 
 [node name="Object_114" type="Node3D" parent="Sketchfab_model/7685ebc16e114b7ca2188a38870dcd12_fbx/Object_2/RootNode/Group011/Group006/VIFS029"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 534.5, -1304.5, -5)
@@ -2382,7 +2382,7 @@ mesh = SubResource("ArrayMesh_5gbwn")
 skeleton = NodePath("")
 
 [node name="VIFS010" type="Node3D" parent="Sketchfab_model/7685ebc16e114b7ca2188a38870dcd12_fbx/Object_2/RootNode/Group011/Group006"]
-transform = Transform3D(1, -3.08149e-33, 4.59177e-40, 0, -1.19209e-07, -1, 3.08149e-33, 1, -1.19209e-07, -515.5, 285, 34)
+transform = Transform3D(1, -3.08149e-33, 0, 0, -1.19209e-07, -1, 3.08149e-33, 1, -1.19209e-07, -515.5, 285, 34)
 
 [node name="Object_126" type="Node3D" parent="Sketchfab_model/7685ebc16e114b7ca2188a38870dcd12_fbx/Object_2/RootNode/Group011/Group006/VIFS010"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -534.5, -1304.5, -5)
@@ -2408,7 +2408,7 @@ transform = Transform3D(-1, -2.84217e-13, -1.75834e-06, -1.75834e-06, 1.78814e-0
 transform = Transform3D(1, 0, -6.16298e-33, 0, 1, 0, 6.16298e-33, 0, 1, -534.5, -252.662, -1280)
 
 [node name="Group007" type="Node3D" parent="Sketchfab_model/7685ebc16e114b7ca2188a38870dcd12_fbx/Object_2/RootNode/Group011"]
-transform = Transform3D(1, 0, -6.16298e-33, 0, 1, 0, 6.16298e-33, 0, 1, -1020.57, -262.862, 21.5)
+transform = Transform3D(-4.37114e-08, 1, -3.08149e-33, -1, -4.37114e-08, 0, 0, 3.08149e-33, 1, -1020.57, -262.862, 21.5)
 
 [node name="Object" type="Node3D" parent="Sketchfab_model/7685ebc16e114b7ca2188a38870dcd12_fbx/Object_2/RootNode/Group011/Group007"]
 transform = Transform3D(-1, -2.27374e-13, -1.57952e-06, -1.57952e-06, 1.78814e-07, 1, 5.68434e-14, 1, -1.19209e-07, 247.321, -7.80078, 0)
@@ -2431,7 +2431,7 @@ mesh = SubResource("ArrayMesh_pnvds")
 skeleton = NodePath("")
 
 [node name="Object012" type="Node3D" parent="Sketchfab_model/7685ebc16e114b7ca2188a38870dcd12_fbx/Object_2/RootNode/Group011/Group007"]
-transform = Transform3D(1, -3.08149e-33, 4.59177e-40, 0, -1.19209e-07, -1, 3.08149e-33, 1, -1.19209e-07, 247.321, 0.699585, 0)
+transform = Transform3D(1, -3.08149e-33, 0, 0, -1.19209e-07, -1, 3.08149e-33, 1, -1.19209e-07, 247.321, 0.699585, 0)
 
 [node name="Object_141" type="Node3D" parent="Sketchfab_model/7685ebc16e114b7ca2188a38870dcd12_fbx/Object_2/RootNode/Group011/Group007/Object012"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 238.75, -1301.5, -9.49997)
@@ -2441,7 +2441,7 @@ mesh = SubResource("ArrayMesh_5fje7")
 skeleton = NodePath("")
 
 [node name="Group008" type="Node3D" parent="Sketchfab_model/7685ebc16e114b7ca2188a38870dcd12_fbx/Object_2/RootNode/Group011"]
-transform = Transform3D(1, 0, -6.16298e-33, 0, 1, 0, 6.16298e-33, 0, 1, -10.4205, -262.087, 21.5)
+transform = Transform3D(0.0871556, -0.996195, -3.06977e-33, 0.996195, 0.0871556, 2.68578e-34, 0, -3.08149e-33, 1, -10.4205, -262.087, 21.5)
 
 [node name="Object016" type="Node3D" parent="Sketchfab_model/7685ebc16e114b7ca2188a38870dcd12_fbx/Object_2/RootNode/Group011/Group008"]
 transform = Transform3D(-1, -2.27374e-13, -1.57952e-06, -1.57952e-06, 1.78814e-07, 1, 5.68434e-14, 1, -1.19209e-07, -247.329, -8.57538, 0)
@@ -2467,7 +2467,7 @@ mesh = SubResource("ArrayMesh_booe1")
 skeleton = NodePath("")
 
 [node name="Object018" type="Node3D" parent="Sketchfab_model/7685ebc16e114b7ca2188a38870dcd12_fbx/Object_2/RootNode/Group011/Group008"]
-transform = Transform3D(1, -3.08149e-33, 4.59177e-40, 0, -1.19209e-07, -1, 3.08149e-33, 1, -1.19209e-07, -247.329, -0.0754395, 0)
+transform = Transform3D(1, -3.08149e-33, 0, 0, -1.19209e-07, -1, 3.08149e-33, 1, -1.19209e-07, -247.329, -0.0754395, 0)
 
 [node name="Object_152" type="Node3D" parent="Sketchfab_model/7685ebc16e114b7ca2188a38870dcd12_fbx/Object_2/RootNode/Group011/Group008/Object018"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -276.75, -1301.5, -9.49997)
@@ -2477,7 +2477,7 @@ mesh = SubResource("ArrayMesh_kha74")
 skeleton = NodePath("")
 
 [node name="Group009" type="Node3D" parent="Sketchfab_model/7685ebc16e114b7ca2188a38870dcd12_fbx/Object_2/RootNode/Group011"]
-transform = Transform3D(1, 0, -6.16298e-33, 0, 1, 0, 6.16298e-33, 0, 1, 12.3301, -262.067, 21.5)
+transform = Transform3D(0.0871556, 0.996195, -3.6069e-33, -0.996195, 0.0871556, 5.87095e-33, 6.16298e-33, 3.08149e-33, 1, 12.3301, -262.067, 21.5)
 
 [node name="Object024" type="Node3D" parent="Sketchfab_model/7685ebc16e114b7ca2188a38870dcd12_fbx/Object_2/RootNode/Group011/Group009"]
 transform = Transform3D(-1, -1.7053e-13, -1.10269e-06, -1.10269e-06, 1.78814e-07, 1, 0, 1, -1.19209e-07, 245.42, -8.5954, 0)
@@ -2500,7 +2500,7 @@ mesh = SubResource("ArrayMesh_75shw")
 skeleton = NodePath("")
 
 [node name="Object026" type="Node3D" parent="Sketchfab_model/7685ebc16e114b7ca2188a38870dcd12_fbx/Object_2/RootNode/Group011/Group009"]
-transform = Transform3D(1, -3.08149e-33, 4.59177e-40, 0, -1.19209e-07, -1, 3.08149e-33, 1, -1.19209e-07, 245.42, -0.0955811, 0)
+transform = Transform3D(1, -3.08149e-33, 0, 0, -1.19209e-07, -1, 3.08149e-33, 1, -1.19209e-07, 245.42, -0.0955811, 0)
 
 [node name="Object_162" type="Node3D" parent="Sketchfab_model/7685ebc16e114b7ca2188a38870dcd12_fbx/Object_2/RootNode/Group011/Group009/Object026"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 238.75, -1301.5, -9.49997)
@@ -2510,7 +2510,7 @@ mesh = SubResource("ArrayMesh_hsuir")
 skeleton = NodePath("")
 
 [node name="Group010" type="Node3D" parent="Sketchfab_model/7685ebc16e114b7ca2188a38870dcd12_fbx/Object_2/RootNode/Group011"]
-transform = Transform3D(1, 0, -6.16298e-33, 0, 1, 0, 6.16298e-33, 0, 1, 1020.35, -262.888, 21.5)
+transform = Transform3D(-4.37114e-08, -1, -6.16297e-33, 1, -4.37114e-08, 0, 0, -6.16297e-33, 1, 1020.35, -262.888, 21.5)
 
 [node name="Object010" type="Node3D" parent="Sketchfab_model/7685ebc16e114b7ca2188a38870dcd12_fbx/Object_2/RootNode/Group011/Group010"]
 transform = Transform3D(-1, -1.7053e-13, -1.2517e-06, -1.2517e-06, 1.78814e-07, 1, 5.68434e-14, 1, -1.19209e-07, -247.103, -7.77411, 0)
@@ -2523,7 +2523,7 @@ mesh = SubResource("ArrayMesh_kkyt6")
 skeleton = NodePath("")
 
 [node name="VIFS044" type="Node3D" parent="Sketchfab_model/7685ebc16e114b7ca2188a38870dcd12_fbx/Object_2/RootNode/Group011/Group010"]
-transform = Transform3D(1, -3.08149e-33, 4.59177e-40, 0, -1.19209e-07, -1, 3.08149e-33, 1, -1.19209e-07, -247.104, 0.725769, 0)
+transform = Transform3D(1, -3.08149e-33, 0, 0, -1.19209e-07, -1, 3.08149e-33, 1, -1.19209e-07, -247.104, 0.725769, 0)
 
 [node name="Object_169" type="Node3D" parent="Sketchfab_model/7685ebc16e114b7ca2188a38870dcd12_fbx/Object_2/RootNode/Group011/Group010/VIFS044"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -276.75, -1301.5, -9.49997)
@@ -2544,7 +2544,7 @@ skeleton = NodePath("")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-&"": SubResource("AnimationLibrary_hiyhx")
+"": SubResource("AnimationLibrary_hiyhx")
 }
 
 [node name="Body" type="CollisionShape3D" parent="."]

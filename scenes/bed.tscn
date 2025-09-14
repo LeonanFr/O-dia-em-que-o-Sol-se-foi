@@ -1,0 +1,86 @@
+[gd_scene load_steps=8 format=3 uid="uid://dyxh2c0ldlqjl"]
+
+[ext_resource type="PackedScene" uid="uid://dcer8iywmp7nh" path="res://assets/queen_sized_bed/scene.gltf" id="1_l1ta4"]
+
+[sub_resource type="Animation" id="Animation_edcxq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sketchfab_Scene/Sketchfab_model/5c28b9eda3b64e5f9f99fc551f713db0_fbx/RootNode/Bed Frame_Baked/Bed Frame_Baked_Pillow02_Baked_0:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_lkkem"]
+resource_name = "pillow_goes_down"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sketchfab_Scene/Sketchfab_model/5c28b9eda3b64e5f9f99fc551f713db0_fbx/RootNode/Bed Frame_Baked/Bed Frame_Baked_Pillow02_Baked_0:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0.5), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_emmei"]
+resource_name = "pillow_goes_up"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sketchfab_Scene/Sketchfab_model/5c28b9eda3b64e5f9f99fc551f713db0_fbx/RootNode/Bed Frame_Baked/Bed Frame_Baked_Pillow02_Baked_0:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.5)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5uymd"]
+_data = {
+"RESET": SubResource("Animation_edcxq"),
+"pillow_goes_down": SubResource("Animation_lkkem"),
+"pillow_goes_up": SubResource("Animation_emmei")
+}
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_r7h2n"]
+size = Vector3(1.65063, 2.03055, 0.523422)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fia7h"]
+size = Vector3(0.875954, 0.282267, 0.367374)
+
+[node name="bed" type="StaticBody3D"]
+
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("1_l1ta4")]
+
+[node name="Bed Frame_Baked_Pillow02_Baked_0" parent="Sketchfab_Scene/Sketchfab_model/5c28b9eda3b64e5f9f99fc551f713db0_fbx/RootNode/Bed Frame_Baked" index="4"]
+visible = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_5uymd")
+}
+
+[node name="Body_bed" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.0192176, 0.43067, 0.0506659)
+shape = SubResource("BoxShape3D_r7h2n")
+
+[node name="Body_pillow" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.652257, -0.757998, 0, 0.757998, 0.652257, -0.344535, 0.7414, -0.772894)
+visible = false
+shape = SubResource("BoxShape3D_fia7h")
+
+[editable path="Sketchfab_Scene"]
