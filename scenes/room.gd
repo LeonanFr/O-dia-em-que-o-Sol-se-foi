@@ -61,8 +61,6 @@ func focus_on_bed() -> void:
 	camera.set_process(false)
 	original_camera_transform = camera.global_transform
 	
-	bed_anim_player.play("pillow_goes_up")
-	
 	await get_tree().process_frame
 	
 	var tween = create_tween()
@@ -83,7 +81,9 @@ func unfocus_camera() -> void:
 	if current_focus == "closet":
 		closet_anim_player.play("close")
 	elif current_focus == "bed":
-		bed_anim_player.play("pillow_goes_down")
+		if Global.pillow_up:
+			bed_anim_player.play("pillow_goes_down")
+			Global.pillow_up = false
 	
 	await tween.finished
 	

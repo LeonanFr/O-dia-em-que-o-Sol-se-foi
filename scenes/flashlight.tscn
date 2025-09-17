@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://btj6yopb7ljak"]
+
+[ext_resource type="PackedScene" uid="uid://w0beeui0bnjk" path="res://assets/tactical_flashlight/scene.gltf" id="1_cg00t"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sygx5"]
+size = Vector3(1, 0.322998, 0.398865)
+
+[node name="flashlight" type="StaticBody3D"]
+
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("1_cg00t")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.121948, 1.91299)
+shape = SubResource("BoxShape3D_sygx5")

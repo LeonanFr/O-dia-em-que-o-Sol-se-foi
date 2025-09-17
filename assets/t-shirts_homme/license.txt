@@ -1,0 +1,11 @@
+Model Information:
+* title:	T-shirts homme
+* source:	https://sketchfab.com/3d-models/t-shirts-homme-40f97ee4740140528ad83173fba68f3c
+* author:	newmag2207 (https://sketchfab.com/newmag2207)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "T-shirts homme" (https://sketchfab.com/3d-models/t-shirts-homme-40f97ee4740140528ad83173fba68f3c) by newmag2207 (https://sketchfab.com/newmag2207) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

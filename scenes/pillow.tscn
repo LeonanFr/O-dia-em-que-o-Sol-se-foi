@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://b5gq4rt7r2nn4"]
+[gd_scene load_steps=8 format=3 uid="uid://b5gq4rt7r2nn4"]
 
 [ext_resource type="PackedScene" uid="uid://dcer8iywmp7nh" path="res://assets/queen_sized_bed/scene.gltf" id="1_8ytjn"]
+[ext_resource type="Script" path="res://scripts/pillow.gd" id="1_o2qd4"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_pti4l"]
 size = Vector3(0.875954, 0.282267, 0.367374)
@@ -59,7 +60,9 @@ _data = {
 "pillow_goes_up": SubResource("Animation_emmei")
 }
 
-[node name="pillow" type="StaticBody3D"]
+[node name="pillow" type="StaticBody3D" node_paths=PackedStringArray("move_clothes_anim_player")]
+script = ExtResource("1_o2qd4")
+move_clothes_anim_player = NodePath("AnimationPlayer")
 
 [node name="Sketchfab_Scene" parent="." instance=ExtResource("1_8ytjn")]
 
@@ -83,5 +86,7 @@ shape = SubResource("BoxShape3D_pti4l")
 libraries = {
 "": SubResource("AnimationLibrary_5uymd")
 }
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
 
 [editable path="Sketchfab_Scene"]

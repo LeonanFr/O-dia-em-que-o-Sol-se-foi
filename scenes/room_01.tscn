@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://ooqeffs4hcg4"]
+[gd_scene load_steps=31 format=3 uid="uid://ooqeffs4hcg4"]
 
 [ext_resource type="PackedScene" uid="uid://cws13unueg4ld" path="res://assets/wooden_floor/wooden_floor.glb" id="1_bmbfo"]
 [ext_resource type="Script" path="res://scenes/room.gd" id="1_c2e1c"]
@@ -23,6 +23,8 @@
 [ext_resource type="PackedScene" uid="uid://dyxh2c0ldlqjl" path="res://scenes/bed.tscn" id="22_hpqne"]
 [ext_resource type="PackedScene" uid="uid://b5o7b7mataj5d" path="res://scenes/closet.tscn" id="22_mpfnh"]
 [ext_resource type="PackedScene" uid="uid://b5gq4rt7r2nn4" path="res://scenes/pillow.tscn" id="23_00wt8"]
+[ext_resource type="PackedScene" uid="uid://st2b1dgxvbvr" path="res://scenes/clothes.tscn" id="24_diktu"]
+[ext_resource type="PackedScene" uid="uid://btj6yopb7ljak" path="res://scenes/flashlight.tscn" id="25_83nib"]
 
 [sub_resource type="Environment" id="Environment_dryon"]
 background_mode = 2
@@ -255,12 +257,6 @@ libraries = {
 "": SubResource("AnimationLibrary_5uymd")
 }
 
-[node name="Body_bed" parent="InteractiveFurniture/bed" index="2"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.0192176, 0.43067, 0.0506659)
-
-[node name="Body_pillow" parent="InteractiveFurniture/bed" index="3"]
-transform = Transform3D(1, 0, 0, 0, 0.652257, -0.757998, 0, 0.757998, 0.652257, -0.344535, 0.7414, -0.772894)
-
 [node name="pillow" parent="InteractiveFurniture" groups=["pillow"] instance=ExtResource("23_00wt8")]
 transform = Transform3D(0.0549755, 0, 3.49957, 0, 3.5, 0, -3.49957, 0, 0.0549755, -21.756, 0, 0)
 
@@ -270,8 +266,22 @@ transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 5.1
 [node name="BedFocus" type="Marker3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -7, 5.1, 0)
 
+[node name="InteractiveObjects" type="Node3D" parent="."]
+
+[node name="clothes" parent="InteractiveObjects" groups=["clothes"] instance=ExtResource("24_diktu")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -2.567, 3.3, 23.8975)
+
+[node name="CollisionShape3D" parent="InteractiveObjects/clothes" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0660248, 0.774414, 0.279787)
+
+[node name="flashlight" parent="InteractiveObjects" instance=ExtResource("25_83nib")]
+transform = Transform3D(0.55067, 0, 0.834723, 0, 1, 0, -0.834723, 0, 0.55067, -26.1774, 2.10849, 0)
+
 [editable path="InteractiveFurniture/closet"]
 [editable path="InteractiveFurniture/bed"]
 [editable path="InteractiveFurniture/bed/Sketchfab_Scene"]
 [editable path="InteractiveFurniture/pillow"]
 [editable path="InteractiveFurniture/pillow/Sketchfab_Scene"]
+[editable path="InteractiveObjects/clothes"]
+[editable path="InteractiveObjects/clothes/Sketchfab_Scene"]
+[editable path="InteractiveObjects/clothes/Sketchfab_Scene2"]
