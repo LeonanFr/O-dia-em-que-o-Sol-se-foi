@@ -1,8 +1,25 @@
-extends StaticBody3D
+extends InteractiveObject
 
-@export var move_clothes_anim_player: AnimationPlayer
+@export var animation_player: AnimationPlayer
 
-func _input_event(camera, event, position, normal, shape_idx):
-	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		move_clothes_anim_player.play("pillow_goes_up")
-		Global.pillow_up = true
+var is_locked: bool = false
+var _is_up: bool = false
+
+func interact(action: String = "") -> void:
+	if is_locked:
+		return
+
+	emit_signal("interacted", object_id)
+
+	if animation_player:
+		if not _is_up:
+			animation_player.play("pillow_goes_up")
+			_is_up = true
+		else:
+			animation_player.play("pillow_goes_down")
+			_is_up = false
+
+func force_down() -> void:
+	if _is_up:
+		animation_player.play("pillow_goes_down")
+		_is_up = false

@@ -32,9 +32,8 @@
 background_mode = 2
 ambient_light_source = 1
 
-[node name="Room" type="Node3D" node_paths=PackedStringArray("pillow_object", "camera_controller")]
+[node name="Room" type="Node3D" node_paths=PackedStringArray("camera_controller")]
 script = ExtResource("1_4706t")
-pillow_object = NodePath("InteractiveFurniture/pillow")
 camera_controller = NodePath("Camera3D")
 debug_mode = true
 
@@ -120,6 +119,8 @@ transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 12, 0)
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 5.1, 0)
 fov = 50.0
 script = ExtResource("6_mjkbk")
+rotation_duration = null
+rotate_angle_deg = null
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_dryon")
@@ -206,8 +207,9 @@ object_id = "bed"
 [node name="Body_bed" parent="InteractiveFurniture/bed" index="1"]
 transform = Transform3D(1, -1.86265e-09, 0, 0, -4.37114e-08, -1, 1.86265e-09, 1, -4.37114e-08, -0.0171215, 0.43067, 0.184095)
 
-[node name="pillow" parent="InteractiveFurniture" groups=["interactive"] instance=ExtResource("23_00wt8")]
+[node name="pillow" parent="InteractiveFurniture" node_paths=PackedStringArray("animation_player") groups=["interactive"] instance=ExtResource("23_00wt8")]
 transform = Transform3D(0.0549755, 0, 3.49957, 0, 3.5, 0, -3.49957, 0, 0.0549755, -21.756, 0, 0)
+animation_player = NodePath("AnimationPlayer")
 object_id = "pillow"
 required_focus_id = "bed"
 
@@ -237,6 +239,7 @@ transform = Transform3D(0.55067, 0, 0.834723, 0, 1, 0, -0.834723, 0, 0.55067, -2
 [editable path="InteractiveFurniture/bed"]
 [editable path="InteractiveFurniture/bed/Sketchfab_Scene"]
 [editable path="InteractiveFurniture/pillow"]
+[editable path="InteractiveFurniture/pillow/Sketchfab_Scene"]
 [editable path="InteractiveObjects/clothes"]
 [editable path="InteractiveObjects/clothes/Sketchfab_Scene"]
 [editable path="InteractiveObjects/clothes/Sketchfab_Scene2"]

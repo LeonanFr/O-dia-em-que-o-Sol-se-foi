@@ -1,6 +1,6 @@
 [gd_scene load_steps=31 format=4 uid="uid://st2b1dgxvbvr"]
 
-[ext_resource type="Script" path="res://scripts/clothes.gd" id="1_44ofa"]
+[ext_resource type="Script" uid="uid://iuai5u1gg20n" path="res://scripts/Clothes.gd" id="1_44ofa"]
 [ext_resource type="PackedScene" uid="uid://b4cggsj3dobsx" path="res://assets/t-shirts_homme/scene.gltf" id="1_rhycn"]
 [ext_resource type="Texture2D" uid="uid://dftldhe2atmr0" path="res://assets/t-shirts_homme/textures/Bois_cintre_baseColor.jpeg" id="2_n8s0y"]
 [ext_resource type="PackedScene" uid="uid://ypuv8yjo7v64" path="res://assets/hangers_w_clothes/scene.gltf" id="2_u5y8h"]
@@ -395,8 +395,8 @@ tracks/3/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pnfus"]
 _data = {
-"RESET": SubResource("Animation_fdp31"),
-"move_clothes": SubResource("Animation_0ek8j")
+&"RESET": SubResource("Animation_fdp31"),
+&"move_clothes": SubResource("Animation_0ek8j")
 }
 
 [node name="clothes" type="StaticBody3D" node_paths=PackedStringArray("move_clothes_anim_player")]

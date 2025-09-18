@@ -1,7 +1,15 @@
-extends StaticBody3D
+extends InteractiveObject
 
-@export var move_clothes_anim_player: AnimationPlayer
+@export var animation_player: AnimationPlayer
 
-func _input_event(camera, event, position, normal, shape_idx):
-	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		move_clothes_anim_player.play("move_clothes")
+var _has_been_moved: bool = false
+
+func interact(action: String = "") -> void:
+	if _has_been_moved:
+		return
+
+	emit_signal("interacted", object_id)
+	
+	if animation_player and action == "move_clothes":
+		animation_player.play("move_clothes")
+		_has_been_moved = true

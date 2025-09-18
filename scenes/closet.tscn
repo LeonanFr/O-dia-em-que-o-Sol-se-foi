@@ -1957,8 +1957,8 @@ tracks/4/keys = PackedFloat32Array(0, 1, 0, -3.08149e-33, 0, 1, 0.266667, 1, 0, 
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hiyhx"]
 _data = {
-"close": SubResource("Animation_d1eaf"),
-"open": SubResource("Animation_7j5ra")
+&"close": SubResource("Animation_d1eaf"),
+&"open": SubResource("Animation_7j5ra")
 }
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7j5ra"]
@@ -2545,7 +2545,7 @@ skeleton = NodePath("")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_hiyhx")
+&"": SubResource("AnimationLibrary_hiyhx")
 }
 
 [node name="Body" type="CollisionShape3D" parent="."]
