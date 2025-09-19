@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://ooqeffs4hcg4"]
+[gd_scene load_steps=30 format=3 uid="uid://ooqeffs4hcg4"]
 
 [ext_resource type="Script" uid="uid://dx3aoro2ahpxc" path="res://scripts/InteractionController.gd" id="1_4706t"]
 [ext_resource type="PackedScene" uid="uid://cws13unueg4ld" path="res://assets/wooden_floor/wooden_floor.glb" id="1_bmbfo"]
@@ -27,6 +27,7 @@
 [ext_resource type="Script" uid="uid://cnm5vpmmihxqc" path="res://scripts/Bed.gd" id="24_4706t"]
 [ext_resource type="PackedScene" uid="uid://st2b1dgxvbvr" path="res://scenes/clothes.tscn" id="24_diktu"]
 [ext_resource type="PackedScene" uid="uid://btj6yopb7ljak" path="res://scenes/flashlight.tscn" id="25_83nib"]
+[ext_resource type="PackedScene" uid="uid://bfpcpmopcfb7b" path="res://scenes/television.tscn" id="25_b6atw"]
 
 [sub_resource type="Environment" id="Environment_dryon"]
 background_mode = 2
@@ -34,7 +35,7 @@ ambient_light_source = 1
 
 [node name="Room" type="Node3D" node_paths=PackedStringArray("pillow_object", "camera_controller")]
 script = ExtResource("1_4706t")
-pillow_object = NodePath("InteractiveFurniture/pillow")
+pillow_object = NodePath("InteractiveObjects/pillow")
 camera_controller = NodePath("Camera3D")
 debug_mode = true
 
@@ -206,10 +207,8 @@ object_id = "bed"
 [node name="Body_bed" parent="InteractiveFurniture/bed" index="1"]
 transform = Transform3D(1, -1.86265e-09, 0, 0, -4.37114e-08, -1, 1.86265e-09, 1, -4.37114e-08, -0.0171215, 0.43067, 0.184095)
 
-[node name="pillow" parent="InteractiveFurniture" groups=["interactive"] instance=ExtResource("23_00wt8")]
-transform = Transform3D(0.0549755, 0, 3.49957, 0, 3.5, 0, -3.49957, 0, 0.0549755, -21.756, 0, 0)
-object_id = "pillow"
-required_focus_id = "bed"
+[node name="Television" parent="InteractiveFurniture" instance=ExtResource("25_b6atw")]
+transform = Transform3D(-6.55671e-08, 0, -1.5, 0, 1.5, 0, 1.5, 0, -6.55671e-08, 25.179, 7.23747, 0)
 
 [node name="ClosetFocus" type="Marker3D" parent="."]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 5.1, 11.5)
@@ -231,12 +230,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0660248, 0.774414, 0.279787
 [node name="flashlight" parent="InteractiveObjects" instance=ExtResource("25_83nib")]
 transform = Transform3D(0.55067, 0, 0.834723, 0, 1, 0, -0.834723, 0, 0.55067, -26.1774, 2.10849, 0)
 
+[node name="pillow" parent="InteractiveObjects" groups=["interactive"] instance=ExtResource("23_00wt8")]
+transform = Transform3D(0.0549755, 0, 3.49957, 0, 3.5, 0, -3.49957, 0, 0.0549755, -21.756, 0, 0)
+object_id = "pillow"
+required_focus_id = "bed"
+
 [node name="PuzzleTimer" type="Timer" parent="."]
 
 [editable path="InteractiveFurniture/closet"]
 [editable path="InteractiveFurniture/bed"]
 [editable path="InteractiveFurniture/bed/Sketchfab_Scene"]
-[editable path="InteractiveFurniture/pillow"]
 [editable path="InteractiveObjects/clothes"]
 [editable path="InteractiveObjects/clothes/Sketchfab_Scene"]
 [editable path="InteractiveObjects/clothes/Sketchfab_Scene2"]
+[editable path="InteractiveObjects/pillow"]

@@ -288,7 +288,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_dp0y5")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_oihg7"]
-size = Vector3(0.780007, 0.677734, 1.29485)
+size = Vector3(0.780007, 0.677734, 0.578206)
 
 [sub_resource type="Animation" id="Animation_fdp31"]
 length = 0.001
@@ -399,9 +399,8 @@ _data = {
 &"move_clothes": SubResource("Animation_0ek8j")
 }
 
-[node name="clothes" type="StaticBody3D" node_paths=PackedStringArray("move_clothes_anim_player")]
+[node name="clothes" type="StaticBody3D"]
 script = ExtResource("1_44ofa")
-move_clothes_anim_player = NodePath("AnimationPlayer")
 
 [node name="Sketchfab_Scene" parent="." instance=ExtResource("1_rhycn")]
 
@@ -455,12 +454,12 @@ transform = Transform3D(1, 0, 0, 0, 2.22045e-16, 1, 0, -1, 2.22045e-16, -13.3019
 transform = Transform3D(0.0162309, 0.999868, -2.22015e-16, -0.999868, 0.0162309, 2.18441e-16, 2.22015e-16, 2.18441e-16, 1, 23.2343, -14.2931, -45.2114)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0141335, 0.774414, 0.0541852)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0141335, 0.774414, 0.181296)
 shape = SubResource("BoxShape3D_oihg7")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_pnfus")
+&"": SubResource("AnimationLibrary_pnfus")
 }
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
