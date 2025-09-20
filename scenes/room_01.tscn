@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://bpxgf84bkwueg" path="res://assets/wall/wall_flat.tscn" id="3_lb5by"]
 [ext_resource type="PackedScene" uid="uid://drl6b52qrcn66" path="res://assets/roof/roof.tscn" id="4_dryon"]
 [ext_resource type="Script" uid="uid://kaplqpdxm125" path="res://scripts/CameraController.gd" id="6_mjkbk"]
-[ext_resource type="PackedScene" uid="uid://c4rndmvcmg3ph" path="res://assets/desk/scene.gltf" id="6_xl46k"]
 [ext_resource type="PackedScene" uid="uid://6rxjugi62ovn" path="res://assets/office_desk_chair/scene.gltf" id="8_m6mxt"]
 [ext_resource type="PackedScene" uid="uid://cawgkrmm0imfy" path="res://assets/laundry_basket/scene.gltf" id="9_r23mb"]
 [ext_resource type="PackedScene" uid="uid://d1rdawa7hkkse" path="res://assets/desk_lamp/scene.gltf" id="10_q24kv"]
@@ -18,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://c3vkc5m6ifynj" path="res://assets/pillows/scene.gltf" id="16_6gbnd"]
 [ext_resource type="PackedScene" uid="uid://c10u3fo70jmsh" path="res://assets/cc0_free_cardboard_box/scene.gltf" id="18_mpfnh"]
 [ext_resource type="PackedScene" uid="uid://cal34xhl46tpv" path="res://assets/rubix_cube/scene.gltf" id="19_c2e1c"]
+[ext_resource type="PackedScene" uid="uid://blxraato0idpm" path="res://scenes/desk.tscn" id="20_b6atw"]
 [ext_resource type="PackedScene" uid="uid://385iqtkfey5s" path="res://assets/monstera_1_low_poly/scene.gltf" id="20_vf70i"]
 [ext_resource type="PackedScene" uid="uid://djrfq5t7dx323" path="res://assets/mirror_b/scene.gltf" id="21_mjkbk"]
 [ext_resource type="Script" uid="uid://d2g2tgnyin2rj" path="res://scripts/Closet.gd" id="22_horgr"]
@@ -37,6 +37,7 @@ ambient_light_source = 1
 script = ExtResource("1_4706t")
 camera_controller = NodePath("Camera3D")
 pillow_object = NodePath("InteractiveObjects/pillow")
+debug_mode = true
 
 [node name="Structure" type="Node3D" parent="."]
 
@@ -117,7 +118,7 @@ transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, -19.6, 0, -25.401)
 transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 12, 0)
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 5.1, 0)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 5.1, 0)
 fov = 50.0
 script = ExtResource("6_mjkbk")
 
@@ -132,17 +133,14 @@ omni_attenuation = 1.5
 
 [node name="furniture" type="Node3D" parent="."]
 
-[node name="table" parent="furniture" instance=ExtResource("6_xl46k")]
-transform = Transform3D(0.04, 0, 0, 0, 0.04, 0, 0, 0, 0.04, 23.6499, 0, 0)
-
 [node name="chair" parent="furniture" instance=ExtResource("8_m6mxt")]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 20.421, 0, 4.59204)
+transform = Transform3D(-1.6804423, 0, -2.4851787, 0, 3, 0, 2.4851787, 0, -1.6804423, 19.56209, 0, 4.8352485)
 
 [node name="lighting2" parent="furniture" instance=ExtResource("9_r23mb")]
 transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, -10.8813, 0, 20.3717)
 
 [node name="lighting" parent="furniture" instance=ExtResource("10_q24kv")]
-transform = Transform3D(-0.759271, 0, -0.650774, 0, 1, 0, 0.650774, 0, -0.759271, 23.5931, 3.2289, -1.14609)
+transform = Transform3D(-0.759271, 0, -0.650774, 0, 1, 0, 0.650774, 0, -0.759271, 24, 3.8, -2.5)
 
 [node name="object_holder_1" parent="furniture" instance=ExtResource("11_yas0y")]
 transform = Transform3D(-1.31134e-07, 0, 3, 0, 3, 0, -3, 0, -1.31134e-07, -24.7973, 8.36239, 12.725)
@@ -211,8 +209,12 @@ collision_shape = NodePath("Body_bed")
 transform = Transform3D(1, -1.86265e-09, 0, 0, -4.37114e-08, -1, 1.86265e-09, 1, -4.37114e-08, -0.0171215, 0.43067, 0.184095)
 
 [node name="Television" parent="InteractiveFurniture" node_paths=PackedStringArray("focus_marker") groups=["interactive"] instance=ExtResource("25_b6atw")]
-transform = Transform3D(-6.55671e-08, 0, -1.5, 0, 1.5, 0, 1.5, 0, -6.55671e-08, 25.179, 7.23747, 0)
+transform = Transform3D(-6.55671e-08, 0, -1.5, 0, 1.5, 0, 1.5, 0, -6.55671e-08, 25.179, 8.6, 0)
 focus_marker = NodePath("../../Focus/TVFocus")
+
+[node name="desk" parent="InteractiveFurniture" node_paths=PackedStringArray("focus_marker") groups=["interactive"] instance=ExtResource("20_b6atw")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 23, 1.9, 0)
+focus_marker = NodePath("../../Focus/DeskFocus")
 
 [node name="InteractiveObjects" type="Node3D" parent="."]
 
@@ -244,11 +246,15 @@ transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 5.1
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -7, 5.1, 0)
 
 [node name="TVFocus" type="Marker3D" parent="Focus"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 20, 7.25, 0)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 20, 8.6, 0)
+
+[node name="DeskFocus" type="Marker3D" parent="Focus"]
+transform = Transform3D(-4.371139e-08, 0.70710677, -0.70710677, 0, 0.70710677, 0.70710677, 1, 3.090862e-08, -3.090862e-08, 16, 8, 0)
 
 [editable path="InteractiveFurniture/closet"]
 [editable path="InteractiveFurniture/bed"]
 [editable path="InteractiveFurniture/bed/Sketchfab_Scene"]
+[editable path="InteractiveFurniture/desk"]
 [editable path="InteractiveObjects/clothes"]
 [editable path="InteractiveObjects/clothes/Sketchfab_Scene"]
 [editable path="InteractiveObjects/clothes/Sketchfab_Scene2"]

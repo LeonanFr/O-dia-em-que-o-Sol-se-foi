@@ -61,6 +61,7 @@ func _handle_mouse_click(mouse_position: Vector2) -> void:
 					_focus_on_object(obj)
 
 func _trigger_interaction(obj: InteractiveObject):
+	print(obj)
 	match obj.object_id:
 		"tv":
 			obj.interact("turn_on")

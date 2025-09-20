@@ -1,11 +1,8 @@
 Model Information:
-* title:	Desk
-* source:	https://sketchfab.com/3d-models/desk-36e27887358e45d3b400d4c4dd7ac7a8
-* author:	charles.cla (https://sketchfab.com/charles.cla)
+* title:	Antique Desk
+* source:	https://sketchfab.com/3d-models/antique-desk-9b3997f19d034134b1ca4337c414f339
+* author:	Timothy Ahene (https://sketchfab.com/timothyahene)
 
 Model License:
-* license type:	CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)
-* requirements:	Author must be credited. No commercial use.
-
-If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
-This work is based on "Desk" (https://sketchfab.com/3d-models/desk-36e27887358e45d3b400d4c4dd7ac7a8) by charles.cla (https://sketchfab.com/charles.cla) licensed under CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)
+* license type:	SKETCHFAB Standard (https://sketchfab.com/licenses)
+* requirements:	Under basic restrictions, use worldwide, on all types of media, commercially or not, and in all types of derivative works
