@@ -1,0 +1,73 @@
+[gd_scene load_steps=6 format=3 uid="uid://c6173kyh31ed8"]
+
+[ext_resource type="FontFile" uid="uid://dgsyllvf1cdrv" path="res://assets/fonts/Oceanside Typewriter.ttf" id="1_ahhtf"]
+[ext_resource type="Script" uid="uid://c72u68n2n3ljw" path="res://scripts/hud.gd" id="1_oo0fn"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_oo0fn"]
+font = ExtResource("1_ahhtf")
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_ahhtf"]
+font = ExtResource("1_ahhtf")
+
+[sub_resource type="LabelSettings" id="LabelSettings_5ysmq"]
+font = ExtResource("1_ahhtf")
+font_size = 32
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_oo0fn")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -259.0
+offset_bottom = 34.0
+grow_horizontal = 0
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+
+[node name="QuestLabel" type="Label" parent="MarginContainer"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_oo0fn")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NotificationPanel" type="PanelContainer" parent="."]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="NotificationPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 20
+
+[node name="NotificationLabel" type="Label" parent="NotificationPanel/MarginContainer"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_ahhtf")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NotificationTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="TimerContainer" type="MarginContainer" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 43.0
+grow_horizontal = 2
+theme_override_constants/margin_top = 20
+
+[node name="TimerLabel" type="Label" parent="TimerContainer"]
+visible = false
+layout_mode = 2
+label_settings = SubResource("LabelSettings_5ysmq")

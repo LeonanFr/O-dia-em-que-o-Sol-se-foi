@@ -1,6 +1,8 @@
-[gd_scene load_steps=17 format=4 uid="uid://bfpcpmopcfb7b"]
+[gd_scene load_steps=19 format=4 uid="uid://bfpcpmopcfb7b"]
 
+[ext_resource type="Script" uid="uid://hklui7wltu5x" path="res://scripts/television.gd" id="1_3fxiq"]
 [ext_resource type="VideoStream" uid="uid://d35odb5beip6a" path="res://assets/video/HD_Bars_and_tone.ogv" id="1_ccm7p"]
+[ext_resource type="FontFile" uid="uid://jucvbx4i2esh" path="res://assets/fonts/Butler_Regular.otf" id="2_qcggj"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4dvst"]
 resource_name = "Black"
@@ -123,57 +125,6 @@ albedo_color = Color(0, 0, 0, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_068w5"]
 size = Vector3(1.12445, 0.656006, 0.0496826)
 
-[sub_resource type="Animation" id="Animation_ccm7p"]
-resource_name = "play_intro"
-length = 6.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Label3D:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 5, 5.5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [true, true, false]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
-"values": []
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("TV 49Zoll/ScreenVideo:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 5.03333, 5.5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [false, false, true]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("TV 49Zoll/ScreenBlack:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 5.03333, 5.5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [true, true, false]
-}
-
 [sub_resource type="Animation" id="Animation_3fxiq"]
 length = 0.001
 tracks/0/type = "value"
@@ -213,13 +164,95 @@ tracks/2/keys = {
 "values": [true]
 }
 
+[sub_resource type="Animation" id="Animation_ccm7p"]
+resource_name = "play_intro"
+length = 6.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label3D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5, 5.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, true, false]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.0333333, 5.5),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"_lock_input"
+}, {
+"args": [],
+"method": &"_unlock_input"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TV 49Zoll/ScreenVideo:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 5.03333, 5.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("TV 49Zoll/ScreenBlack:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 5.03333, 5.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, true, false]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 5.5),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"_on_intro_started"
+}, {
+"args": [],
+"method": &"_on_intro_finished"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3fxiq"]
 _data = {
 &"RESET": SubResource("Animation_3fxiq"),
 &"play_intro": SubResource("Animation_ccm7p")
 }
 
-[node name="television" type="StaticBody3D"]
+[node name="television" type="StaticBody3D" node_paths=PackedStringArray("animation_player", "label_text", "screen_black", "screen_video", "collision_shape")]
+script = ExtResource("1_3fxiq")
+animation_player = NodePath("AnimationPlayer")
+label_text = NodePath("Label3D")
+screen_black = NodePath("TV 49Zoll/ScreenBlack")
+screen_video = NodePath("TV 49Zoll/ScreenVideo")
+object_id = "tv"
+is_container = true
+collision_shape = NodePath("TVBody")
 
 [node name="TV 49Zoll" type="Node3D" parent="."]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
@@ -250,7 +283,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.111786)
 visible = false
 text = "Você ficará sem energia em breve...
 Procure uma fonte de luz imediatamente."
-outline_size = 0
+font = ExtResource("2_qcggj")
+uppercase = true
 
 [node name="SubViewport" type="SubViewport" parent="."]
 size = Vector2i(1920, 1080)

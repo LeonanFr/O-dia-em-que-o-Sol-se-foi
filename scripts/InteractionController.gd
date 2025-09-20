@@ -1,16 +1,19 @@
 extends Node3D
 class_name InteractionController
 
-@export var pillow_object: Node
 @export var camera_controller: CameraController
+@export var pillow_object: Node 
 @export var debug_mode: bool = false
 
 var is_focused: bool = false
 var is_transitioning: bool = false
+var input_locked: bool = false
 var focused_object: InteractiveObject = null
 var original_camera_transform: Transform3D
 
 func _ready() -> void:
+	GameManager.reset()
+	
 	if not camera_controller:
 		push_error("CameraController não foi atribuído no InteractionController!")
 		get_tree().quit()
@@ -18,17 +21,24 @@ func _ready() -> void:
 	original_camera_transform = camera_controller.global_transform
 	GameManager.interaction_denied.connect(_on_interaction_denied)
 
-func _unhandled_input(event: InputEvent) -> void:
-	if is_transitioning or camera_controller.get_is_panning():
-		return
+	var televisions = get_tree().get_nodes_in_group("interactive")
+	for obj in televisions:
+		if obj is TV:
+			obj.input_lock_requested.connect(lock_input)
+			
+	var interactive_objects = get_tree().get_nodes_in_group("interactive")
+	for obj in interactive_objects:
+		if obj.has_signal("interacted"):
+			obj.interacted.connect(GameManager.notify_interacted)
 
+func _unhandled_input(event: InputEvent) -> void:
+	if input_locked or is_transitioning or camera_controller.is_busy():
+		return
 	if is_focused:
 		if event.is_action_pressed("ui_down"):
 			_unfocus_current_object()
-	
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		_handle_mouse_click(event.position)
-	
 	if not is_focused:
 		camera_controller.handle_input(event, true)
 
@@ -37,6 +47,7 @@ func _handle_mouse_click(mouse_position: Vector2) -> void:
 	var ray_origin = camera_controller.project_ray_origin(mouse_position)
 	var ray_end = ray_origin + camera_controller.project_ray_normal(mouse_position) * 1000
 	var query := PhysicsRayQueryParameters3D.create(ray_origin, ray_end)
+	
 	var result := space_state.intersect_ray(query)
 
 	if result.has("collider"):
@@ -51,6 +62,8 @@ func _handle_mouse_click(mouse_position: Vector2) -> void:
 
 func _trigger_interaction(obj: InteractiveObject):
 	match obj.object_id:
+		"tv":
+			obj.interact("turn_on")
 		"closet":
 			obj.interact("open")
 		"clothes":
@@ -59,9 +72,6 @@ func _trigger_interaction(obj: InteractiveObject):
 			obj.interact()
 		_:
 			obj.interact()
-
-	if not debug_mode:
-		GameManager.notify_interacted(obj.object_id)
 
 func _focus_on_object(obj: InteractiveObject) -> void:
 	var target_transform = obj.get_focus_transform()
@@ -81,11 +91,17 @@ func _focus_on_object(obj: InteractiveObject) -> void:
 	
 	await tween.finished
 	
+	if obj.is_container and obj.collision_shape:
+		obj.collision_shape.disabled = true
+	
 	is_transitioning = false
 
 func _unfocus_current_object() -> void:
 	if not is_focused:
 		return
+
+	if focused_object and focused_object.is_container and focused_object.collision_shape:
+		focused_object.collision_shape.disabled = false
 		
 	is_transitioning = true
 	
@@ -103,5 +119,9 @@ func _unfocus_current_object() -> void:
 	focused_object = null
 	is_transitioning = false
 
+
 func _on_interaction_denied(message: String) -> void:
-	print("INTERAÇÃO NEGADA: ", message)
+	pass
+
+func lock_input(should_lock: bool):
+	input_locked = should_lock

@@ -1,0 +1,73 @@
+[gd_scene load_steps=5 format=3 uid="uid://cuexfh157uiqm"]
+
+[ext_resource type="Script" uid="uid://w5g1j643m30c" path="res://scripts/game_over_screen.gd" id="1_jb1p3"]
+[ext_resource type="FontFile" uid="uid://dgsyllvf1cdrv" path="res://assets/fonts/Oceanside Typewriter.ttf" id="1_wojlb"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_jb1p3"]
+font = ExtResource("1_wojlb")
+font_size = 48
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1tm0t"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.650128, 0.650128, 0.650128, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 2
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 2
+
+[node name="GameOverScreen" type="CanvasLayer"]
+script = ExtResource("1_jb1p3")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.784314)
+
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect"]
+layout_mode = 1
+offset_right = 811.0
+offset_bottom = 51.0
+
+[node name="Label" type="Label" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -405.5
+offset_top = -25.5
+offset_right = 405.5
+offset_bottom = 25.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "A escuridão tomou conta de nós."
+label_settings = SubResource("LabelSettings_jb1p3")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = 46.0
+offset_right = 80.0
+offset_bottom = 74.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_wojlb")
+theme_override_styles/normal = SubResource("StyleBoxFlat_1tm0t")
+text = "Tentar novamente"
+
+[connection signal="pressed" from="ColorRect/Button" to="." method="_on_button_pressed"]

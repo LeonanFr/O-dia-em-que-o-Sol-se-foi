@@ -33,11 +33,10 @@
 background_mode = 2
 ambient_light_source = 1
 
-[node name="Room" type="Node3D" node_paths=PackedStringArray("pillow_object", "camera_controller")]
+[node name="Room" type="Node3D" node_paths=PackedStringArray("camera_controller", "pillow_object")]
 script = ExtResource("1_4706t")
-pillow_object = NodePath("InteractiveObjects/pillow")
 camera_controller = NodePath("Camera3D")
-debug_mode = true
+pillow_object = NodePath("InteractiveObjects/pillow")
 
 [node name="Structure" type="Node3D" parent="."]
 
@@ -191,30 +190,29 @@ transform = Transform3D(-4, 0, -3.49691e-07, 0, 4, 0, 3.49691e-07, 0, -4, -12.03
 
 [node name="InteractiveFurniture" type="Node3D" parent="."]
 
-[node name="closet" parent="InteractiveFurniture" node_paths=PackedStringArray("focus_marker", "animation_player") groups=["interactive"] instance=ExtResource("22_mpfnh")]
+[node name="closet" parent="InteractiveFurniture" node_paths=PackedStringArray("focus_marker", "animation_player", "collision_shape") groups=["interactive"] instance=ExtResource("22_mpfnh")]
 transform = Transform3D(-4, 0, -3.49691e-07, 0, 4, 0, 3.49691e-07, 0, -4, 4, 0, 25)
 script = ExtResource("22_horgr")
-focus_marker = NodePath("../../ClosetFocus")
+focus_marker = NodePath("../../Focus/ClosetFocus")
 animation_player = NodePath("AnimationPlayer")
 object_id = "closet"
+is_container = true
+collision_shape = NodePath("Body")
 
-[node name="bed" parent="InteractiveFurniture" node_paths=PackedStringArray("focus_marker") groups=["interactive"] instance=ExtResource("22_hpqne")]
+[node name="bed" parent="InteractiveFurniture" node_paths=PackedStringArray("focus_marker", "collision_shape") groups=["interactive"] instance=ExtResource("22_hpqne")]
 transform = Transform3D(0.0549755, 0, 3.49957, 0, 3.5, 0, -3.49957, 0, 0.0549755, -21.756, 0, 0)
 script = ExtResource("24_4706t")
-focus_marker = NodePath("../../BedFocus")
+focus_marker = NodePath("../../Focus/BedFocus")
 object_id = "bed"
+is_container = true
+collision_shape = NodePath("Body_bed")
 
 [node name="Body_bed" parent="InteractiveFurniture/bed" index="1"]
 transform = Transform3D(1, -1.86265e-09, 0, 0, -4.37114e-08, -1, 1.86265e-09, 1, -4.37114e-08, -0.0171215, 0.43067, 0.184095)
 
-[node name="Television" parent="InteractiveFurniture" instance=ExtResource("25_b6atw")]
+[node name="Television" parent="InteractiveFurniture" node_paths=PackedStringArray("focus_marker") groups=["interactive"] instance=ExtResource("25_b6atw")]
 transform = Transform3D(-6.55671e-08, 0, -1.5, 0, 1.5, 0, 1.5, 0, -6.55671e-08, 25.179, 7.23747, 0)
-
-[node name="ClosetFocus" type="Marker3D" parent="."]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 5.1, 11.5)
-
-[node name="BedFocus" type="Marker3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -7, 5.1, 0)
+focus_marker = NodePath("../../Focus/TVFocus")
 
 [node name="InteractiveObjects" type="Node3D" parent="."]
 
@@ -236,6 +234,17 @@ object_id = "pillow"
 required_focus_id = "bed"
 
 [node name="PuzzleTimer" type="Timer" parent="."]
+
+[node name="Focus" type="Node3D" parent="."]
+
+[node name="ClosetFocus" type="Marker3D" parent="Focus"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 5.1, 11.5)
+
+[node name="BedFocus" type="Marker3D" parent="Focus"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -7, 5.1, 0)
+
+[node name="TVFocus" type="Marker3D" parent="Focus"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 20, 7.25, 0)
 
 [editable path="InteractiveFurniture/closet"]
 [editable path="InteractiveFurniture/bed"]
