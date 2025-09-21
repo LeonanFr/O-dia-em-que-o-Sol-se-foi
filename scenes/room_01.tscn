@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://ooqeffs4hcg4"]
+[gd_scene load_steps=36 format=3 uid="uid://ooqeffs4hcg4"]
 
 [ext_resource type="Script" uid="uid://dx3aoro2ahpxc" path="res://scripts/InteractionController.gd" id="1_4706t"]
 [ext_resource type="PackedScene" uid="uid://cws13unueg4ld" path="res://assets/wooden_floor/wooden_floor.glb" id="1_bmbfo"]
@@ -6,9 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://bpxgf84bkwueg" path="res://assets/wall/wall_flat.tscn" id="3_lb5by"]
 [ext_resource type="PackedScene" uid="uid://drl6b52qrcn66" path="res://assets/roof/roof.tscn" id="4_dryon"]
 [ext_resource type="Script" uid="uid://kaplqpdxm125" path="res://scripts/CameraController.gd" id="6_mjkbk"]
+[ext_resource type="Texture2D" uid="uid://po6gbsxtctog" path="res://assets/cellphone_light_mask.png" id="7_ckr6b"]
 [ext_resource type="PackedScene" uid="uid://6rxjugi62ovn" path="res://assets/office_desk_chair/scene.gltf" id="8_m6mxt"]
+[ext_resource type="Script" uid="uid://ccr27xmr65klp" path="res://scripts/cellphone_light.gd" id="8_wbk8i"]
 [ext_resource type="PackedScene" uid="uid://cawgkrmm0imfy" path="res://assets/laundry_basket/scene.gltf" id="9_r23mb"]
-[ext_resource type="PackedScene" uid="uid://d1rdawa7hkkse" path="res://assets/desk_lamp/scene.gltf" id="10_q24kv"]
 [ext_resource type="PackedScene" uid="uid://d2lwpkijugtd0" path="res://assets/cc0_-_shelf_5/scene.gltf" id="11_yas0y"]
 [ext_resource type="PackedScene" uid="uid://0jyqyd3wlog" path="res://assets/photo_collage_wall/scene.gltf" id="12_87oqg"]
 [ext_resource type="PackedScene" uid="uid://hdqkyooabjr6" path="res://assets/vintage_cabinet/scene.gltf" id="13_87oqg"]
@@ -20,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://blxraato0idpm" path="res://scenes/desk.tscn" id="20_b6atw"]
 [ext_resource type="PackedScene" uid="uid://385iqtkfey5s" path="res://assets/monstera_1_low_poly/scene.gltf" id="20_vf70i"]
 [ext_resource type="PackedScene" uid="uid://djrfq5t7dx323" path="res://assets/mirror_b/scene.gltf" id="21_mjkbk"]
+[ext_resource type="PackedScene" uid="uid://c010hsg7265le" path="res://scenes/lighting.tscn" id="21_wbk8i"]
 [ext_resource type="Script" uid="uid://d2g2tgnyin2rj" path="res://scripts/Closet.gd" id="22_horgr"]
 [ext_resource type="PackedScene" uid="uid://dyxh2c0ldlqjl" path="res://scenes/bed.tscn" id="22_hpqne"]
 [ext_resource type="PackedScene" uid="uid://b5o7b7mataj5d" path="res://scenes/closet.tscn" id="22_mpfnh"]
@@ -28,16 +30,121 @@
 [ext_resource type="PackedScene" uid="uid://st2b1dgxvbvr" path="res://scenes/clothes.tscn" id="24_diktu"]
 [ext_resource type="PackedScene" uid="uid://btj6yopb7ljak" path="res://scenes/flashlight.tscn" id="25_83nib"]
 [ext_resource type="PackedScene" uid="uid://bfpcpmopcfb7b" path="res://scenes/television.tscn" id="25_b6atw"]
+[ext_resource type="PackedScene" uid="uid://bwqnc7b0f6sim" path="res://scenes/cellphone.tscn" id="26_yntok"]
 
 [sub_resource type="Environment" id="Environment_dryon"]
 background_mode = 2
 ambient_light_source = 1
 
-[node name="Room" type="Node3D" node_paths=PackedStringArray("camera_controller", "pillow_object")]
+[sub_resource type="Animation" id="Animation_7wmn2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Lamp:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [5.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Lamp:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_wbk8i"]
+resource_name = "power_outage"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Lamp:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 1.4, 2, 2.8, 3.2, 3.5, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [5.0, 0.0, 5.0, 0.0, 5.0, 0.0, 3.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Lamp:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(4),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_on_start_power_cut"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"turn_off_emissives"
+}]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_on_power_cut"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gk4pe"]
+_data = {
+&"RESET": SubResource("Animation_7wmn2"),
+&"power_outage": SubResource("Animation_wbk8i")
+}
+
+[node name="Room" type="Node3D" node_paths=PackedStringArray("main_light", "cellphone_light", "camera_controller", "pillow_object")]
 script = ExtResource("1_4706t")
+main_light = NodePath("Lamp")
+cellphone_light = NodePath("Camera3D/CellphoneLight")
 camera_controller = NodePath("Camera3D")
 pillow_object = NodePath("InteractiveObjects/pillow")
-debug_mode = true
 
 [node name="Structure" type="Node3D" parent="."]
 
@@ -122,14 +229,23 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 5
 fov = 50.0
 script = ExtResource("6_mjkbk")
 
+[node name="CellphoneLight" type="SpotLight3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.8559972e-08, 0, -0.653376)
+visible = false
+light_energy = 3.0
+light_projector = ExtResource("7_ckr6b")
+shadow_enabled = true
+spot_range = 40.0
+spot_angle = 30.0
+script = ExtResource("8_wbk8i")
+
+[node name="Lamp" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.9344273, 0)
+light_energy = 5.0
+omni_range = 40.0
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_dryon")
-
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0282871, 5.50823, -0.000918388)
-light_energy = 16.0
-omni_range = 45.0
-omni_attenuation = 1.5
 
 [node name="furniture" type="Node3D" parent="."]
 
@@ -138,9 +254,6 @@ transform = Transform3D(-1.6804423, 0, -2.4851787, 0, 3, 0, 2.4851787, 0, -1.680
 
 [node name="lighting2" parent="furniture" instance=ExtResource("9_r23mb")]
 transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, -10.8813, 0, 20.3717)
-
-[node name="lighting" parent="furniture" instance=ExtResource("10_q24kv")]
-transform = Transform3D(-0.759271, 0, -0.650774, 0, 1, 0, 0.650774, 0, -0.759271, 24, 3.8, -2.5)
 
 [node name="object_holder_1" parent="furniture" instance=ExtResource("11_yas0y")]
 transform = Transform3D(-1.31134e-07, 0, 3, 0, 3, 0, -3, 0, -1.31134e-07, -24.7973, 8.36239, 12.725)
@@ -184,6 +297,9 @@ transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -6.40362, 0, -23.6834)
 [node name="mirror" parent="furniture" instance=ExtResource("21_mjkbk")]
 transform = Transform3D(-4, 0, -3.49691e-07, 0, 4, 0, 3.49691e-07, 0, -4, -12.0382, 0, 24.8133)
 
+[node name="lighting" parent="furniture" instance=ExtResource("21_wbk8i")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 23.597013, 3.78, -2.5483348)
+
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="InteractiveFurniture" type="Node3D" parent="."]
@@ -212,9 +328,16 @@ transform = Transform3D(1, -1.86265e-09, 0, 0, -4.37114e-08, -1, 1.86265e-09, 1,
 transform = Transform3D(-6.55671e-08, 0, -1.5, 0, 1.5, 0, 1.5, 0, -6.55671e-08, 25.179, 8.6, 0)
 focus_marker = NodePath("../../Focus/TVFocus")
 
-[node name="desk" parent="InteractiveFurniture" node_paths=PackedStringArray("focus_marker") groups=["interactive"] instance=ExtResource("20_b6atw")]
+[node name="desk" parent="InteractiveFurniture" node_paths=PackedStringArray("focus_marker", "cellphone_node") groups=["interactive"] instance=ExtResource("20_b6atw")]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 23, 1.9, 0)
 focus_marker = NodePath("../../Focus/DeskFocus")
+cellphone_node = NodePath("Model/Collada visual scene group/Drawers/LeftDrawers/LeftOne/cellphone")
+
+[node name="cellphone" parent="InteractiveFurniture/desk/Model/Collada visual scene group/Drawers/LeftDrawers/LeftOne" index="6" groups=["interactive"] instance=ExtResource("26_yntok")]
+transform = Transform3D(0.25, 0, 0, 0, -1.0927846e-08, -0.25, 0, 0.25, -1.0927846e-08, -0.1495676, 0.2149888, -0.6092684)
+visible = false
+object_id = "cellphone"
+is_collectible = true
 
 [node name="InteractiveObjects" type="Node3D" parent="."]
 
@@ -251,10 +374,16 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 20, 8.
 [node name="DeskFocus" type="Marker3D" parent="Focus"]
 transform = Transform3D(-4.371139e-08, 0.70710677, -0.70710677, 0, 0.70710677, 0.70710677, 1, 3.090862e-08, -3.090862e-08, 16, 8, 0)
 
+[node name="LevelAnimator" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_gk4pe")
+}
+
 [editable path="InteractiveFurniture/closet"]
 [editable path="InteractiveFurniture/bed"]
 [editable path="InteractiveFurniture/bed/Sketchfab_Scene"]
 [editable path="InteractiveFurniture/desk"]
+[editable path="InteractiveFurniture/desk/Model/Collada visual scene group/Drawers/LeftDrawers/LeftOne/cellphone"]
 [editable path="InteractiveObjects/clothes"]
 [editable path="InteractiveObjects/clothes/Sketchfab_Scene"]
 [editable path="InteractiveObjects/clothes/Sketchfab_Scene2"]

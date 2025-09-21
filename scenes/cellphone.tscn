@@ -2925,7 +2925,6 @@ size = Vector3(0.4946289, 1.033081, 0.3000641)
 
 [node name="cellphone" type="StaticBody3D"]
 script = ExtResource("1_eywxc")
-object_id = "cellphone"
 
 [node name="Model" type="Node3D" parent="."]
 transform = Transform3D(6.3435698, 0, 0, 0, 1.4085554e-15, 6.3435698, 0, -6.3435698, 1.4085554e-15, 0, 0, 0)
@@ -3287,6 +3286,6 @@ skeleton = NodePath("")
 mesh = SubResource("ArrayMesh_g2d1k")
 skeleton = NodePath("")
 
-[node name="CellphoneBody" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0031738281, -0.0010375977, 0.008590698)
 shape = SubResource("BoxShape3D_fw5h6")

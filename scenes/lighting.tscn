@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://c010hsg7265le"]
+
+[ext_resource type="PackedScene" uid="uid://d1rdawa7hkkse" path="res://assets/desk_lamp/scene.gltf" id="1_qs70a"]
+
+[node name="lighting" instance=ExtResource("1_qs70a")]
+
+[node name="Sphere020_Ceramic_0" parent="Sketchfab_model/ef564956d2504f09b35a43a75a568550_fbx/RootNode/Sphere020" index="1" groups=["emissive_objects"]]

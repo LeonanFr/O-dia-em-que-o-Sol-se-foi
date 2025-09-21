@@ -28,6 +28,12 @@ func interact(action: String = "") -> void:
 	if animation_player and action == "turn_on":
 		animation_player.play("play_intro")
 
+func turn_off():
+	if screen_video:
+		screen_video.hide()
+	if screen_black:
+		screen_black.show()
+
 func _on_intro_started():
 	has_been_activated = true
 

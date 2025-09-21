@@ -261,7 +261,8 @@ transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
 mesh = SubResource("ArrayMesh_5d32t")
 skeleton = NodePath("")
 
-[node name="TV 49Zoll_RedLight_0" type="MeshInstance3D" parent="TV 49Zoll"]
+[node name="TV 49Zoll_RedLight_0" type="MeshInstance3D" parent="TV 49Zoll" groups=["emissive_objects"]]
+gi_mode = 0
 mesh = SubResource("ArrayMesh_v7rtl")
 skeleton = NodePath("")
 

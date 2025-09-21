@@ -1,6 +1,8 @@
 extends Node3D
 class_name InteractionController
 
+@export var main_light: OmniLight3D
+@export var cellphone_light: SpotLight3D
 @export var camera_controller: CameraController
 @export var pillow_object: Node 
 @export var debug_mode: bool = false
@@ -11,27 +13,33 @@ var input_locked: bool = false
 var focused_object: InteractiveObject = null
 var original_camera_transform: Transform3D
 
-func _ready() -> void:
+func _ready():
 	GameManager.reset()
-	
+	GameManager.cellphone_light_toggled.connect(_on_cellphone_light_toggled)
 	if not camera_controller:
 		push_error("CameraController não foi atribuído no InteractionController!")
 		get_tree().quit()
 	
 	original_camera_transform = camera_controller.global_transform
 	GameManager.interaction_denied.connect(_on_interaction_denied)
-
-	var televisions = get_tree().get_nodes_in_group("interactive")
-	for obj in televisions:
-		if obj is TV:
-			obj.input_lock_requested.connect(lock_input)
+	
+	var hud = get_tree().root.get_node("Hud")
+	if hud and hud.has_signal("ui_toggled"):
+		hud.ui_toggled.connect(lock_input)
 			
 	var interactive_objects = get_tree().get_nodes_in_group("interactive")
 	for obj in interactive_objects:
 		if obj.has_signal("interacted"):
 			obj.interacted.connect(GameManager.notify_interacted)
+		if obj is TV:
+			obj.input_lock_requested.connect(lock_input)
 
-func _unhandled_input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent):
+	if GameManager.is_in_darkness:
+		if event.is_action_pressed("ui_left") or event.is_action_pressed("ui_right") or \
+		(event is InputEventMouseButton and event.is_pressed()):
+			GameManager.emit_notification_requested("Não consigo ver nada!")
+		return
 	if input_locked or is_transitioning or camera_controller.is_busy():
 		return
 	if is_focused:
@@ -42,7 +50,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if not is_focused:
 		camera_controller.handle_input(event, true)
 
-func _handle_mouse_click(mouse_position: Vector2) -> void:
+func _handle_mouse_click(mouse_position: Vector2):
 	var space_state = get_world_3d().direct_space_state
 	var ray_origin = camera_controller.project_ray_origin(mouse_position)
 	var ray_end = ray_origin + camera_controller.project_ray_normal(mouse_position) * 1000
@@ -56,15 +64,24 @@ func _handle_mouse_click(mouse_position: Vector2) -> void:
 			if obj.required_focus_id != "":
 				if is_focused and focused_object.object_id == obj.required_focus_id:
 					_trigger_interaction(obj)
+			elif is_focused:
+				if GameManager.request_interaction(obj):
+					_trigger_interaction(obj)
 			elif not is_focused:
-				if debug_mode or GameManager.request_interaction(obj.object_id):
+				if debug_mode or GameManager.request_interaction(obj):
 					_focus_on_object(obj)
 
 func _trigger_interaction(obj: InteractiveObject):
-	print(obj)
+	if obj.is_collectible:
+		GameManager.add_to_inventory(obj.object_id)
+		obj.queue_free()
+		return
+		
 	match obj.object_id:
 		"tv":
 			obj.interact("turn_on")
+		"desk":
+			obj.interact()
 		"closet":
 			obj.interact("open")
 		"clothes":
@@ -74,12 +91,15 @@ func _trigger_interaction(obj: InteractiveObject):
 		_:
 			obj.interact()
 
-func _focus_on_object(obj: InteractiveObject) -> void:
+func _focus_on_object(obj: InteractiveObject):
 	var target_transform = obj.get_focus_transform()
 	if not target_transform:
 		print("AVISO: Objeto '", obj.object_id, "' não tem um Marker3D de foco configurado.")
 		return
-
+		
+	if obj.object_id == "tv":
+		GameManager.emit_quest_updated("")
+	
 	is_transitioning = true
 	original_camera_transform = camera_controller.global_transform
 	
@@ -97,7 +117,7 @@ func _focus_on_object(obj: InteractiveObject) -> void:
 	
 	is_transitioning = false
 
-func _unfocus_current_object() -> void:
+func _unfocus_current_object():
 	if not is_focused:
 		return
 
@@ -109,6 +129,9 @@ func _unfocus_current_object() -> void:
 	if focused_object and focused_object.object_id == "closet":
 		focused_object.interact("close")
 		
+	if focused_object and focused_object.object_id == "desk":
+		focused_object.close_all_drawers()
+	
 	if focused_object and focused_object.object_id == "bed":
 		if pillow_object:
 			pillow_object.force_down()
@@ -120,9 +143,30 @@ func _unfocus_current_object() -> void:
 	focused_object = null
 	is_transitioning = false
 
-
-func _on_interaction_denied(message: String) -> void:
+func _on_interaction_denied(message: String):
 	pass
 
 func lock_input(should_lock: bool):
 	input_locked = should_lock
+	
+func turn_off_emissives():
+
+	var emissive_objects = get_tree().get_nodes_in_group("emissive_objects")
+	for obj in emissive_objects:
+		if obj is MeshInstance3D:
+			var mat = obj.get_active_material(0)
+			if mat:
+				mat.emission_enabled = false
+
+func _on_cellphone_light_toggled(is_on: bool):
+	if cellphone_light:
+		cellphone_light.visible = is_on
+
+func _on_power_cut():
+	GameManager.on_power_cut()
+	GameManager._show_dialogue("Droga! Fiquei sem energia. Como vou enxergar algo?")
+
+func _on_start_power_cut():
+	if is_focused and focused_object:
+		_unfocus_current_object()
+	GameManager._show_dialogue("Mas... O que foi isso?")

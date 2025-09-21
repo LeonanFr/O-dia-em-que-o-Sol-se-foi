@@ -5,13 +5,17 @@ class_name Desk
 @export var drawer_move_distance: float = 0.5
 @export var drawer_anim_duration: float = 0.6
 @export var focus_marker: Marker3D
+@export var cellphone_node: InteractiveObject
 
-var drawer_states := {}
+var drawer_data := {}
 
 func _ready():
 	for drawer in interactive_drawers:
 		if drawer:
-			drawer_states[drawer] = false
+			drawer_data[drawer] = {
+				"is_open": false,
+				"initial_pos": drawer.position
+			}
 			var area = drawer.get_node_or_null("Area3D")
 			if area:
 				area.input_event.connect(_on_drawer_clicked.bind(drawer))
@@ -25,28 +29,57 @@ func _on_drawer_clicked(camera, event, position, normal, shape_idx, drawer_node)
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		animate_drawer(drawer_node)
 
-func animate_drawer(drawer_node):
-	if drawer_node.has_meta("is_moving") and drawer_node.get_meta("is_moving"):
+func animate_drawer(drawer_node, force_state: String = "toggle"):
+	var data = drawer_data.get(drawer_node)
+	if data == null:
 		return
+
+	var is_open = data.is_open
+	var should_open: bool
 	
-	drawer_node.set_meta("is_moving", true)
+	match force_state:
+		"toggle": should_open = not is_open
+		"close": should_open = false
+		"open": should_open = true
 
-	var is_open = drawer_states.get(drawer_node, false)
-	var initial_position = drawer_node.position
-	var target_position = initial_position
+	if should_open == is_open:
+		return
 
-	if not is_open:
-		target_position.x -= drawer_move_distance
+	data.is_open = should_open
+
+	var target_position = drawer_node.position
+	if should_open:
+		target_position.x = data.initial_pos.x - drawer_move_distance
 	else:
-		target_position.x += drawer_move_distance
-	
+		target_position.x = data.initial_pos.x
+
+	if cellphone_node and drawer_node.is_ancestor_of(cellphone_node):
+		var collider = cellphone_node.get_node_or_null("CollisionShape3D")
+		if should_open:
+			cellphone_node.show()
+			if collider: collider.disabled = false
+		else:
+			cellphone_node.hide()
+			if collider: collider.disabled = true
+
+	if drawer_node.has_meta("active_tween"):
+		var old_tween = drawer_node.get_meta("active_tween")
+		if old_tween:
+			old_tween.kill()
+			drawer_node.remove_meta("active_tween")
+
 	var tween = create_tween().set_trans(Tween.TRANS_SINE)
 	tween.tween_property(drawer_node, "position", target_position, drawer_anim_duration)
-	
-	await tween.finished
-	
-	drawer_states[drawer_node] = not is_open
-	drawer_node.remove_meta("is_moving")
+	tween.finished.connect(func():
+		drawer_node.remove_meta("active_tween")
+	)
+	drawer_node.set_meta("active_tween", tween)
+
+func close_all_drawers():
+	for drawer in drawer_data:
+		var data = drawer_data[drawer]
+		if data.is_open:
+			animate_drawer(drawer, "close")
 
 func interact(action: String = "") -> void:
 	emit_signal("interacted", object_id)

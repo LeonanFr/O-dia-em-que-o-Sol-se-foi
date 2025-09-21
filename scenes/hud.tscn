@@ -1,11 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://c6173kyh31ed8"]
+[gd_scene load_steps=8 format=3 uid="uid://c6173kyh31ed8"]
 
 [ext_resource type="FontFile" uid="uid://dgsyllvf1cdrv" path="res://assets/fonts/Oceanside Typewriter.ttf" id="1_ahhtf"]
 [ext_resource type="Script" uid="uid://c72u68n2n3ljw" path="res://scripts/hud.gd" id="1_oo0fn"]
+[ext_resource type="PackedScene" uid="uid://cthboh3oh8f6m" path="res://scenes/inventory_slot.tscn" id="3_5ysmq"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_oo0fn"]
 font = ExtResource("1_ahhtf")
 font_size = 32
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oo0fn"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ahhtf"]
 font = ExtResource("1_ahhtf")
@@ -17,21 +20,65 @@ font_size = 32
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_oo0fn")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-anchors_preset = 1
+[node name="UIContainer" type="VBoxContainer" parent="."]
+anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -259.0
-offset_bottom = 34.0
+anchor_bottom = 1.0
+offset_left = -214.0
+offset_top = -17.5
+offset_bottom = -41.5
 grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="UIContainer"]
+layout_mode = 2
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 
-[node name="QuestLabel" type="Label" parent="MarginContainer"]
+[node name="QuestLabel" type="Label" parent="UIContainer/MarginContainer"]
 layout_mode = 2
+size_flags_vertical = 0
 label_settings = SubResource("LabelSettings_oo0fn")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="UIContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="PanelContainer" type="PanelContainer" parent="UIContainer/MarginContainer2"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxEmpty_oo0fn")
+
+[node name="GridContainer" type="GridContainer" parent="UIContainer/MarginContainer2/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/v_separation = 24
+
+[node name="InventorySlot" parent="UIContainer/MarginContainer2/PanelContainer/GridContainer" instance=ExtResource("3_5ysmq")]
+layout_mode = 2
+
+[node name="InventorySlot2" parent="UIContainer/MarginContainer2/PanelContainer/GridContainer" instance=ExtResource("3_5ysmq")]
+layout_mode = 2
+
+[node name="InventorySlot3" parent="UIContainer/MarginContainer2/PanelContainer/GridContainer" instance=ExtResource("3_5ysmq")]
+layout_mode = 2
+
+[node name="InventorySlot4" parent="UIContainer/MarginContainer2/PanelContainer/GridContainer" instance=ExtResource("3_5ysmq")]
+layout_mode = 2
+
+[node name="InventorySlot5" parent="UIContainer/MarginContainer2/PanelContainer/GridContainer" instance=ExtResource("3_5ysmq")]
+layout_mode = 2
+
+[node name="InventorySlot6" parent="UIContainer/MarginContainer2/PanelContainer/GridContainer" instance=ExtResource("3_5ysmq")]
+layout_mode = 2
 
 [node name="NotificationPanel" type="PanelContainer" parent="."]
 anchors_preset = 12
