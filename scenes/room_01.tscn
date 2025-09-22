@@ -400,8 +400,7 @@ focus_marker = NodePath("../../Focus/DeskFocus")
 cellphone_node = NodePath("Model/Collada visual scene group/Drawers/RightDrawers/RightThree/cellphone")
 
 [node name="cellphone" parent="InteractiveFurniture/desk/Model/Collada visual scene group/Drawers/RightDrawers/RightThree" index="6" groups=["interactive"] instance=ExtResource("26_yntok")]
-transform = Transform3D(0.25, 0, 0, 0, -1.0927846e-08, -0.25, 0, 0.25, -1.0927846e-08, -0.045271397, -0.12570873, 0.5994759)
-visible = false
+transform = Transform3D(0.15, 0, 0, 0, -6.556709e-09, -0.15, 0, 0.15, -6.556709e-09, -0.045271397, -0.132721, 0.5994759)
 required_focus_id = "desk"
 
 [node name="Cylinder_002" type="Node3D" parent="InteractiveFurniture/desk/Model/Collada visual scene group/Drawers/RightDrawers/RightThree/cellphone"]

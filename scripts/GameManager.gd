@@ -61,6 +61,7 @@ func reset():
 	_timer_running = false
 	_current_puzzle = ""
 	active_tool = null
+	current_state = GameState.START
 	active_light_source = null
 	emit_signal("active_item_changed", "")
 	_tv_puzzle_started = false
@@ -71,6 +72,11 @@ func reset():
 	has_cellphone_light = false
 	has_flashlight = false
 	emit_quest_updated("Encontre a TV")
+	
+	if puzzle_timer:
+		puzzle_timer.stop()
+
+
 
 func can_combine(first: ItemData, second: ItemData) -> bool:
 	if first.id == "flashlight" and second.id == "battery":

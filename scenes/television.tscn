@@ -167,7 +167,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_ccm7p"]
 resource_name = "play_intro"
-length = 6.0
+length = 4.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -175,7 +175,7 @@ tracks/0/path = NodePath("Label3D:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 5, 5.5),
+"times": PackedFloat32Array(0, 3, 4),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [true, true, false]
@@ -187,7 +187,7 @@ tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.0333333, 5.5),
+"times": PackedFloat32Array(0.0333333, 4),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],
@@ -204,7 +204,7 @@ tracks/2/path = NodePath("TV 49Zoll/ScreenVideo:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 5.03333, 5.5),
+"times": PackedFloat32Array(0, 3, 4),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, false, true]
@@ -216,7 +216,7 @@ tracks/3/path = NodePath("TV 49Zoll/ScreenBlack:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 5.03333, 5.5),
+"times": PackedFloat32Array(0, 3, 4),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [true, true, false]
@@ -228,7 +228,7 @@ tracks/4/path = NodePath(".")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 5.5),
+"times": PackedFloat32Array(0, 4),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],
