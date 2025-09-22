@@ -1,7 +1,8 @@
-[gd_scene load_steps=146 format=4 uid="uid://blxraato0idpm"]
+[gd_scene load_steps=147 format=4 uid="uid://blxraato0idpm"]
 
 [ext_resource type="Script" uid="uid://c6gadnrub2by0" path="res://scripts/desk.gd" id="1_arwrf"]
 [ext_resource type="Texture2D" uid="uid://cv6gp4qiuw77p" path="res://assets/desk/textures/Tabletop_and_legs_material_baseColor.jpeg" id="2_adkvq"]
+[ext_resource type="Resource" uid="uid://cvkun515h8l7r" path="res://items/desk.tres" id="2_qvr81"]
 [ext_resource type="Texture2D" uid="uid://b6wm3fkgkotl6" path="res://assets/desk/textures/Tabletop_and_legs_material_metallicRoughness.png" id="3_qvr81"]
 [ext_resource type="Texture2D" uid="uid://cbwgs843ad10e" path="res://assets/desk/textures/Tabletop_and_legs_material_normal.jpeg" id="4_wun5u"]
 [ext_resource type="Texture2D" uid="uid://ckatuie4kcxtv" path="res://assets/desk/textures/middle_section_material_baseColor.jpeg" id="5_vtr0y"]
@@ -2039,11 +2040,12 @@ size = Vector3(0.037231445, 0.13769531, 0.55529785)
 [sub_resource type="BoxShape3D" id="BoxShape3D_mnear"]
 size = Vector3(1, 0.9442749, 1.8661423)
 
-[node name="desk" type="StaticBody3D" node_paths=PackedStringArray("interactive_drawers", "collision_shape")]
+[node name="desk" type="StaticBody3D" node_paths=PackedStringArray("locked_drawer", "interactive_drawers", "collision_shape")]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
 script = ExtResource("1_arwrf")
+locked_drawer = NodePath("Model/Collada visual scene group/Drawers/Center")
 interactive_drawers = [NodePath("Model/Collada visual scene group/Drawers/Center"), NodePath("Model/Collada visual scene group/Drawers/LeftDrawers/LeftFour"), NodePath("Model/Collada visual scene group/Drawers/LeftDrawers/LeftThree"), NodePath("Model/Collada visual scene group/Drawers/LeftDrawers/LeftTwo"), NodePath("Model/Collada visual scene group/Drawers/LeftDrawers/LeftOne"), NodePath("Model/Collada visual scene group/Drawers/RightDrawers/RightOne"), NodePath("Model/Collada visual scene group/Drawers/RightDrawers/RightTwo"), NodePath("Model/Collada visual scene group/Drawers/RightDrawers/RightThree"), NodePath("Model/Collada visual scene group/Drawers/RightDrawers/RightFour")]
-object_id = "desk"
+item_data = ExtResource("2_qvr81")
 is_container = true
 collision_shape = NodePath("CollisionShape3D")
 

@@ -1,6 +1,7 @@
 extends InteractiveObject
 class_name Desk
 
+@export var locked_drawer: Node = null
 @export var interactive_drawers: Array[Node]
 @export var drawer_move_distance: float = 0.5
 @export var drawer_anim_duration: float = 0.6
@@ -12,23 +13,39 @@ var drawer_data := {}
 func _ready():
 	for drawer in interactive_drawers:
 		if drawer:
+			var is_this_drawer_locked = (drawer == locked_drawer)
 			drawer_data[drawer] = {
 				"is_open": false,
-				"initial_pos": drawer.position
+				"initial_pos": drawer.position,
+				"is_locked": is_this_drawer_locked
 			}
 			var area = drawer.get_node_or_null("Area3D")
 			if area:
 				area.input_event.connect(_on_drawer_clicked.bind(drawer))
-
+				
 func get_focus_transform():
 	if focus_marker:
 		return focus_marker.global_transform
 	return null
-
-func _on_drawer_clicked(camera, event, position, normal, shape_idx, drawer_node):
+	
+func _on_drawer_clicked(_camera, event, _position, _normal, _shape_idx, drawer_node):
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		animate_drawer(drawer_node)
+		var data = drawer_data.get(drawer_node)
+		if not data: return
 
+		var active_tool = GameManager.active_tool
+		
+		if data.is_locked:
+			if active_tool and active_tool.id == "smallkey":
+				data.is_locked = false
+				GameManager.set_active_item(active_tool) 
+				GameManager.remove_from_inventory("smallkey")
+			else:
+				GameManager.emit_notification_requested("Está trancada.")
+		else:
+			animate_drawer(drawer_node)
+
+			
 func animate_drawer(drawer_node, force_state: String = "toggle"):
 	var data = drawer_data.get(drawer_node)
 	if data == null:
@@ -81,5 +98,5 @@ func close_all_drawers():
 		if data.is_open:
 			animate_drawer(drawer, "close")
 
-func interact(action: String = "") -> void:
-	emit_signal("interacted", object_id)
+func interact(_action: String = "") -> void:
+	emit_signal("interacted", item_data.id)

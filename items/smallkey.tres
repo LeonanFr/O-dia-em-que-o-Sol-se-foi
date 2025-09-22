@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://ctd5ojbdl582k"]
+
+[ext_resource type="Texture2D" uid="uid://r46cjild7uv3" path="res://assets/icons/smallkey.png" id="1_qdsjb"]
+[ext_resource type="Script" uid="uid://bkecg5j2sc3qj" path="res://scripts/ItemData.gd" id="2_k5xqt"]
+
+[resource]
+script = ExtResource("2_k5xqt")
+id = "smallkey"
+display_name = "Chave pequena"
+icon = ExtResource("1_qdsjb")
+category = 1
+is_collectible = true
+metadata/_custom_type_script = "uid://bkecg5j2sc3qj"

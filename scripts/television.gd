@@ -38,7 +38,7 @@ func _on_intro_started():
 	has_been_activated = true
 
 func _on_intro_finished():
-	emit_signal("interacted", object_id)
+	emit_signal("interacted", item_data.id)
 
 func _lock_input():
 	emit_signal("input_lock_requested", true)

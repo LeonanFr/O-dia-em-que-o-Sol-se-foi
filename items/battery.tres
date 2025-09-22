@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://6w21ne74eexm"]
+
+[ext_resource type="Texture2D" uid="uid://d8c4ahd7r4v" path="res://assets/icons/battery.png" id="1_cqiva"]
+[ext_resource type="Script" uid="uid://bkecg5j2sc3qj" path="res://scripts/ItemData.gd" id="1_spau2"]
+
+[resource]
+script = ExtResource("1_spau2")
+id = "battery"
+display_name = "Pilha pequena"
+icon = ExtResource("1_cqiva")
+category = 1
+is_collectible = true
+metadata/_custom_type_script = "uid://bkecg5j2sc3qj"

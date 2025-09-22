@@ -1,7 +1,8 @@
-[gd_scene load_steps=19 format=4 uid="uid://bfpcpmopcfb7b"]
+[gd_scene load_steps=20 format=4 uid="uid://bfpcpmopcfb7b"]
 
 [ext_resource type="Script" uid="uid://hklui7wltu5x" path="res://scripts/television.gd" id="1_3fxiq"]
 [ext_resource type="VideoStream" uid="uid://d35odb5beip6a" path="res://assets/video/HD_Bars_and_tone.ogv" id="1_ccm7p"]
+[ext_resource type="Resource" uid="uid://bn3dts1sds0pw" path="res://items/tv.tres" id="2_p7rhp"]
 [ext_resource type="FontFile" uid="uid://jucvbx4i2esh" path="res://assets/fonts/Butler_Regular.otf" id="2_qcggj"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4dvst"]
@@ -250,7 +251,7 @@ animation_player = NodePath("AnimationPlayer")
 label_text = NodePath("Label3D")
 screen_black = NodePath("TV 49Zoll/ScreenBlack")
 screen_video = NodePath("TV 49Zoll/ScreenVideo")
-object_id = "tv"
+item_data = ExtResource("2_p7rhp")
 is_container = true
 collision_shape = NodePath("TVBody")
 

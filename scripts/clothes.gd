@@ -8,7 +8,7 @@ func interact(action: String = "") -> void:
 	if _has_been_moved:
 		return
 
-	emit_signal("interacted", object_id)
+	emit_signal("interacted", item_data.id)
 	
 	if animation_player and action == "move_clothes":
 		animation_player.play("move_clothes")

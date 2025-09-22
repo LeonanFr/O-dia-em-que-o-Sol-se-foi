@@ -1,9 +1,10 @@
-[gd_scene load_steps=31 format=4 uid="uid://st2b1dgxvbvr"]
+[gd_scene load_steps=32 format=4 uid="uid://st2b1dgxvbvr"]
 
 [ext_resource type="Script" uid="uid://iuai5u1gg20n" path="res://scripts/Clothes.gd" id="1_44ofa"]
 [ext_resource type="PackedScene" uid="uid://b4cggsj3dobsx" path="res://assets/t-shirts_homme/scene.gltf" id="1_rhycn"]
 [ext_resource type="Texture2D" uid="uid://dftldhe2atmr0" path="res://assets/t-shirts_homme/textures/Bois_cintre_baseColor.jpeg" id="2_n8s0y"]
 [ext_resource type="PackedScene" uid="uid://ypuv8yjo7v64" path="res://assets/hangers_w_clothes/scene.gltf" id="2_u5y8h"]
+[ext_resource type="Resource" uid="uid://uwky7tkknlb" path="res://items/clothes.tres" id="2_y0eyq"]
 [ext_resource type="Texture2D" uid="uid://bdecmvk6cqo2k" path="res://assets/t-shirts_homme/textures/Tshirt_manches_longues_baseColor.jpeg" id="3_3y33a"]
 [ext_resource type="Texture2D" uid="uid://c4qe6qjneacry" path="res://assets/t-shirts_homme/textures/Manches_et_dos_T-shirt_normal.jpeg" id="4_p33n2"]
 
@@ -399,8 +400,10 @@ _data = {
 &"move_clothes": SubResource("Animation_0ek8j")
 }
 
-[node name="clothes" type="StaticBody3D"]
+[node name="clothes" type="StaticBody3D" node_paths=PackedStringArray("animation_player")]
 script = ExtResource("1_44ofa")
+animation_player = NodePath("AnimationPlayer")
+item_data = ExtResource("2_y0eyq")
 
 [node name="Sketchfab_Scene" parent="." instance=ExtResource("1_rhycn")]
 

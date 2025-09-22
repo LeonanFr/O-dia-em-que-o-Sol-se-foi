@@ -3,6 +3,9 @@ extends InteractiveObject
 @export var focus_marker: Marker3D
 @export var animation_player: AnimationPlayer
 
+func _ready():
+	animation_player.play("RESET")
+
 func get_focus_transform():
 	return focus_marker.global_transform if focus_marker else null
 
@@ -14,4 +17,4 @@ func interact(action: String = "") -> void:
 			animation_player.play("close")
 
 	if action != "close":
-		emit_signal("interacted", object_id)
+		emit_signal("interacted", item_data.id)

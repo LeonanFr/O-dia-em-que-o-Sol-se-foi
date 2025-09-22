@@ -1,0 +1,11 @@
+Model Information:
+* title:	Door Key
+* source:	https://sketchfab.com/3d-models/door-key-6538a6a21f5545e0b1dcf22bee5741a1
+* author:	GUIBEL (https://sketchfab.com/Guibel)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Door Key" (https://sketchfab.com/3d-models/door-key-6538a6a21f5545e0b1dcf22bee5741a1) by GUIBEL (https://sketchfab.com/Guibel) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

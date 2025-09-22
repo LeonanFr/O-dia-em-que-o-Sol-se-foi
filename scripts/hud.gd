@@ -8,6 +8,7 @@ signal ui_toggled(is_open: bool)
 @onready var notification_timer = $NotificationTimer
 @onready var timer_label = $TimerContainer/TimerLabel
 @onready var inventory_slots_container = $UIContainer/MarginContainer2/PanelContainer/GridContainer
+
 var password_screen_scene = preload("res://scenes/password_screen.tscn")
 
 func _ready():
@@ -16,18 +17,19 @@ func _ready():
 	GameManager.timer_updated.connect(_on_timer_updated)
 	GameManager.puzzle_solved.connect(_on_puzzle_ended.bind(true))
 	GameManager.puzzle_failed.connect(_on_puzzle_ended.bind(false))
-	GameManager.inventory_updated.connect(redraw_inventory)
 	
+	GameManager.inventory_updated.connect(redraw_inventory)
+	GameManager.active_item_changed.connect(_update_all_slot_styles)
+	GameManager.cellphone_light_toggled.connect(_update_all_slot_styles)
+
 	for slot in inventory_slots_container.get_children():
-			if slot is InventorySlot:
-				slot.used.connect(_on_item_used)
-				
+		if slot is InventorySlot:
+			slot.used.connect(_on_item_used)
+			
 	quest_label.hide()
 	notification_panel.hide()
 	timer_label.hide()
-
 	notification_timer.timeout.connect(_on_notification_timer_timeout)
-
 	redraw_inventory()
 
 func update_quest(text: String):
@@ -51,12 +53,8 @@ func _on_timer_updated(seconds_left: float):
 	var seconds = int(seconds_left) % 60
 	timer_label.text = "%02d:%02d" % [minutes, seconds]
 
-func _on_puzzle_ended(puzzle_id: String, success: bool):
+func _on_puzzle_ended(_puzzle_id: String, _success: bool):
 	timer_label.hide()
-	if success:
-		match puzzle_id:
-			"find_cellphone":
-				update_quest("")
 
 func redraw_inventory():
 	var inventory_items = GameManager.inventory
@@ -68,17 +66,42 @@ func redraw_inventory():
 			slot.display_item(inventory_items[i])
 		else:
 			slot.clear_slot()
+	
+	_update_all_slot_styles()
 
-func _on_item_used(item_id: String):
-	match item_id:
-		"cellphone":
-			if not GameManager.is_cellphone_unlocked():
-				var password_screen = password_screen_scene.instantiate()
-				password_screen.name = "PasswordScreenInstance"
-				password_screen.password_entered.connect(GameManager._on_password_entered)
-				GameManager.puzzle_failed.connect(password_screen.queue_free)
-				emit_signal("ui_toggled", true)
-				password_screen.tree_exiting.connect(func(): emit_signal("ui_toggled", false))
-				get_tree().root.add_child(password_screen)
-			else:
-				GameManager.toggle_cellphone_light()
+func _on_item_used(slot: InventorySlot):
+	var item_data = slot.item_data
+	if not item_data: return
+
+	match item_data.type:
+		ItemData.ItemType.ACTIVATABLE:
+			GameManager.set_active_item(item_data)
+		ItemData.ItemType.DIRECT_USE:
+			GameManager.use_item_directly(item_data)
+			var message = GameManager.get_item_feedback_message(item_data)
+			if message != "":
+				show_notification(message)
+
+func _update_all_slot_styles(_payload = null):
+	var active_tool_id = GameManager.active_tool.id if GameManager.active_tool else ""
+	
+	for slot in inventory_slots_container.get_children():
+		if not (slot is InventorySlot and slot.item_data): continue
+			
+		var is_active = false
+		var current_item_id = slot.item_data.id
+		
+		if current_item_id == active_tool_id:
+			is_active = true
+			
+		elif slot.item_data.type == ItemData.ItemType.DIRECT_USE:
+			var direct_use_is_active = GameManager.is_direct_use_item_active(current_item_id)
+			if direct_use_is_active:
+				is_active = true
+		
+		var new_stylebox = slot.get_theme_stylebox("panel").duplicate() as StyleBoxFlat
+		if is_active:
+			new_stylebox.bg_color = Color(0.2, 0.3, 0.5, 0.7)
+		else:
+			new_stylebox.bg_color = Color("#3d3d3d")
+		slot.add_theme_stylebox_override("panel", new_stylebox)

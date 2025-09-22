@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://bkoi0kpm8e5w1"]
+
+[ext_resource type="Script" uid="uid://bkecg5j2sc3qj" path="res://scripts/ItemData.gd" id="1_2okmi"]
+[ext_resource type="Texture2D" uid="uid://dngprcqkvosir" path="res://assets/icons/cellphone.png" id="1_4vvbr"]
+
+[resource]
+script = ExtResource("1_2okmi")
+id = "cellphone"
+display_name = "Celular"
+icon = ExtResource("1_4vvbr")
+type = 1
+category = 2
+is_collectible = true
+metadata/_custom_type_script = "uid://bkecg5j2sc3qj"

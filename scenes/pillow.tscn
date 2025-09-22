@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=4 uid="uid://b5gq4rt7r2nn4"]
+[gd_scene load_steps=12 format=4 uid="uid://b5gq4rt7r2nn4"]
 
 [ext_resource type="Script" uid="uid://ifc0km21obp6" path="res://scripts/Pillow.gd" id="1_o2qd4"]
 [ext_resource type="Texture2D" uid="uid://vcjio4ccj3sy" path="res://assets/queen_sized_bed/textures/Pillow02_Baked_baseColor.png" id="2_1luaj"]
+[ext_resource type="Resource" uid="uid://bdy3p7gweconw" path="res://items/pillow.tres" id="2_lq0hf"]
 [ext_resource type="Texture2D" uid="uid://x8chudtnj61s" path="res://assets/queen_sized_bed/textures/Pillow02_Baked_normal.png" id="3_lq0hf"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ohot1"]
@@ -104,6 +105,7 @@ _data = {
 [node name="pillow" type="StaticBody3D" node_paths=PackedStringArray("animation_player")]
 script = ExtResource("1_o2qd4")
 animation_player = NodePath("AnimationPlayer")
+item_data = ExtResource("2_lq0hf")
 
 [node name="PillowModel" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)

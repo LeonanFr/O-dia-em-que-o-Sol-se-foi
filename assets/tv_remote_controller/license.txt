@@ -1,0 +1,11 @@
+Model Information:
+* title:	TV Remote Controller
+* source:	https://sketchfab.com/3d-models/tv-remote-controller-4d456696547746fbb73932f1d60b855e
+* author:	5hift (https://sketchfab.com/Shift_booy)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "TV Remote Controller" (https://sketchfab.com/3d-models/tv-remote-controller-4d456696547746fbb73932f1d60b855e) by 5hift (https://sketchfab.com/Shift_booy) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

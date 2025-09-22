@@ -55,14 +55,19 @@ func _handle_mouse_click(mouse_position: Vector2):
 	var ray_origin = camera_controller.project_ray_origin(mouse_position)
 	var ray_end = ray_origin + camera_controller.project_ray_normal(mouse_position) * 1000
 	var query := PhysicsRayQueryParameters3D.create(ray_origin, ray_end)
-	
 	var result := space_state.intersect_ray(query)
 
 	if result.has("collider"):
 		var obj = result.collider
 		if obj is InteractiveObject:
+			if GameManager.active_tool:
+				obj.use_tool(GameManager.active_tool)
+				return
+			
+			if not obj.item_data: return
+
 			if obj.required_focus_id != "":
-				if is_focused and focused_object.object_id == obj.required_focus_id:
+				if is_focused and focused_object.item_data and focused_object.item_data.id == obj.required_focus_id:
 					_trigger_interaction(obj)
 			elif is_focused:
 				if GameManager.request_interaction(obj):
@@ -72,12 +77,14 @@ func _handle_mouse_click(mouse_position: Vector2):
 					_focus_on_object(obj)
 
 func _trigger_interaction(obj: InteractiveObject):
-	if obj.is_collectible:
-		GameManager.add_to_inventory(obj.object_id)
+	if not obj.item_data: return
+
+	if obj.item_data.is_collectible:
+		GameManager.add_to_inventory(obj.item_data)
 		obj.queue_free()
 		return
 		
-	match obj.object_id:
+	match obj.item_data.id:
 		"tv":
 			obj.interact("turn_on")
 		"desk":
@@ -93,64 +100,52 @@ func _trigger_interaction(obj: InteractiveObject):
 
 func _focus_on_object(obj: InteractiveObject):
 	var target_transform = obj.get_focus_transform()
-	if not target_transform:
-		print("AVISO: Objeto '", obj.object_id, "' não tem um Marker3D de foco configurado.")
-		return
 		
-	if obj.object_id == "tv":
+	if obj.item_data and obj.item_data.id == "tv":
 		GameManager.emit_quest_updated("")
 	
 	is_transitioning = true
 	original_camera_transform = camera_controller.global_transform
-	
 	var tween = camera_controller.focus_on(target_transform)
-	
 	is_focused = true
 	focused_object = obj
-	
 	_trigger_interaction(obj)
-	
 	await tween.finished
-	
 	if obj.is_container and obj.collision_shape:
 		obj.collision_shape.disabled = true
-	
 	is_transitioning = false
 
 func _unfocus_current_object():
-	if not is_focused:
-		return
+	if not is_focused: return
 
 	if focused_object and focused_object.is_container and focused_object.collision_shape:
 		focused_object.collision_shape.disabled = false
 		
 	is_transitioning = true
 	
-	if focused_object and focused_object.object_id == "closet":
-		focused_object.interact("close")
-		
-	if focused_object and focused_object.object_id == "desk":
-		focused_object.close_all_drawers()
-	
-	if focused_object and focused_object.object_id == "bed":
-		if pillow_object:
-			pillow_object.force_down()
+	if focused_object and focused_object.item_data:
+		match focused_object.item_data.id:
+			"closet":
+				focused_object.interact("close")
+			"desk":
+				focused_object.close_all_drawers()
+			"bed":
+				if pillow_object:
+					pillow_object.force_down()
 	
 	var tween = camera_controller.unfocus(original_camera_transform)
 	await tween.finished
-	
 	is_focused = false
 	focused_object = null
 	is_transitioning = false
 
-func _on_interaction_denied(message: String):
+func _on_interaction_denied():
 	pass
 
 func lock_input(should_lock: bool):
 	input_locked = should_lock
 	
 func turn_off_emissives():
-
 	var emissive_objects = get_tree().get_nodes_in_group("emissive_objects")
 	for obj in emissive_objects:
 		if obj is MeshInstance3D:

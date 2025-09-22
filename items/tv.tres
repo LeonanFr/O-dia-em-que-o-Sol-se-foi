@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3 uid="uid://bn3dts1sds0pw"]
+
+[ext_resource type="Script" uid="uid://bkecg5j2sc3qj" path="res://scripts/ItemData.gd" id="1_cvtir"]
+
+[resource]
+script = ExtResource("1_cvtir")
+id = "tv"
+metadata/_custom_type_script = "uid://bkecg5j2sc3qj"

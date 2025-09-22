@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://rnhohofliyc2"]
+
+[ext_resource type="Texture2D" uid="uid://0r443fmejya6" path="res://assets/icons/flashlight.png" id="1_0om7m"]
+[ext_resource type="Script" uid="uid://bkecg5j2sc3qj" path="res://scripts/ItemData.gd" id="1_mkv1w"]
+
+[resource]
+script = ExtResource("1_mkv1w")
+id = "charged_flashlight"
+display_name = "Lanterna"
+icon = ExtResource("1_0om7m")
+type = 1
+category = 2
+metadata/_custom_type_script = "uid://bkecg5j2sc3qj"

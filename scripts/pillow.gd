@@ -9,7 +9,7 @@ func interact(action: String = "") -> void:
 	if is_locked:
 		return
 
-	emit_signal("interacted", object_id)
+	emit_signal("interacted", item_data.id)
 
 	if animation_player:
 		if not _is_up:
