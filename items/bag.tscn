@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://b2slo75mask30"]
+
+[ext_resource type="PackedScene" uid="uid://w6ldvoqtot1m" path="res://assets/womens_bag/scene.gltf" id="1_kfotp"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1ooud"]
+size = Vector3(2.06976, 1.87115, 1)
+
+[node name="bag" type="StaticBody3D"]
+
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("1_kfotp")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.025238, 1.01578, 0)
+shape = SubResource("BoxShape3D_1ooud")

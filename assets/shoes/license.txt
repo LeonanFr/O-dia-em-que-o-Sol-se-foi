@@ -1,0 +1,11 @@
+Model Information:
+* title:	Shoes
+* source:	https://sketchfab.com/3d-models/shoes-8202cb5fdf654563aa6e3d8e188a17d1
+* author:	Phobos (https://sketchfab.com/1majaxed)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Shoes" (https://sketchfab.com/3d-models/shoes-8202cb5fdf654563aa6e3d8e188a17d1) by Phobos (https://sketchfab.com/1majaxed) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

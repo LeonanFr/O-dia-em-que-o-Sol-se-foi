@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://gkbpwknukakq"]
+
+[ext_resource type="PackedScene" uid="uid://0dk1adrqihiu" path="res://assets/shoes/scene.gltf" id="1_ckmbe"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6w7rq"]
+size = Vector3(5.7778, 5.21069, 6.41495)
+
+[node name="shoes" type="StaticBody3D"]
+
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("1_ckmbe")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.804337, 2.10535, -0.140274)
+shape = SubResource("BoxShape3D_6w7rq")

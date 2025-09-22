@@ -1,0 +1,11 @@
+Model Information:
+* title:	Frog plush
+* source:	https://sketchfab.com/3d-models/frog-plush-23c6857d9a194ac1af3e6e6740611812
+* author:	SunnyBuns (https://sketchfab.com/SunnyBuns)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Frog plush" (https://sketchfab.com/3d-models/frog-plush-23c6857d9a194ac1af3e6e6740611812) by SunnyBuns (https://sketchfab.com/SunnyBuns) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

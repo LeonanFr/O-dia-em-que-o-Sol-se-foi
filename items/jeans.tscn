@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://brw8btlumf4ys"]
+
+[ext_resource type="PackedScene" uid="uid://dooplmdnjtq4h" path="res://assets/denim_doblado_ia/scene.gltf" id="1_yqm43"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vifk1"]
+size = Vector3(0.887207, 0.314453, 0.923706)
+
+[node name="jeans" type="StaticBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.999859, 0.0167893, 0, -0.0167893, 0.999859, -0.0563965, 0.153323, -0.199844)
+shape = SubResource("BoxShape3D_vifk1")
+
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("1_yqm43")]

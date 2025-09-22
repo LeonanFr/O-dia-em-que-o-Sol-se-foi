@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cx0jiyma8r4bu"]
+
+[ext_resource type="PackedScene" uid="uid://hygq8kpr4d4b" path="res://assets/camisas_mosch_dobladas/scene.gltf" id="1_qbe35"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_22tp7"]
+size = Vector3(0.515564, 0.235046, 0.876953)
+
+[node name="camisas" type="StaticBody3D"]
+
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("1_qbe35")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.218287, -0.363554)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0889587, 0.13266, 0.0615234)
+shape = SubResource("BoxShape3D_22tp7")

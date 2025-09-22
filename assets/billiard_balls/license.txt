@@ -1,0 +1,11 @@
+Model Information:
+* title:	Billiard Balls
+* source:	https://sketchfab.com/3d-models/billiard-balls-0dd3b1e39fd544f79d7464e174da3502
+* author:	György Pejović (https://sketchfab.com/truetrue065)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Billiard Balls" (https://sketchfab.com/3d-models/billiard-balls-0dd3b1e39fd544f79d7464e174da3502) by György Pejović (https://sketchfab.com/truetrue065) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

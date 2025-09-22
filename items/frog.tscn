@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://ddtbl2p82saj3"]
+
+[ext_resource type="PackedScene" uid="uid://e03ue14yms78" path="res://assets/frog_plush/scene.gltf" id="1_vrqc2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_w812g"]
+size = Vector3(1, 1.04111, 1.27911)
+
+[node name="frog" type="StaticBody3D"]
+
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("1_vrqc2")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.56395, -0.10672)
+shape = SubResource("BoxShape3D_w812g")

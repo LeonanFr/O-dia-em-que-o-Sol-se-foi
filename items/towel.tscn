@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://b2tvrkunsvsr6"]
+
+[ext_resource type="PackedScene" uid="uid://be57qd0hmn7n1" path="res://assets/realistic_towel_set/scene.gltf" id="1_knn4i"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kfvk5"]
+size = Vector3(0.44088, 0.273834, 0.307648)
+
+[node name="towel" type="StaticBody3D"]
+
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("1_knn4i")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00239182, 0.151505, 0.0211029)
+shape = SubResource("BoxShape3D_kfvk5")

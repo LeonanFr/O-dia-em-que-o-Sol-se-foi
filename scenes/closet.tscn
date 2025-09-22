@@ -1,9 +1,23 @@
-[gd_scene load_steps=126 format=4 uid="uid://b5o7b7mataj5d"]
+[gd_scene load_steps=146 format=4 uid="uid://b5o7b7mataj5d"]
 
 [ext_resource type="Texture2D" uid="uid://b8p77c6o7r6bk" path="res://assets/closet_m000230802/textures/Sicomora_baseColor.jpeg" id="1_7j5ra"]
-[ext_resource type="Script" uid="uid://d2g2tgnyin2rj" path="res://scripts/closet.gd" id="1_71km3"]
-[ext_resource type="Resource" uid="uid://cw7j8vyq5epu5" path="res://items/closet.tres" id="2_cgwhh"]
+[ext_resource type="Script" path="res://scripts/closet.gd" id="1_71km3"]
 [ext_resource type="FontFile" uid="uid://4i5lfnhbrq0p" path="res://assets/fonts/Rockfull.ttf" id="2_p7ald"]
+[ext_resource type="PackedScene" uid="uid://b2slo75mask30" path="res://items/bag.tscn" id="5_ymn24"]
+[ext_resource type="Script" path="res://scripts/bag.gd" id="6_p61y0"]
+[ext_resource type="Script" path="res://scripts/ItemData.gd" id="7_0weua"]
+[ext_resource type="PackedScene" uid="uid://gkbpwknukakq" path="res://items/shoes.tscn" id="7_rhvrs"]
+[ext_resource type="Script" path="res://scripts/shoes.gd" id="8_nhely"]
+[ext_resource type="PackedScene" uid="uid://ddtbl2p82saj3" path="res://items/frog.tscn" id="9_2rgul"]
+[ext_resource type="Script" path="res://scripts/frog.gd" id="10_iklod"]
+[ext_resource type="PackedScene" uid="uid://cx0jiyma8r4bu" path="res://items/camisas.tscn" id="11_saw6p"]
+[ext_resource type="Script" path="res://scripts/camisas.gd" id="12_p282a"]
+[ext_resource type="PackedScene" uid="uid://brw8btlumf4ys" path="res://items/jeans.tscn" id="13_l2w8l"]
+[ext_resource type="PackedScene" uid="uid://b2tvrkunsvsr6" path="res://items/towel.tscn" id="14_ef0o2"]
+[ext_resource type="Script" path="res://scripts/jeans.gd" id="14_xbh6p"]
+[ext_resource type="Script" path="res://scripts/towel.gd" id="16_hrdkk"]
+[ext_resource type="PackedScene" uid="uid://dv7vfbdwit58y" path="res://assets/billiard_balls/scene.gltf" id="17_eelo7"]
+[ext_resource type="PackedScene" uid="uid://bot0mljadw3we" path="res://assets/bunny_plush_toy/scene.gltf" id="18_kvv22"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aam5g"]
 resource_name = "Sicomora"
@@ -1880,6 +1894,45 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_t0pm7")
 
+[sub_resource type="Animation" id="Animation_71km3"]
+resource_name = "RESET"
+length = 0.1
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sketchfab_model/7685ebc16e114b7ca2188a38870dcd12_fbx/Object_2/RootNode/Group011/Group005")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 515.5, 48.7075, -508.833)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sketchfab_model/7685ebc16e114b7ca2188a38870dcd12_fbx/Object_2/RootNode/Group011/Group007")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, -3.08149e-33, 0, 1)
+tracks/2/type = "rotation_3d"
+tracks/2/imported = true
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sketchfab_model/7685ebc16e114b7ca2188a38870dcd12_fbx/Object_2/RootNode/Group011/Group008")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, 0, -3.08149e-33, 0, 1)
+tracks/3/type = "rotation_3d"
+tracks/3/imported = true
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sketchfab_model/7685ebc16e114b7ca2188a38870dcd12_fbx/Object_2/RootNode/Group011/Group009")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = PackedFloat32Array(0, 1, 0, -3.08149e-33, 0, 1)
+tracks/4/type = "rotation_3d"
+tracks/4/imported = true
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sketchfab_model/7685ebc16e114b7ca2188a38870dcd12_fbx/Object_2/RootNode/Group011/Group010")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = PackedFloat32Array(0, 1, 0, -3.08149e-33, 0, 1)
+
 [sub_resource type="Animation" id="Animation_d1eaf"]
 resource_name = "close"
 length = 1.8
@@ -1957,59 +2010,67 @@ tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = PackedFloat32Array(0, 1, 0, -3.08149e-33, 0, 1, 0.266667, 1, 0, -3.08149e-33, 0, 1, 0.3, 1, 3.38941e-35, -1.54037e-33, 0.0219985, 0.999758, 0.333333, 1, 3.07121e-33, 2.51487e-34, 0.0816122, 0.996664, 0.366667, 1, 5.20334e-34, -3.03724e-33, 0.168858, 0.98564, 0.4, 1, -2.96446e-33, -8.41146e-34, 0.272968, 0.962023, 0.466667, 1, -2.69097e-33, -1.50141e-33, 0.487236, 0.87327, 0.5, 1, -2.00461e-33, -1.41821e-33, 0.577552, 0.816354, 0.533333, 1, 2.81294e-33, -5.69592e-33, 0.647039, 0.762457, 0.566667, 1, -1.11317e-33, -1.06524e-33, 0.69138, 0.722491, 0.6, 1, -2.17894e-33, -2.17894e-33, 0.707107, 0.707107)
 
-[sub_resource type="Animation" id="Animation_71km3"]
-resource_name = "RESET"
-length = 0.1
-tracks/0/type = "position_3d"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sketchfab_model/7685ebc16e114b7ca2188a38870dcd12_fbx/Object_2/RootNode/Group011/Group005")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 515.5, 48.7075, -508.833)
-tracks/1/type = "rotation_3d"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sketchfab_model/7685ebc16e114b7ca2188a38870dcd12_fbx/Object_2/RootNode/Group011/Group007")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, 0, -3.08149e-33, 0, 1)
-tracks/2/type = "rotation_3d"
-tracks/2/imported = true
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sketchfab_model/7685ebc16e114b7ca2188a38870dcd12_fbx/Object_2/RootNode/Group011/Group008")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = PackedFloat32Array(0, 1, 0, -3.08149e-33, 0, 1)
-tracks/3/type = "rotation_3d"
-tracks/3/imported = true
-tracks/3/enabled = true
-tracks/3/path = NodePath("Sketchfab_model/7685ebc16e114b7ca2188a38870dcd12_fbx/Object_2/RootNode/Group011/Group009")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = PackedFloat32Array(0, 1, 0, -3.08149e-33, 0, 1)
-tracks/4/type = "rotation_3d"
-tracks/4/imported = true
-tracks/4/enabled = true
-tracks/4/path = NodePath("Sketchfab_model/7685ebc16e114b7ca2188a38870dcd12_fbx/Object_2/RootNode/Group011/Group010")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = PackedFloat32Array(0, 1, 0, -3.08149e-33, 0, 1)
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hiyhx"]
 _data = {
-&"RESET": SubResource("Animation_71km3"),
-&"close": SubResource("Animation_d1eaf"),
-&"open": SubResource("Animation_7j5ra")
+"RESET": SubResource("Animation_71km3"),
+"close": SubResource("Animation_d1eaf"),
+"open": SubResource("Animation_7j5ra")
 }
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7j5ra"]
 size = Vector3(2.04993, 2.57117, 0.587433)
 
+[sub_resource type="Resource" id="Resource_rg2se"]
+script = ExtResource("7_0weua")
+id = "bag"
+display_name = ""
+type = 0
+category = 0
+is_collectible = false
+
+[sub_resource type="Resource" id="Resource_lj60h"]
+script = ExtResource("7_0weua")
+id = "shoes"
+display_name = ""
+type = 0
+category = 0
+is_collectible = false
+
+[sub_resource type="Resource" id="Resource_nyocn"]
+script = ExtResource("7_0weua")
+id = "frog"
+display_name = ""
+type = 0
+category = 0
+is_collectible = false
+
+[sub_resource type="Resource" id="Resource_mtnqh"]
+script = ExtResource("7_0weua")
+id = "camisas"
+display_name = ""
+type = 0
+category = 0
+is_collectible = false
+
+[sub_resource type="Resource" id="Resource_u63v1"]
+script = ExtResource("7_0weua")
+id = "jeans"
+display_name = ""
+type = 0
+category = 0
+is_collectible = false
+
+[sub_resource type="Resource" id="Resource_bt3a0"]
+script = ExtResource("7_0weua")
+id = "towel"
+display_name = ""
+type = 0
+category = 0
+is_collectible = false
+
 [node name="Closet" type="StaticBody3D"]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
 script = ExtResource("1_71km3")
-item_data = ExtResource("2_cgwhh")
 
 [node name="Sketchfab_model" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 2.22045e-16, 1, 0, -1, 2.22045e-16, 0, 0, 0)
@@ -2589,17 +2650,148 @@ skeleton = NodePath("")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-&"": SubResource("AnimationLibrary_hiyhx")
+"": SubResource("AnimationLibrary_hiyhx")
 }
 
 [node name="Body" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.03973, 1.27002, 0.340147)
 shape = SubResource("BoxShape3D_7j5ra")
 
-[node name="Label3D" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.61111, 1.55068, 0.0491697)
+[node name="Label1" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.206202, 2.21195, 0.0491697)
 modulate = Color(0, 0, 0, 1)
 outline_modulate = Color(0, 0, 0, 0)
-text = "1234"
+text = "1"
 font = ExtResource("2_p7ald")
 font_size = 43
+
+[node name="Label2" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.780425, 1.82168, 0.049)
+modulate = Color(0, 0, 0, 1)
+outline_modulate = Color(0, 0, 0, 0)
+text = "1"
+font = ExtResource("2_p7ald")
+font_size = 43
+
+[node name="Label3" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.21755, 0.973366, 0.0674663)
+modulate = Color(0, 0, 0, 1)
+outline_modulate = Color(0, 0, 0, 0)
+text = "1"
+font = ExtResource("2_p7ald")
+font_size = 43
+
+[node name="Label4" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.841985, 0.497027, 0.437666)
+modulate = Color(0, 0, 0, 1)
+outline_modulate = Color(0, 0, 0, 0)
+text = "1"
+font = ExtResource("2_p7ald")
+font_size = 43
+
+[node name="Slot1" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.264607, 1.74837, 0.368999)
+
+[node name="Slot2" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.760132, 1.74837, 0.368999)
+
+[node name="Slot3" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.264607, 1.33368, 0.368999)
+
+[node name="Slot4" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.76, 1.334, 0.369)
+
+[node name="Slot5" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.264607, 0.919245, 0.368999)
+
+[node name="Slot6" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.765956, 0.919245, 0.368999)
+
+[node name="bag" parent="." groups=["interactive"] instance=ExtResource("5_ymn24")]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0.265, 1.748, 0.369)
+script = ExtResource("6_p61y0")
+item_data = SubResource("Resource_rg2se")
+
+[node name="shoes" parent="." groups=["interactive"] instance=ExtResource("7_rhvrs")]
+transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0.766, 0.919, 0.369)
+script = ExtResource("8_nhely")
+item_data = SubResource("Resource_lj60h")
+
+[node name="frog" parent="." groups=["interactive"] instance=ExtResource("9_2rgul")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.76, 1.748, 0.369)
+script = ExtResource("10_iklod")
+item_data = SubResource("Resource_nyocn")
+
+[node name="camisas" parent="." groups=["interactive"] instance=ExtResource("11_saw6p")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.265, 1.334, 0.369)
+script = ExtResource("12_p282a")
+item_data = SubResource("Resource_mtnqh")
+
+[node name="jeans" parent="." groups=["interactive"] instance=ExtResource("13_l2w8l")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.265, 0.919, 0.369)
+script = ExtResource("14_xbh6p")
+item_data = SubResource("Resource_u63v1")
+
+[node name="towel" parent="." groups=["interactive"] instance=ExtResource("14_ef0o2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.76, 1.334, 0.369)
+script = ExtResource("16_hrdkk")
+item_data = SubResource("Resource_bt3a0")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0.546516, 1.004, 3.75008)
+
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("17_eelo7")]
+transform = Transform3D(0.005, 0, 0, 0, 0.005, 0, 0, 0, 0.005, 1.65408, 2.18153, 0.358957)
+
+[node name="8_Material #39_0" parent="Sketchfab_Scene/Sketchfab_model/BilliardBalls_FBX/RootNode/BilliardBalls/8" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 1.13687e-13, 0, -1.13687e-13, 1, 149.124, 0, 97.3476)
+
+[node name="1" parent="Sketchfab_Scene/Sketchfab_model/BilliardBalls_FBX/RootNode/BilliardBalls" index="1"]
+visible = false
+
+[node name="3_Material #27_0" parent="Sketchfab_Scene/Sketchfab_model/BilliardBalls_FBX/RootNode/BilliardBalls/3" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 7.10543e-14, 0, -7.10543e-14, 1, 141.109, 0, 10.308)
+
+[node name="2_Material #26_0" parent="Sketchfab_Scene/Sketchfab_model/BilliardBalls_FBX/RootNode/BilliardBalls/2" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 9.9476e-14, 0, -9.9476e-14, 1, 123.313, 0, 69.6281)
+
+[node name="5" parent="Sketchfab_Scene/Sketchfab_model/BilliardBalls_FBX/RootNode/BilliardBalls" index="4"]
+visible = false
+
+[node name="7_Material #31_0" parent="Sketchfab_Scene/Sketchfab_model/BilliardBalls_FBX/RootNode/BilliardBalls/7" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 1.13687e-13, 0, -1.13687e-13, 1, 172.704, 0, -99.3242)
+
+[node name="6_Material #30_0" parent="Sketchfab_Scene/Sketchfab_model/BilliardBalls_FBX/RootNode/BilliardBalls/6" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 1.56319e-13, 0, -1.56319e-13, 1, 127.109, 0, -99.453)
+
+[node name="4" parent="Sketchfab_Scene/Sketchfab_model/BilliardBalls_FBX/RootNode/BilliardBalls" index="7"]
+visible = false
+
+[node name="14" parent="Sketchfab_Scene/Sketchfab_model/BilliardBalls_FBX/RootNode/BilliardBalls" index="8"]
+visible = false
+
+[node name="12" parent="Sketchfab_Scene/Sketchfab_model/BilliardBalls_FBX/RootNode/BilliardBalls" index="9"]
+visible = false
+
+[node name="13" parent="Sketchfab_Scene/Sketchfab_model/BilliardBalls_FBX/RootNode/BilliardBalls" index="10"]
+visible = false
+
+[node name="11" parent="Sketchfab_Scene/Sketchfab_model/BilliardBalls_FBX/RootNode/BilliardBalls" index="11"]
+visible = false
+
+[node name="11_Material #34_0" parent="Sketchfab_Scene/Sketchfab_model/BilliardBalls_FBX/RootNode/BilliardBalls/11" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 1.42109e-14, 0, -1.42109e-14, 1, -347.211, 0, 0)
+
+[node name="9" parent="Sketchfab_Scene/Sketchfab_model/BilliardBalls_FBX/RootNode/BilliardBalls" index="12"]
+visible = false
+
+[node name="10_Material #33_0" parent="Sketchfab_Scene/Sketchfab_model/BilliardBalls_FBX/RootNode/BilliardBalls/10" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 1.27898e-13, 0, -1.27898e-13, 1, 201.428, 0, 21.7268)
+
+[node name="15" parent="Sketchfab_Scene/Sketchfab_model/BilliardBalls_FBX/RootNode/BilliardBalls" index="14"]
+visible = false
+
+[node name="Sketchfab_Scene2" parent="." instance=ExtResource("18_kvv22")]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 1.26407, 2.12219, 0.414534)
+
+[editable path="Sketchfab_Scene"]

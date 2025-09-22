@@ -1,0 +1,11 @@
+Model Information:
+* title:	STICKER PACK 1, 41 Stickers
+* source:	https://sketchfab.com/3d-models/sticker-pack-1-41-stickers-1ea3bb388c504ea1a6396759f5538006
+* author:	Ellipsoid (https://sketchfab.com/Ellipsoid)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "STICKER PACK 1, 41 Stickers" (https://sketchfab.com/3d-models/sticker-pack-1-41-stickers-1ea3bb388c504ea1a6396759f5538006) by Ellipsoid (https://sketchfab.com/Ellipsoid) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
