@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://cthboh3oh8f6m"]
+[gd_scene load_steps=5 format=3 uid="uid://cthboh3oh8f6m"]
 
 [ext_resource type="Script" uid="uid://e3qxtai0ri3c" path="res://scripts/inventory_slot.gd" id="1_dxvxp"]
+[ext_resource type="FontFile" uid="uid://dgsyllvf1cdrv" path="res://assets/fonts/Oceanside Typewriter.ttf" id="2_bxqf6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dxvxp"]
 bg_color = Color(0.24115604, 0.24115607, 0.24115595, 1)
@@ -17,6 +18,9 @@ expand_margin_left = 5.0
 expand_margin_top = 5.0
 expand_margin_right = 5.0
 expand_margin_bottom = 5.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_hddt5"]
+font = ExtResource("2_bxqf6")
 
 [node name="InventorySlot" type="Panel"]
 custom_minimum_size = Vector2(60, 60)
@@ -43,3 +47,9 @@ grow_horizontal = 2
 grow_vertical = 2
 expand_mode = 1
 stretch_mode = 5
+
+[node name="QuantityLabel" type="Label" parent="."]
+layout_mode = 0
+offset_right = 26.0
+offset_bottom = 23.0
+label_settings = SubResource("LabelSettings_hddt5")

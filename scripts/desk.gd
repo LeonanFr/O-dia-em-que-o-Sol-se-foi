@@ -76,7 +76,6 @@ func animate_drawer(drawer_node, force_state: String = "toggle"):
 			cellphone_node.show()
 			if collider: collider.disabled = false
 		else:
-			cellphone_node.hide()
 			if collider: collider.disabled = true
 
 	if drawer_node.has_meta("active_tween"):
@@ -89,8 +88,11 @@ func animate_drawer(drawer_node, force_state: String = "toggle"):
 	tween.tween_property(drawer_node, "position", target_position, drawer_anim_duration)
 	tween.finished.connect(func():
 		drawer_node.remove_meta("active_tween")
+		if cellphone_node and drawer_node.is_ancestor_of(cellphone_node) and not should_open:
+			cellphone_node.hide()
 	)
 	drawer_node.set_meta("active_tween", tween)
+
 
 func close_all_drawers():
 	for drawer in drawer_data:

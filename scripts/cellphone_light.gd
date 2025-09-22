@@ -3,7 +3,7 @@ extends SpotLight3D
 @onready var camera = get_parent() as Camera3D
 var ray_length: float = 100.0
 
-func _process(delta):
+func _process(_delta):
 	var space_state = get_world_3d().direct_space_state
 	var mouse_pos = get_viewport().get_mouse_position()
 	

@@ -13,6 +13,8 @@ signal timer_updated(time_left: float)
 signal password_correct
 signal inventory_updated
 
+enum GameState { START, FIND_CELLPHONE_PUZZLE, ROOM_EXPLORATION }
+var current_state: GameState = GameState.START
 var active_tool: ItemData = null
 var active_light_source: ItemData = null
 var is_in_darkness: bool = false
@@ -21,23 +23,19 @@ var has_cellphone_light: bool = false
 var has_flashlight: bool = false
 var is_cellphone_light_on: bool = false
 var _cellphone_is_unlocked: bool = false
-var inventory: Array[ItemData] = []
+var inventory: Array[InventorySlotData] = []
 
 @onready var level_animator = get_tree().root.get_node("Room/LevelAnimator")
-@export var initial_allowed_objects: Array[String] = ["tv"]
 @export var find_cellphone_timer_seconds: float = 60.0
 @export var correct_password: String = "1809"
 
 var puzzle_timer: Timer
 var game_over_screen_scene = preload("res://scenes/GameOverScreen.tscn")
-var _initial_allowed_objects_backup: Array[String]
-var _allowed_objects: Array[String] = []
 var _timer_running: bool = false
 var _current_puzzle: String = ""
 var _tv_puzzle_started: bool = false
 
 func _ready():
-	_initial_allowed_objects_backup = initial_allowed_objects.duplicate()
 	reset()
 	puzzle_timer = Timer.new()
 	puzzle_timer.name = "PuzzleTimer"
@@ -58,7 +56,6 @@ func reset():
 	if lingering_password_screen:
 		lingering_password_screen.queue_free()
 		
-	_allowed_objects = _initial_allowed_objects_backup.duplicate()
 	_timer_running = false
 	_current_puzzle = ""
 	active_tool = null
@@ -72,7 +69,7 @@ func reset():
 	has_cellphone_light = false
 	has_flashlight = false
 	emit_quest_updated("Encontre a TV")
-	
+
 func set_active_item(item_data: ItemData):
 	var previous_active_tool_id = active_tool.id if active_tool else ""
 
@@ -115,8 +112,22 @@ func use_item_directly(item_data: ItemData):
 func notify_interacted(object_id: String):
 	match object_id:
 		"tv":
-			if not _timer_running and _current_puzzle == "":
-				_start_cellphone_puzzle()
+			if current_state == GameState.START:
+				current_state = GameState.FIND_CELLPHONE_PUZZLE
+				
+				var tv_node = get_tree().get_root().get_node("Room/InteractiveFurniture/Television")
+				
+				tv_node.connect("interacted", Callable(self, "_on_tv_intro_finished"))
+				
+				tv_node.interact("turn_on")
+
+func _on_tv_intro_finished(_tv_id: String):
+	emit_quest_updated("Ache uma fonte de luz")
+	_start_cellphone_puzzle()
+	
+	var tv_node = get_tree().get_root().get_node("Room/InteractiveFurniture/Television")
+	tv_node.disconnect("interacted", Callable(self, "_on_tv_intro_finished"))
+
 
 func _start_cellphone_puzzle():
 	_tv_puzzle_started = true
@@ -124,10 +135,6 @@ func _start_cellphone_puzzle():
 	puzzle_timer.wait_time = find_cellphone_timer_seconds
 	puzzle_timer.start()
 	_timer_running = true
-	_allowed_objects.clear()
-	for obj in get_tree().get_nodes_in_group("interactive"):
-		if obj is InteractiveObject and obj.item_data:
-			_allowed_objects.append(obj.item_data.id)
 	emit_quest_updated("Ache uma fonte de luz")
 	emit_signal("puzzle_started", _current_puzzle, find_cellphone_timer_seconds)
 
@@ -181,12 +188,23 @@ func emit_notification_requested(message: String):
 	emit_signal("notification_requested", message)
 
 func request_interaction(obj: InteractiveObject) -> bool:
-	if not obj.item_data: return false
-
-	if obj.item_data.id == "tv" and _tv_puzzle_started:
-		emit_notification_requested("Não tem mais nada útil aí.")
+	if not obj.item_data:
 		return false
-		
+
+	if current_state == GameState.START:
+		if obj.item_data.id != "tv":
+			emit_notification_requested("Não tenho tempo para isso agora.")
+			return false
+		else:
+			notify_interacted("tv")
+			current_state = GameState.FIND_CELLPHONE_PUZZLE
+			return true
+
+	if obj.required_focus_id != "":
+		var current_focus_id = active_tool.id if active_tool else ""
+		if current_focus_id != obj.required_focus_id:
+			return false
+
 	var can_see = false
 	match obj.required_light:
 		InteractiveObject.LightRequirement.NONE:
@@ -197,45 +215,51 @@ func request_interaction(obj: InteractiveObject) -> bool:
 		InteractiveObject.LightRequirement.FLASHLIGHT:
 			if has_flashlight:
 				can_see = true
-	
+
 	if not can_see:
-		emit_notification_requested("Está escuro demais para mexer nisso.")
+		var msg = "Está escuro demais para mexer nisso."
+		emit_notification_requested(msg)
+		emit_signal("interaction_denied", msg)
 		return false
-		
-	if obj.item_data.id in _allowed_objects:
-		return true
-		
-	var message = "Melhor não mexer nisso agora."
-	if _timer_running and _current_puzzle == "find_cellphone":
-		message = "Sem tempo pra isso! Cadê meu celular?!"
-	emit_notification_requested(message)
-	emit_signal("interaction_denied", message)
-	return false
+
+	return true
+
+
+	if not can_see:
+		var msg = "Está escuro demais para mexer nisso."
+		emit_notification_requested(msg)
+		emit_signal("interaction_denied", msg)
+		return false
+
+	return true
 
 func add_to_inventory(new_item_data: ItemData):
-	for item in inventory:
-		if item.id == new_item_data.id:
+	for slot_data in inventory:
+		if slot_data.item.id == new_item_data.id:
+			slot_data.quantity += 1
+			emit_signal("inventory_updated")
 			return
-	inventory.append(new_item_data)
+
+	var new_slot_data = InventorySlotData.new(new_item_data, 1)
+	inventory.append(new_slot_data)
 	emit_signal("inventory_updated")
-	
+
 func remove_from_inventory(item_id_to_remove: String):
-	var item_to_remove = null
-	for item in inventory:
-		if item.id == item_id_to_remove:
-			item_to_remove = item
-			break
-	
-	if item_to_remove:
-		inventory.erase(item_to_remove)
-		emit_signal("inventory_updated")
-		
+	for i in range(inventory.size() - 1, -1, -1):
+		var slot_data = inventory[i]
+		if slot_data.item.id == item_id_to_remove:
+			slot_data.quantity -= 1
+			if slot_data.quantity <= 0:
+				inventory.remove_at(i)
+			emit_signal("inventory_updated")
+			return
+
 func has_in_inventory(item_id: String) -> bool:
 	for item in inventory:
 		if item.id == item_id:
 			return true
 	return false
-	
+
 func toggle_cellphone_light():
 	if not _cellphone_is_unlocked: return
 	
@@ -256,6 +280,6 @@ func _update_darkness_state():
 		emit_notification_requested("Eu não deveria ter desligado isso.")
 	elif not is_in_darkness and was_in_darkness:
 		emit_notification_requested("Ufa, bem melhor.")
-		
+
 func _show_dialogue(message: String):
 	emit_notification_requested(message)

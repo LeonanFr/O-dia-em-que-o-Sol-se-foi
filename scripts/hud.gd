@@ -57,21 +57,25 @@ func _on_puzzle_ended(_puzzle_id: String, _success: bool):
 	timer_label.hide()
 
 func redraw_inventory():
-	var inventory_items = GameManager.inventory
+	var inventory_data = GameManager.inventory
 	var slots = inventory_slots_container.get_children()
-	
+
 	for i in range(slots.size()):
 		var slot = slots[i]
-		if i < inventory_items.size():
-			slot.display_item(inventory_items[i])
+		if i < inventory_data.size():
+			slot.display_item(inventory_data[i])
 		else:
 			slot.clear_slot()
-	
+
 	_update_all_slot_styles()
 
 func _on_item_used(slot: InventorySlot):
-	var item_data = slot.item_data
-	if not item_data: return
+	if not slot.slot_data: 
+		return
+	
+	var item_data = slot.slot_data.item
+	if not item_data: 
+		return
 
 	match item_data.type:
 		ItemData.ItemType.ACTIVATABLE:
@@ -82,19 +86,21 @@ func _on_item_used(slot: InventorySlot):
 			if message != "":
 				show_notification(message)
 
+
 func _update_all_slot_styles(_payload = null):
 	var active_tool_id = GameManager.active_tool.id if GameManager.active_tool else ""
 	
 	for slot in inventory_slots_container.get_children():
-		if not (slot is InventorySlot and slot.item_data): continue
+		if not (slot is InventorySlot and slot.slot_data and slot.slot_data.item):
+			continue
 			
+		var item_data = slot.slot_data.item
 		var is_active = false
-		var current_item_id = slot.item_data.id
+		var current_item_id = item_data.id
 		
 		if current_item_id == active_tool_id:
 			is_active = true
-			
-		elif slot.item_data.type == ItemData.ItemType.DIRECT_USE:
+		elif item_data.type == ItemData.ItemType.DIRECT_USE:
 			var direct_use_is_active = GameManager.is_direct_use_item_active(current_item_id)
 			if direct_use_is_active:
 				is_active = true

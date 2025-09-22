@@ -1,6 +1,8 @@
-[gd_scene load_steps=6 format=4 uid="uid://c4bl82xtryg61"]
+[gd_scene load_steps=8 format=4 uid="uid://c4bl82xtryg61"]
 
 [ext_resource type="Texture2D" uid="uid://b7ljnk3p4dkqa" path="res://assets/tv_remote_controller/textures/Body_baseColor.png" id="1_bavnn"]
+[ext_resource type="Script" uid="uid://e8gqnna7m5g6" path="res://scripts/InteractiveObject.gd" id="1_y10rp"]
+[ext_resource type="Resource" uid="uid://6w21ne74eexm" path="res://items/battery.tres" id="2_op1cn"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pq1nh"]
 resource_name = "Battery"
@@ -48,6 +50,8 @@ height = 0.6809082
 radius = 0.080566406
 
 [node name="Battery" type="StaticBody3D"]
+script = ExtResource("1_y10rp")
+item_data = ExtResource("2_op1cn")
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
 mesh = SubResource("ArrayMesh_ytmnr")
