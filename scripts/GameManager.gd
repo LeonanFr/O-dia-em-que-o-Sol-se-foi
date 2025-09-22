@@ -81,35 +81,42 @@ func can_combine(first: ItemData, second: ItemData) -> bool:
 	
 func set_active_item(item_data: ItemData):
 	var previous_active_tool = active_tool
-
+	
 	if active_tool == item_data:
 		active_tool = null
 		emit_signal("active_item_changed", "")
 		return
-
-	if previous_active_tool and can_combine(previous_active_tool, item_data):
-		var flashlight_item = previous_active_tool if previous_active_tool.id == "flashlight" else item_data
-		var battery_item = previous_active_tool if previous_active_tool.id == "battery" else item_data
-
-		if flashlight_item and battery_item:
-			remove_from_inventory(battery_item.id)
-			if active_tool == battery_item:
-				active_tool = null
-				emit_signal("active_item_changed", "")
-
-			if flashlight_item.add_battery():
-				remove_from_inventory(flashlight_item.id)
-				has_flashlight = true
-
+		
+	if previous_active_tool and is_flashlight_battery_combo(previous_active_tool, item_data):
+		handle_flashlight_battery(previous_active_tool, item_data)
 		return
-
+		
+	if item_data.category != ItemData.ItemCategory.TOOL:
+		active_tool = null
+		use_item_directly(item_data)
+		emit_signal("active_item_changed", item_data.id)
+		return
+		
 	active_tool = item_data
-
 	var message = get_item_feedback_message(item_data)
 	if message != "":
 		emit_notification_requested(message)
-
 	emit_signal("active_item_changed", item_data.id)
+	
+func is_flashlight_battery_combo(item_a: ItemData, item_b: ItemData) -> bool:
+	return (item_a is FlashlightItemData and item_b) or (item_b is FlashlightItemData and item_a)
+
+func handle_flashlight_battery(item_a: ItemData, item_b: ItemData):
+	var flashlight = item_a if item_a is FlashlightItemData else item_b
+	var battery_item = item_b if item_a is FlashlightItemData else item_a
+	
+	if flashlight.add_battery():
+		remove_from_inventory(flashlight.id)
+		has_flashlight = true
+		active_tool = null
+		emit_signal("active_item_changed", "")
+		
+	remove_from_inventory(battery_item.id)
 
 	
 func get_item_feedback_message(item_data: ItemData) -> String:

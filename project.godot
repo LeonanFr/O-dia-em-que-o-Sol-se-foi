@@ -13,9 +13,15 @@ config_version=5
 config/name="Joguinho"
 run/main_scene="res://scenes/room_01.tscn"
 config/features=PackedStringArray("4.5", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="uid://c4uxdyk731ayf"
 
 [autoload]
 
 GameManager="*res://scripts/GameManager.gd"
 Hud="*res://scenes/hud.tscn"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/size/mode=4
