@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=4 uid="uid://ooqeffs4hcg4"]
+[gd_scene load_steps=45 format=4 uid="uid://ooqeffs4hcg4"]
 
 [ext_resource type="Script" uid="uid://dx3aoro2ahpxc" path="res://scripts/InteractionController.gd" id="1_4706t"]
 [ext_resource type="PackedScene" uid="uid://cws13unueg4ld" path="res://assets/wooden_floor/wooden_floor.glb" id="1_bmbfo"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://po6gbsxtctog" path="res://assets/cellphone_light_mask.png" id="7_ckr6b"]
 [ext_resource type="PackedScene" uid="uid://6rxjugi62ovn" path="res://assets/office_desk_chair/scene.gltf" id="8_m6mxt"]
 [ext_resource type="Script" uid="uid://ccr27xmr65klp" path="res://scripts/cellphone_light.gd" id="8_wbk8i"]
+[ext_resource type="Script" uid="uid://ctgl1o1mu86qt" path="res://scripts/flashlight_light.gd" id="9_883be"]
 [ext_resource type="PackedScene" uid="uid://cawgkrmm0imfy" path="res://assets/laundry_basket/scene.gltf" id="9_r23mb"]
 [ext_resource type="PackedScene" uid="uid://d2lwpkijugtd0" path="res://assets/cc0_-_shelf_5/scene.gltf" id="11_yas0y"]
 [ext_resource type="PackedScene" uid="uid://0jyqyd3wlog" path="res://assets/photo_collage_wall/scene.gltf" id="12_87oqg"]
@@ -185,10 +186,11 @@ _data = {
 &"power_outage": SubResource("Animation_wbk8i")
 }
 
-[node name="Room" type="Node3D" node_paths=PackedStringArray("main_light", "cellphone_light", "camera_controller", "pillow_object")]
+[node name="Room" type="Node3D" node_paths=PackedStringArray("main_light", "cellphone_light", "flashlight_light", "camera_controller", "pillow_object")]
 script = ExtResource("1_4706t")
 main_light = NodePath("Lamp")
 cellphone_light = NodePath("Camera3D/CellphoneLight")
+flashlight_light = NodePath("Camera3D/FlashLight")
 camera_controller = NodePath("Camera3D")
 pillow_object = NodePath("InteractiveObjects/pillow")
 
@@ -287,6 +289,16 @@ script = ExtResource("8_wbk8i")
 
 [node name="InspectionPoint" type="Marker3D" parent="Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.32415e-07, -0.064110756, -3.029302)
+
+[node name="FlashLight" type="SpotLight3D" parent="Camera3D"]
+visible = false
+light_color = Color(1, 0.8862745, 0, 1)
+light_energy = 10.0
+light_projector = ExtResource("7_ckr6b")
+shadow_enabled = true
+spot_range = 40.0
+spot_angle = 35.0
+script = ExtResource("9_883be")
 
 [node name="Lamp" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.9344273, 0)
@@ -412,12 +424,12 @@ required_focus_id = "closet"
 [node name="CollisionShape3D" parent="InteractiveObjects/clothes" index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0660248, 0.774414, 0.279787)
 
-[node name="flashlight" parent="InteractiveObjects" instance=ExtResource("25_83nib")]
-transform = Transform3D(0.55067, 0, 0.834723, 0, 1, 0, -0.834723, 0, 0.55067, -26.1774, 2.10849, 0)
-
 [node name="pillow" parent="InteractiveObjects" groups=["interactive"] instance=ExtResource("23_00wt8")]
 transform = Transform3D(0.0549755, 0, 3.49957, 0, 3.5, 0, -3.49957, 0, 0.0549755, -21.756, 0, 0)
 required_focus_id = "bed"
+
+[node name="Flashlight" parent="InteractiveObjects" groups=["interactive"] instance=ExtResource("25_83nib")]
+transform = Transform3D(2, 0, 0, 0, 0.06979899, -1.9987817, 0, 1.9987817, 0.06979899, -24.53853, 2.1767848, 1.2832451)
 
 [node name="PuzzleTimer" type="Timer" parent="."]
 

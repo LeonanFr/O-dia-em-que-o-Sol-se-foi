@@ -2,6 +2,7 @@ extends Node
 
 signal active_item_changed(item_id: String)
 signal cellphone_light_toggled(is_on: bool)
+signal flashlight_toggled(is_on: bool)
 signal cellphone_light_unlocked
 signal quest_updated(text: String)
 signal notification_requested(message: String)
@@ -22,6 +23,7 @@ var _main_power_is_out: bool = false
 var has_cellphone_light: bool = false
 var has_flashlight: bool = false
 var is_cellphone_light_on: bool = false
+var is_flashlight_on: bool = false
 var _cellphone_is_unlocked: bool = false
 var inventory: Array[InventorySlotData] = []
 
@@ -70,23 +72,46 @@ func reset():
 	has_flashlight = false
 	emit_quest_updated("Encontre a TV")
 
+func can_combine(first: ItemData, second: ItemData) -> bool:
+	if first.id == "flashlight" and second.id == "battery":
+		return true
+	if first.id == "battery" and second.id == "flashlight":
+		return true
+	return false
+	
 func set_active_item(item_data: ItemData):
-	var previous_active_tool_id = active_tool.id if active_tool else ""
+	var previous_active_tool = active_tool
 
 	if active_tool == item_data:
 		active_tool = null
 		emit_signal("active_item_changed", "")
 		return
-		
+
+	if previous_active_tool and can_combine(previous_active_tool, item_data):
+		var flashlight_item = previous_active_tool if previous_active_tool.id == "flashlight" else item_data
+		var battery_item = previous_active_tool if previous_active_tool.id == "battery" else item_data
+
+		if flashlight_item and battery_item:
+			remove_from_inventory(battery_item.id)
+			if active_tool == battery_item:
+				active_tool = null
+				emit_signal("active_item_changed", "")
+
+			if flashlight_item.add_battery():
+				remove_from_inventory(flashlight_item.id)
+				has_flashlight = true
+
+		return
+
 	active_tool = item_data
-	
-	if previous_active_tool_id != item_data.id:
-		var message = get_item_feedback_message(item_data)
-		if message != "":
-			emit_notification_requested(message)
-	
+
+	var message = get_item_feedback_message(item_data)
+	if message != "":
+		emit_notification_requested(message)
+
 	emit_signal("active_item_changed", item_data.id)
 
+	
 func get_item_feedback_message(item_data: ItemData) -> String:
 	if item_data.display_name == "":
 		return ""
@@ -108,6 +133,8 @@ func use_item_directly(item_data: ItemData):
 				get_tree().root.add_child(password_screen)
 			else:
 				toggle_cellphone_light()
+		"charged_flashlight":
+			toggle_flashlight()
 	
 func notify_interacted(object_id: String):
 	match object_id:
@@ -229,6 +256,12 @@ func request_interaction(obj: InteractiveObject) -> bool:
 	return true
 
 func add_to_inventory(new_item_data: ItemData):
+	if new_item_data.id == "cellphone" and has_flashlight:
+		print("Celular bloqueado porque a lanterna está ativa")
+		return
+		
+		
+		
 	for slot_data in inventory:
 		if slot_data.item.id == new_item_data.id:
 			slot_data.quantity += 1
@@ -254,7 +287,7 @@ func has_in_inventory(item_id: String) -> bool:
 		if item.id == item_id:
 			return true
 	return false
-
+	
 func toggle_cellphone_light():
 	if not _cellphone_is_unlocked: return
 	
@@ -262,17 +295,27 @@ func toggle_cellphone_light():
 	emit_signal("cellphone_light_toggled", is_cellphone_light_on)
 	_update_darkness_state()
 	
+func toggle_flashlight():
+	if not has_flashlight:
+		return
+	is_flashlight_on = not is_flashlight_on
+	active_light_source = preload("res://items/charged_flashlight.tres") if is_flashlight_on else null
+	_update_darkness_state()
+	emit_signal("flashlight_toggled", is_flashlight_on)
+	
 func is_direct_use_item_active(item_id: String) -> bool:
 	match item_id:
 		"cellphone":
 			return is_cellphone_light_on
+		"charged_flashlight":
+			return is_flashlight_on
 	return false
 	
 func _update_darkness_state():
 	var was_in_darkness = is_in_darkness
-	is_in_darkness = _main_power_is_out and not is_cellphone_light_on
+	is_in_darkness = _main_power_is_out and not (is_cellphone_light_on or is_flashlight_on)
 	if is_in_darkness and not was_in_darkness:
-		emit_notification_requested("Eu não deveria ter desligado isso.")
+		emit_notification_requested("Está escuro demais.")
 	elif not is_in_darkness and was_in_darkness:
 		emit_notification_requested("Ufa, bem melhor.")
 

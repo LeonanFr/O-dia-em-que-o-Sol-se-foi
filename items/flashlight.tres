@@ -1,12 +1,15 @@
-[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://c0svitqgfuv3h"]
+[gd_resource type="Resource" script_class="FlashlightItemData" load_steps=4 format=3 uid="uid://c0svitqgfuv3h"]
 
 [ext_resource type="Texture2D" uid="uid://0r443fmejya6" path="res://assets/icons/flashlight.png" id="1_2opa4"]
-[ext_resource type="Script" uid="uid://bkecg5j2sc3qj" path="res://scripts/ItemData.gd" id="1_twf4v"]
+[ext_resource type="Resource" uid="uid://rnhohofliyc2" path="res://items/charged_flashlight.tres" id="1_2yxpk"]
+[ext_resource type="Script" uid="uid://3waalg4vw55r" path="res://scripts/FlashlightItemData.gd" id="3_2yxpk"]
 
 [resource]
-script = ExtResource("1_twf4v")
+script = ExtResource("3_2yxpk")
+charged_flashlight_item = ExtResource("1_2yxpk")
 id = "flashlight"
 display_name = "Lanterna sem pilhas"
 icon = ExtResource("1_2opa4")
+category = 1
 is_collectible = true
 metadata/_custom_type_script = "uid://bkecg5j2sc3qj"

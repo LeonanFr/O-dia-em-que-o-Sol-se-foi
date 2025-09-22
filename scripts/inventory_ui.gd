@@ -36,3 +36,8 @@ func _on_item_used(item_id: String):
 						GameManager.puzzle_failed.disconnect(password_screen.queue_free)
 			)
 			get_tree().root.add_child(password_screen)
+		"charged_flashlight":
+			for slot_data in GameManager.inventory:
+				if slot_data.item.id == "charged_flashlight":
+					GameManager.use_item_directly(slot_data.item)
+					break

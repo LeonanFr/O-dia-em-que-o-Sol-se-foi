@@ -3,6 +3,7 @@ class_name InteractionController
 
 @export var main_light: OmniLight3D
 @export var cellphone_light: SpotLight3D
+@export var flashlight_light: SpotLight3D
 @export var camera_controller: CameraController
 @export var pillow_object: Node 
 @export var debug_mode: bool = false
@@ -22,6 +23,7 @@ var _inspected_object_original_transform: Transform3D
 func _ready():
 	GameManager.reset()
 	GameManager.cellphone_light_toggled.connect(_on_cellphone_light_toggled)
+	GameManager.flashlight_toggled.connect(_on_flashlight_toggled)
 	if not camera_controller:
 		push_error("CameraController não foi atribuído no InteractionController!")
 		get_tree().quit()
@@ -138,7 +140,9 @@ func _trigger_interaction(obj: InteractiveObject):
 	if not obj.item_data:
 		obj.interact()
 		return
-
+	if obj.item_data.id == "flashlight" and not GameManager.is_cellphone_unlocked():
+		GameManager.emit_notification_requested("Não sei se devo pegar isso agora.")
+		return
 	if obj.item_data.is_collectible:
 		GameManager.add_to_inventory(obj.item_data)
 		obj.queue_free()
@@ -267,7 +271,11 @@ func turn_off_emissives():
 func _on_cellphone_light_toggled(is_on: bool):
 	if cellphone_light:
 		cellphone_light.visible = is_on
-
+		
+func _on_flashlight_toggled(is_on: bool):
+	if flashlight_light:
+		flashlight_light.visible = is_on
+		
 func _on_power_cut():
 	GameManager.on_power_cut()
 	GameManager._show_dialogue("Droga! Fiquei sem energia. Como vou enxergar algo?")

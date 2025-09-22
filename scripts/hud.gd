@@ -76,15 +76,13 @@ func _on_item_used(slot: InventorySlot):
 	var item_data = slot.slot_data.item
 	if not item_data: 
 		return
-
+	
 	match item_data.type:
 		ItemData.ItemType.ACTIVATABLE:
 			GameManager.set_active_item(item_data)
 		ItemData.ItemType.DIRECT_USE:
 			GameManager.use_item_directly(item_data)
-			var message = GameManager.get_item_feedback_message(item_data)
-			if message != "":
-				show_notification(message)
+	redraw_inventory()
 
 
 func _update_all_slot_styles(_payload = null):
