@@ -76,47 +76,64 @@ func _handle_mouse_click(mouse_position: Vector2):
 	var ray_end = ray_origin + camera_controller.project_ray_normal(mouse_position) * 1000
 	var query := PhysicsRayQueryParameters3D.create(ray_origin, ray_end)
 	var result := space_state.intersect_ray(query)
-	
 
 	if result.has("collider"):
 		var obj = result.collider
-		
+		print("CLICK -> Collider encontrado:", obj)
+
 		if not (obj is InteractiveObject):
-			print("  -> FIM: Objeto não é um InteractiveObject (", obj, "). Ignorando.")
+			print("  -> FIM: Não é InteractiveObject.")
 			return
+
+		print("  -> É InteractiveObject:", obj)
+
 		if is_inspecting:
+			print("  -> Já está inspecionando, checando se é o mesmo objeto ou filho.")
 			if obj == inspected_object or inspected_object.is_ancestor_of(obj):
 				if obj == inspected_object:
+					print("  -> Clique no objeto inspecionado.")
 					inspected_object.handle_inspection_click(result)
 				elif obj is InteractiveObject:
+					print("  -> Clique em item filho do inspecionado.")
 					inspected_object.child_item_was_collected(obj)
 			return
-		
-		if obj is InteractiveObject:
-			if GameManager.active_tool:
-				obj.use_tool(GameManager.active_tool)
-				return
-			
-			if is_focused:
-				if obj.required_focus_id != "" and focused_object.item_data and focused_object.item_data.id == obj.required_focus_id:
-					_trigger_interaction(obj)
-				elif focused_object.is_ancestor_of(obj):
-					if obj.is_inspectable:
-						_start_inspection(obj)
-					else:
-						_trigger_interaction(obj)
-			else:
-				if not debug_mode and not GameManager.request_interaction(obj):
-					return
 
+		if GameManager.active_tool:
+			print("  -> Usando ferramenta ativa:", GameManager.active_tool.id)
+			obj.use_tool(GameManager.active_tool)
+			return
+
+		if is_focused:
+			print("  -> Está focado em algo:", focused_object)
+			if obj.required_focus_id != "" and focused_object.item_data and focused_object.item_data.id == obj.required_focus_id:
+				print("  -> Required focus id bateu, chamando _trigger_interaction.")
+				_trigger_interaction(obj)
+			elif focused_object.is_ancestor_of(obj):
+				print("  -> Objeto é filho do foco.")
 				if obj.is_inspectable:
+					print("  -> INSPECIONÁVEL dentro do foco -> chamando _start_inspection.")
 					_start_inspection(obj)
-				elif obj.get_focus_transform():
-					_focus_on_object(obj)
 				else:
+					print("  -> Não inspecionável -> interação normal.")
 					_trigger_interaction(obj)
+			else:
+				print("  -> Não correspondeu a nada no foco.")
+		else:
+			print("  -> Não está focado.")
+			if not debug_mode and not GameManager.request_interaction(obj):
+				print("  -> request_interaction bloqueou.")
+				return
 
-			
+			if obj.is_inspectable:
+				print("  -> Objeto é inspecionável, chamando _start_inspection.")
+				_start_inspection(obj)
+			elif obj.get_focus_transform():
+				print("  -> Objeto tem foco, chamando _focus_on_object.")
+				_focus_on_object(obj)
+			else:
+				print("  -> Interação simples.")
+				_trigger_interaction(obj)
+
 func _trigger_interaction(obj: InteractiveObject):
 	if not obj.item_data:
 		obj.interact()
@@ -186,6 +203,7 @@ func _unfocus_current_object():
 	is_transitioning = false
 
 func _start_inspection(obj: InteractiveObject):
+	print("Chamado")
 	if camera_controller.is_busy() or is_transitioning: return
 
 	is_inspecting = true

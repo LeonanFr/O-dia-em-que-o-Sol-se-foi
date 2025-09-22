@@ -200,6 +200,10 @@ func request_interaction(obj: InteractiveObject) -> bool:
 			current_state = GameState.FIND_CELLPHONE_PUZZLE
 			return true
 
+	if obj.item_data.id == "tv":
+		emit_notification_requested("Não tem mais nada para ver.")
+		return false
+
 	if obj.required_focus_id != "":
 		var current_focus_id = active_tool.id if active_tool else ""
 		if current_focus_id != obj.required_focus_id:
@@ -215,15 +219,6 @@ func request_interaction(obj: InteractiveObject) -> bool:
 		InteractiveObject.LightRequirement.FLASHLIGHT:
 			if has_flashlight:
 				can_see = true
-
-	if not can_see:
-		var msg = "Está escuro demais para mexer nisso."
-		emit_notification_requested(msg)
-		emit_signal("interaction_denied", msg)
-		return false
-
-	return true
-
 
 	if not can_see:
 		var msg = "Está escuro demais para mexer nisso."
