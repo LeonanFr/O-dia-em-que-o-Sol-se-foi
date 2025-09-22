@@ -404,8 +404,7 @@ focus_marker = NodePath("../../Focus/DeskFocus")
 cellphone_node = NodePath("Model/Collada visual scene group/Drawers/RightDrawers/RightThree/cellphone")
 
 [node name="cellphone" parent="InteractiveFurniture/desk/Model/Collada visual scene group/Drawers/RightDrawers/RightThree" index="6" groups=["interactive"] instance=ExtResource("26_yntok")]
-transform = Transform3D(0.25, 0, 0, 0, -1.09278e-08, -0.25, 0, 0.25, -1.09278e-08, -0.0452714, -0.125709, 0.599476)
-visible = false
+transform = Transform3D(0.15, 0, 0, 0, -6.556709e-09, -0.15, 0, 0.15, -6.556709e-09, -0.045271397, -0.132721, 0.5994759)
 required_focus_id = "desk"
 
 [node name="Cylinder_002" type="Node3D" parent="InteractiveFurniture/desk/Model/Collada visual scene group/Drawers/RightDrawers/RightThree/cellphone"]
@@ -433,7 +432,7 @@ transform = Transform3D(0.0549755, 0, 3.49957, 0, 3.5, 0, -3.49957, 0, 0.0549755
 required_focus_id = "bed"
 
 [node name="Flashlight" parent="InteractiveObjects" groups=["interactive"] instance=ExtResource("25_83nib")]
-transform = Transform3D(2, 0, 0, 0, 0.069799, -1.99878, 0, 1.99878, 0.069799, -24.5385, 2.17678, 1.28325)
+transform = Transform3D(2.5, 0, 0, 0, 0.08724874, -2.498477, 0, 2.498477, 0.08724874, -24.53853, 2.1969202, 1.2832451)
 
 [node name="PuzzleTimer" type="Timer" parent="."]
 
