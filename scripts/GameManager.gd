@@ -27,9 +27,8 @@ var is_flashlight_on: bool = false
 var _cellphone_is_unlocked: bool = false
 var inventory: Array[InventorySlotData] = []
 
-@onready var level_animator = get_tree().root.get_node("Room/LevelAnimator")
 @export var find_cellphone_timer_seconds: float = 60.0
-@export var correct_password: String = "1809"
+@export var correct_password: String = "7294"
 
 var puzzle_timer: Timer
 var game_over_screen_scene = preload("res://scenes/GameOverScreen.tscn")
@@ -71,13 +70,20 @@ func reset():
 	_main_power_is_out = false
 	has_cellphone_light = false
 	has_flashlight = false
-	emit_quest_updated("Encontre a TV")
+	_update_darkness_state()
 	
-	if puzzle_timer:
-		puzzle_timer.stop()
-
-
-
+	var interaction_controller = get_tree().root.get_node_or_null("Room/InteractionController")
+	if interaction_controller:
+		interaction_controller.reset_power_state()
+	var clothes = get_tree().root.get_node_or_null("Room/InteractiveObjects/clothes")
+	if clothes:
+		clothes._is_anim_playing = false
+		clothes._is_open = false
+		if clothes.animation_player:
+			clothes.animation_player.stop()
+			clothes.animation_player.play("RESET")
+	emit_quest_updated("Encontre a TV")
+		
 func can_combine(first: ItemData, second: ItemData) -> bool:
 	if first.id == "flashlight" and second.id == "battery":
 		return true
@@ -192,6 +198,7 @@ func _on_puzzle_solved_logic(puzzle_id: String):
 			_cellphone_is_unlocked = true
 			emit_signal("cellphone_light_unlocked")
 			emit_quest_updated("")
+			var level_animator = get_tree().root.get_node_or_null("Room/LevelAnimator")
 			if level_animator:
 				level_animator.play("power_outage")
 			var nodes = get_tree().get_nodes_in_group("interactive")
@@ -228,20 +235,16 @@ func emit_notification_requested(message: String):
 	emit_signal("notification_requested", message)
 
 func request_interaction(obj: InteractiveObject) -> bool:
-	if not obj.item_data:
-		return false
-
 	if current_state == GameState.START:
-		if obj.item_data.id != "tv":
+		if not obj.item_data or obj.item_data.id != "tv":
 			emit_notification_requested("Não tenho tempo para isso agora.")
 			return false
-		else:
-			notify_interacted("tv")
-			current_state = GameState.FIND_CELLPHONE_PUZZLE
-			return true
+		notify_interacted("tv")
+		current_state = GameState.FIND_CELLPHONE_PUZZLE
+		return true
 
-	if obj.item_data.id == "tv":
-		emit_notification_requested("Não tem mais nada para ver.")
+	if obj.item_data and obj.item_data.id == "tv":
+		emit_notification_requested("Não tem mais nada para mexer nisso.")
 		return false
 
 	if obj.required_focus_id != "":
@@ -254,10 +257,10 @@ func request_interaction(obj: InteractiveObject) -> bool:
 		InteractiveObject.LightRequirement.NONE:
 			can_see = true
 		InteractiveObject.LightRequirement.CELLPHONE:
-			if has_cellphone_light or has_flashlight:
+			if is_cellphone_light_on or is_flashlight_on:
 				can_see = true
 		InteractiveObject.LightRequirement.FLASHLIGHT:
-			if has_flashlight:
+			if is_flashlight_on:
 				can_see = true
 
 	if not can_see:
@@ -272,8 +275,6 @@ func add_to_inventory(new_item_data: ItemData):
 	if new_item_data.id == "cellphone" and has_flashlight:
 		print("Celular bloqueado porque a lanterna está ativa")
 		return
-		
-		
 		
 	for slot_data in inventory:
 		if slot_data.item.id == new_item_data.id:

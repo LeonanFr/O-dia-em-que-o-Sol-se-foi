@@ -20,16 +20,14 @@ func _ready() -> void:
 	]
 
 	puzzle_objects = [
-		$bag, #0
-		$shoes, #1
-		$frog, #2
-		$camisas, #3
-		$jeans, #4
-		$towel #5
+		$bag,
+		$shoes,
+		$frog,
+		$camisas,
+		$jeans,
+		$towel
 	]
-	#marrom, verde, azul, azul, vermelho, preto | towel, frog, bag, jeans, shoes, camisas
 
-	# Posiciona os objetos nos slots
 	for i in range(min(puzzle_objects.size(), slots.size())):
 		place_object_in_slot(puzzle_objects[i], slots[i])
 
@@ -43,7 +41,7 @@ func _ready() -> void:
 		if label:
 			label.hide()
 
-func get_focus_transform() -> Transform3D:
+func get_focus_transform():
 	return focus_marker.global_transform if focus_marker else null
 
 func interact(action: String = "") -> void:
@@ -95,6 +93,10 @@ func puzzle_solved() -> void:
 
 	for obj in puzzle_objects:
 		obj.hide()
+		for child in obj.get_children():
+			if child is CollisionShape3D:
+				child.disabled = true
+				break
 
 	var numeros = ["7", "2", "9", "4"]
 	for i in range(labels.size()):

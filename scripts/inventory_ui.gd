@@ -17,7 +17,7 @@ func redraw_inventory():
 			slot.get_child(0).queue_free()
 			
 		if i < inventory_items.size():
-			var item_id = inventory_items[i]
+			var item_id = inventory_items[i].item.id
 			var item_button = Button.new()
 			item_button.expand_icon = true
 			item_button.icon = load("res://assets/icons/" + item_id + ".png")

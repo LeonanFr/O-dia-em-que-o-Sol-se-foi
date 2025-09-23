@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://fgwnx20agy5w"]
+
+[ext_resource type="Script" uid="uid://ba1p0u6g43tni" path="res://scripts/color_puzzle.gd" id="1_d8y65"]
+[ext_resource type="PackedScene" uid="uid://dm3wclwk8v1tu" path="res://scenes/button_press.tscn" id="2_18xs0"]
+[ext_resource type="Resource" uid="uid://c76jhxfvtjju5" path="res://items/color_puzzle.tres" id="3_18xs0"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4tkm2"]
+size = Vector3(1.9893799, 1, 2.934143)
+
+[node name="ColorPuzzle" type="StaticBody3D" node_paths=PackedStringArray("collision_shape")]
+script = ExtResource("1_d8y65")
+button_scene = ExtResource("2_18xs0")
+button_positions = Array[Vector3]([Vector3(0, 0, 0), Vector3(1, 0, 0), Vector3(0, 0, 1), Vector3(1, 0, 1), Vector3(0, 0, 2), Vector3(1, 0, 2)])
+correct_sequence = Array[Color]([Color(0.5019608, 0, 0.5019608, 1), Color(0, 1, 0, 1), Color(0, 0, 1, 1), Color(0, 0, 1, 1), Color(1, 0, 0, 1), Color(0, 0, 0, 1)])
+item_data = ExtResource("3_18xs0")
+required_light = 2
+required_focus_id = "dresser"
+is_container = true
+collision_shape = NodePath("CollisionShape3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.49468994, 0, 0.96707153)
+shape = SubResource("BoxShape3D_4tkm2")
+
+[node name="Buttons" type="Node3D" parent="."]
+
+[node name="ButtonPress" parent="Buttons" instance=ExtResource("2_18xs0")]
+
+[node name="ButtonPress2" parent="Buttons" instance=ExtResource("2_18xs0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+
+[node name="ButtonPress3" parent="Buttons" instance=ExtResource("2_18xs0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+
+[node name="ButtonPress4" parent="Buttons" instance=ExtResource("2_18xs0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
+
+[node name="ButtonPress5" parent="Buttons" instance=ExtResource("2_18xs0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+
+[node name="ButtonPress6" parent="Buttons" instance=ExtResource("2_18xs0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 2)

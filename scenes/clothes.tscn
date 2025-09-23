@@ -1,6 +1,6 @@
-[gd_scene load_steps=32 format=4 uid="uid://st2b1dgxvbvr"]
+[gd_scene load_steps=33 format=4 uid="uid://st2b1dgxvbvr"]
 
-[ext_resource type="Script" uid="uid://iuai5u1gg20n" path="res://scripts/Clothes.gd" id="1_44ofa"]
+[ext_resource type="Script" uid="uid://iuai5u1gg20n" path="res://scripts/clothes.gd" id="1_44ofa"]
 [ext_resource type="PackedScene" uid="uid://b4cggsj3dobsx" path="res://assets/t-shirts_homme/scene.gltf" id="1_rhycn"]
 [ext_resource type="Texture2D" uid="uid://dftldhe2atmr0" path="res://assets/t-shirts_homme/textures/Bois_cintre_baseColor.jpeg" id="2_n8s0y"]
 [ext_resource type="PackedScene" uid="uid://ypuv8yjo7v64" path="res://assets/hangers_w_clothes/scene.gltf" id="2_u5y8h"]
@@ -342,8 +342,60 @@ tracks/3/keys = {
 "values": [Vector3(23.2343, -14.2931, -45.2114)]
 }
 
+[sub_resource type="Animation" id="Animation_y0eyq"]
+resource_name = "close_clothes"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sketchfab_Scene/Sketchfab_model/root/GLTF_SceneRootNode/Obj3d66-516286-2-747_0:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.328, 0.774, 0.12), Vector3(-0.141, 0.774, 0.12)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sketchfab_Scene/Sketchfab_model/root/GLTF_SceneRootNode/Obj3d66-516286-9-190_1:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.165, 0.809, 0.136), Vector3(-0.037, 0.809, 0.136)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sketchfab_Scene/Sketchfab_model/root/GLTF_SceneRootNode/Obj3d66-516286-9-190_2:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.432, 0.809, 0.136), Vector3(0.254336, 0.809, 0.136)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sketchfab_Scene2/Sketchfab_model/hangers_w_clothes_obj_cleaner_materialmerger_gles:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(41.636, -14.293, -45.211), Vector3(23.2343, -14.2931, -45.2114)]
+}
+
 [sub_resource type="Animation" id="Animation_0ek8j"]
-resource_name = "move_clothes"
+resource_name = "open_clothes"
 length = 1.5
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -397,7 +449,8 @@ tracks/3/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pnfus"]
 _data = {
 &"RESET": SubResource("Animation_fdp31"),
-&"move_clothes": SubResource("Animation_0ek8j")
+&"close_clothes": SubResource("Animation_y0eyq"),
+&"open_clothes": SubResource("Animation_0ek8j")
 }
 
 [node name="clothes" type="StaticBody3D" node_paths=PackedStringArray("animation_player")]

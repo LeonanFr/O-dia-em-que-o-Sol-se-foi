@@ -5,5 +5,6 @@ func _ready():
 
 func _on_button_pressed():
 	get_tree().paused = false
+	GameManager.reset()
 	get_tree().reload_current_scene()
 	queue_free()

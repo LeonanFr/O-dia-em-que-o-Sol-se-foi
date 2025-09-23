@@ -7,6 +7,7 @@ class_name Desk
 @export var drawer_anim_duration: float = 0.6
 @export var focus_marker: Marker3D
 @export var cellphone_node: InteractiveObject
+@export var battery_node: InteractiveObject
 
 var drawer_data := {}
 
@@ -22,7 +23,11 @@ func _ready():
 			var area = drawer.get_node_or_null("Area3D")
 			if area:
 				area.input_event.connect(_on_drawer_clicked.bind(drawer))
-				
+	if battery_node:
+		battery_node.hide()
+		if battery_node.get_node_or_null("CollisionShape3D"):
+			battery_node.get_node("CollisionShape3D").disabled = true
+			
 func get_focus_transform():
 	if focus_marker:
 		return focus_marker.global_transform
@@ -77,7 +82,15 @@ func animate_drawer(drawer_node, force_state: String = "toggle"):
 			if collider: collider.disabled = false
 		else:
 			if collider: collider.disabled = true
-
+			
+	if battery_node and drawer_node.is_ancestor_of(battery_node):
+			var collider = battery_node.get_node_or_null("CollisionShape3D")
+			if should_open:
+				battery_node.show()
+				if collider: collider.disabled = false
+			else:
+				if collider: collider.disabled = true
+				
 	if drawer_node.has_meta("active_tween"):
 		var old_tween = drawer_node.get_meta("active_tween")
 		if old_tween:
@@ -90,6 +103,8 @@ func animate_drawer(drawer_node, force_state: String = "toggle"):
 		drawer_node.remove_meta("active_tween")
 		if cellphone_node and drawer_node.is_ancestor_of(cellphone_node) and not should_open:
 			cellphone_node.hide()
+		if battery_node and drawer_node.is_ancestor_of(battery_node) and not should_open:
+			battery_node.hide()
 	)
 	drawer_node.set_meta("active_tween", tween)
 

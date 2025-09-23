@@ -1,23 +1,23 @@
 [gd_scene load_steps=146 format=4 uid="uid://b5o7b7mataj5d"]
 
 [ext_resource type="Texture2D" uid="uid://b8p77c6o7r6bk" path="res://assets/closet_m000230802/textures/Sicomora_baseColor.jpeg" id="1_7j5ra"]
-[ext_resource type="Script" path="res://scripts/closet.gd" id="1_71km3"]
+[ext_resource type="Script" uid="uid://7wd8k6q8w6q3" path="res://scripts/Closet.gd" id="1_71km3"]
 [ext_resource type="FontFile" uid="uid://4i5lfnhbrq0p" path="res://assets/fonts/Rockfull.ttf" id="2_p7ald"]
-[ext_resource type="PackedScene" uid="uid://b2slo75mask30" path="res://items/bag.tscn" id="5_ymn24"]
-[ext_resource type="Script" path="res://scripts/bag.gd" id="6_p61y0"]
-[ext_resource type="Script" path="res://scripts/ItemData.gd" id="7_0weua"]
-[ext_resource type="PackedScene" uid="uid://gkbpwknukakq" path="res://items/shoes.tscn" id="7_rhvrs"]
-[ext_resource type="Script" path="res://scripts/shoes.gd" id="8_nhely"]
-[ext_resource type="PackedScene" uid="uid://ddtbl2p82saj3" path="res://items/frog.tscn" id="9_2rgul"]
-[ext_resource type="Script" path="res://scripts/frog.gd" id="10_iklod"]
-[ext_resource type="PackedScene" uid="uid://cx0jiyma8r4bu" path="res://items/camisas.tscn" id="11_saw6p"]
-[ext_resource type="Script" path="res://scripts/camisas.gd" id="12_p282a"]
-[ext_resource type="PackedScene" uid="uid://brw8btlumf4ys" path="res://items/jeans.tscn" id="13_l2w8l"]
-[ext_resource type="PackedScene" uid="uid://b2tvrkunsvsr6" path="res://items/towel.tscn" id="14_ef0o2"]
-[ext_resource type="Script" path="res://scripts/jeans.gd" id="14_xbh6p"]
-[ext_resource type="Script" path="res://scripts/towel.gd" id="16_hrdkk"]
+[ext_resource type="PackedScene" uid="uid://b2slo75mask30" path="res://scenes/bag.tscn" id="5_ymn24"]
+[ext_resource type="Script" uid="uid://dnt11h50vvt4g" path="res://scripts/bag.gd" id="6_p61y0"]
+[ext_resource type="Script" uid="uid://bkecg5j2sc3qj" path="res://scripts/ItemData.gd" id="7_0weua"]
+[ext_resource type="PackedScene" uid="uid://gkbpwknukakq" path="res://scenes/shoes.tscn" id="7_rhvrs"]
+[ext_resource type="Script" uid="uid://csrf6cnryoyma" path="res://scripts/shoes.gd" id="8_nhely"]
+[ext_resource type="PackedScene" uid="uid://ddtbl2p82saj3" path="res://scenes/frog.tscn" id="9_2rgul"]
+[ext_resource type="Script" uid="uid://d27vy70im8lmg" path="res://scripts/frog.gd" id="10_iklod"]
+[ext_resource type="PackedScene" uid="uid://cx0jiyma8r4bu" path="res://scenes/camisas.tscn" id="11_saw6p"]
+[ext_resource type="Script" uid="uid://dvmcaokto1d0x" path="res://scripts/camisas.gd" id="12_p282a"]
+[ext_resource type="PackedScene" uid="uid://brw8btlumf4ys" path="res://scenes/jeans.tscn" id="13_l2w8l"]
+[ext_resource type="PackedScene" uid="uid://b2tvrkunsvsr6" path="res://scenes/towel.tscn" id="14_ef0o2"]
+[ext_resource type="Script" uid="uid://de7ij4rq7fpg4" path="res://scripts/jeans.gd" id="14_xbh6p"]
+[ext_resource type="Script" uid="uid://cijdrr5g22eel" path="res://scripts/towel.gd" id="16_hrdkk"]
 [ext_resource type="PackedScene" uid="uid://dv7vfbdwit58y" path="res://assets/billiard_balls/scene.gltf" id="17_eelo7"]
-[ext_resource type="PackedScene" uid="uid://bot0mljadw3we" path="res://assets/bunny_plush_toy/scene.gltf" id="18_kvv22"]
+[ext_resource type="PackedScene" uid="uid://c30xp3fbsifs0" path="res://scenes/rabbit.tscn" id="18_8i737"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aam5g"]
 resource_name = "Sicomora"
@@ -2012,9 +2012,9 @@ tracks/4/keys = PackedFloat32Array(0, 1, 0, -3.08149e-33, 0, 1, 0.266667, 1, 0, 
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hiyhx"]
 _data = {
-"RESET": SubResource("Animation_71km3"),
-"close": SubResource("Animation_d1eaf"),
-"open": SubResource("Animation_7j5ra")
+&"RESET": SubResource("Animation_71km3"),
+&"close": SubResource("Animation_d1eaf"),
+&"open": SubResource("Animation_7j5ra")
 }
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7j5ra"]
@@ -2023,50 +2023,26 @@ size = Vector3(2.04993, 2.57117, 0.587433)
 [sub_resource type="Resource" id="Resource_rg2se"]
 script = ExtResource("7_0weua")
 id = "bag"
-display_name = ""
-type = 0
-category = 0
-is_collectible = false
 
 [sub_resource type="Resource" id="Resource_lj60h"]
 script = ExtResource("7_0weua")
 id = "shoes"
-display_name = ""
-type = 0
-category = 0
-is_collectible = false
 
 [sub_resource type="Resource" id="Resource_nyocn"]
 script = ExtResource("7_0weua")
 id = "frog"
-display_name = ""
-type = 0
-category = 0
-is_collectible = false
 
 [sub_resource type="Resource" id="Resource_mtnqh"]
 script = ExtResource("7_0weua")
 id = "camisas"
-display_name = ""
-type = 0
-category = 0
-is_collectible = false
 
 [sub_resource type="Resource" id="Resource_u63v1"]
 script = ExtResource("7_0weua")
 id = "jeans"
-display_name = ""
-type = 0
-category = 0
-is_collectible = false
 
 [sub_resource type="Resource" id="Resource_bt3a0"]
 script = ExtResource("7_0weua")
 id = "towel"
-display_name = ""
-type = 0
-category = 0
-is_collectible = false
 
 [node name="Closet" type="StaticBody3D"]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
@@ -2650,7 +2626,7 @@ skeleton = NodePath("")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_hiyhx")
+&"": SubResource("AnimationLibrary_hiyhx")
 }
 
 [node name="Body" type="CollisionShape3D" parent="."]
@@ -2791,7 +2767,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 1.27898e-13, 0, -1.27898e-13, 1, 201.428,
 [node name="15" parent="Sketchfab_Scene/Sketchfab_model/BilliardBalls_FBX/RootNode/BilliardBalls" index="14"]
 visible = false
 
-[node name="Sketchfab_Scene2" parent="." instance=ExtResource("18_kvv22")]
-transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 1.26407, 2.12219, 0.414534)
+[node name="rabbit" parent="." instance=ExtResource("18_8i737")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.3636408, 2.1351082, 0.37421757)
 
 [editable path="Sketchfab_Scene"]

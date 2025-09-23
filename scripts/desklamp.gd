@@ -1,0 +1,2 @@
+extends InteractiveObject
+class_name DeskLamp

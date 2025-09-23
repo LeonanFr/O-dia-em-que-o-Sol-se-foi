@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://b6qtcrha7pgbs"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="BookCover" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Logo" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MenuButtons" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="StartButton" type="Button" parent="MenuButtons"]
+layout_mode = 2
+
+[node name="QuitButton" type="Button" parent="MenuButtons"]
+layout_mode = 2

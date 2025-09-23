@@ -1,4 +1,4 @@
-[gd_scene load_steps=147 format=4 uid="uid://blxraato0idpm"]
+[gd_scene load_steps=148 format=4 uid="uid://blxraato0idpm"]
 
 [ext_resource type="Script" uid="uid://c6gadnrub2by0" path="res://scripts/desk.gd" id="1_arwrf"]
 [ext_resource type="Texture2D" uid="uid://cv6gp4qiuw77p" path="res://assets/desk/textures/Tabletop_and_legs_material_baseColor.jpeg" id="2_adkvq"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://dhd7ruex6dvru" path="res://assets/desk/textures/Left_section_material_baseColor.jpeg" id="14_ktwfl"]
 [ext_resource type="Texture2D" uid="uid://fyqtg1jk5o6y" path="res://assets/desk/textures/Left_section_material_metallicRoughness.png" id="15_ivmh4"]
 [ext_resource type="Texture2D" uid="uid://ri62il36q3ro" path="res://assets/desk/textures/Left_section_material_normal.jpeg" id="16_wo0ul"]
+[ext_resource type="FontFile" uid="uid://dgsyllvf1cdrv" path="res://assets/fonts/Oceanside Typewriter.ttf" id="18_qvr81"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_he2pu"]
 resource_name = "Tabletop_and_legs_material"
@@ -2485,3 +2486,29 @@ shape = SubResource("BoxShape3D_arwrf")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00289917, 0.007083893)
 visible = false
 shape = SubResource("BoxShape3D_mnear")
+
+[node name="Pistas" type="Node3D" parent="."]
+
+[node name="Alpha" type="Label3D" parent="Pistas"]
+transform = Transform3D(-1.7484555e-09, -0.04, 0, -1.7484555e-09, 7.642742e-17, -0.04, 0.04, -1.7484555e-09, -1.7484555e-09, -0.37934434, 0.471, 0.08)
+text = "α"
+font = ExtResource("18_qvr81")
+font_size = 256
+
+[node name="Beta" type="Label3D" parent="Pistas"]
+transform = Transform3D(0.04, 0, 1.5285486e-16, -1.5285484e-16, 1.7484556e-09, 0.040000003, 0, -0.040000003, 1.7484556e-09, -0.36725083, 0.471, -0.16)
+text = "β"
+font = ExtResource("18_qvr81")
+font_size = 256
+
+[node name="Sigma" type="Label3D" parent="Pistas"]
+transform = Transform3D(-1.7484555e-09, 0.04, 0, 1.7484555e-09, 7.642742e-17, -0.04, -0.04, -1.7484555e-09, -1.7484555e-09, -0.36323658, 0.47088498, 0)
+text = "Σ"
+font = ExtResource("18_qvr81")
+font_size = 256
+
+[node name="Delta" type="Label3D" parent="Pistas"]
+transform = Transform3D(0.04, 0, 0, 0, -1.7484555e-09, -0.04, 0, 0.04, -1.7484555e-09, -0.37025085, 0.471, -0.08)
+text = "Δ"
+font = ExtResource("18_qvr81")
+font_size = 256
