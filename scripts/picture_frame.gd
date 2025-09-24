@@ -15,6 +15,7 @@ var interaction_enabled: bool = true
 
 func _ready() -> void:
 	symbol_label.text = get_symbol_character(symbol)
+	required_light = LightRequirement.FLASHLIGHT
 	number_label.hide()
 	
 func interact(_action: String = "") -> void:

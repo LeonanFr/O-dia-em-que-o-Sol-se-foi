@@ -17,6 +17,7 @@ signal inventory_updated
 enum GameState { START, FIND_CELLPHONE_PUZZLE, ROOM_EXPLORATION }
 var current_state: GameState = GameState.START
 var active_tool: ItemData = null
+var current_focus: InteractiveObject = null
 var active_light_source: ItemData = null
 var is_in_darkness: bool = false
 var _main_power_is_out: bool = false
@@ -37,7 +38,6 @@ var _current_puzzle: String = ""
 var _tv_puzzle_started: bool = false
 
 func _ready():
-	reset()
 	puzzle_timer = Timer.new()
 	puzzle_timer.name = "PuzzleTimer"
 	puzzle_timer.one_shot = true
@@ -49,7 +49,7 @@ func _process(_delta: float):
 	if _timer_running:
 		emit_signal("timer_updated", puzzle_timer.time_left)
 
-func reset():
+func initialize_new_game():
 	inventory.clear()
 	emit_signal("inventory_updated")
 	
@@ -70,7 +70,10 @@ func reset():
 	_main_power_is_out = false
 	has_cellphone_light = false
 	has_flashlight = false
+	is_flashlight_on = false
+	current_focus = null
 	_update_darkness_state()
+	emit_signal("inventory_updated")
 	
 	var interaction_controller = get_tree().root.get_node_or_null("Room/InteractionController")
 	if interaction_controller:
@@ -83,6 +86,7 @@ func reset():
 			clothes.animation_player.stop()
 			clothes.animation_player.play("RESET")
 	emit_quest_updated("Encontre a TV")
+	
 		
 func can_combine(first: ItemData, second: ItemData) -> bool:
 	if first.id == "flashlight" and second.id == "battery":
@@ -116,20 +120,36 @@ func set_active_item(item_data: ItemData):
 	emit_signal("active_item_changed", item_data.id)
 	
 func is_flashlight_battery_combo(item_a: ItemData, item_b: ItemData) -> bool:
-	return (item_a is FlashlightItemData and item_b) or (item_b is FlashlightItemData and item_a)
-
+	if item_a is FlashlightItemData and item_b.id == "battery":
+		return true
+		
+	if item_a.id == "battery" and item_b is FlashlightItemData:
+		return true
+		
+	return false
+	
 func handle_flashlight_battery(item_a: ItemData, item_b: ItemData):
 	var flashlight = item_a if item_a is FlashlightItemData else item_b
 	var battery_item = item_b if item_a is FlashlightItemData else item_a
 	
-	if flashlight.add_battery():
-		remove_from_inventory(flashlight.id)
-		has_flashlight = true
-		active_tool = null
-		emit_signal("active_item_changed", "")
+	var is_fully_charged = flashlight.add_battery()
+	
+	active_tool = null
+	
+	remove_from_inventory(battery_item.id, false)
+	
+	if is_fully_charged:
+		remove_from_inventory(flashlight.id, false)
+		var charged_item = flashlight.charged_flashlight_item.duplicate()
+		add_to_inventory(charged_item, false)
 		
-	remove_from_inventory(battery_item.id)
-
+		has_flashlight = true
+		remove_from_inventory("cellphone", false)
+		if is_cellphone_light_on:
+			toggle_cellphone_light()
+	
+	emit_signal("inventory_updated")
+	emit_signal("active_item_changed", "")
 	
 func get_item_feedback_message(item_data: ItemData) -> String:
 	if item_data.display_name == "":
@@ -198,6 +218,8 @@ func _on_puzzle_solved_logic(puzzle_id: String):
 			_cellphone_is_unlocked = true
 			emit_signal("cellphone_light_unlocked")
 			emit_quest_updated("")
+			current_state = GameState.ROOM_EXPLORATION
+
 			var level_animator = get_tree().root.get_node_or_null("Room/LevelAnimator")
 			if level_animator:
 				level_animator.play("power_outage")
@@ -233,7 +255,7 @@ func emit_quest_updated(text: String):
 
 func emit_notification_requested(message: String):
 	emit_signal("notification_requested", message)
-
+	
 func request_interaction(obj: InteractiveObject) -> bool:
 	if current_state == GameState.START:
 		if not obj.item_data or obj.item_data.id != "tv":
@@ -244,11 +266,14 @@ func request_interaction(obj: InteractiveObject) -> bool:
 		return true
 
 	if obj.item_data and obj.item_data.id == "tv":
-		emit_notification_requested("Não tem mais nada para mexer nisso.")
+		emit_notification_requested("Não tem mais nada para mexer aqui.")
 		return false
 
 	if obj.required_focus_id != "":
-		var current_focus_id = active_tool.id if active_tool else ""
+		var current_focus_id = ""
+		if current_focus and current_focus.item_data:
+			current_focus_id = current_focus.item_data.id
+
 		if current_focus_id != obj.required_focus_id:
 			return false
 
@@ -264,36 +289,45 @@ func request_interaction(obj: InteractiveObject) -> bool:
 				can_see = true
 
 	if not can_see:
-		var msg = "Está escuro demais para mexer nisso."
-		emit_notification_requested(msg)
-		emit_signal("interaction_denied", msg)
+		var msg = ""
+		
+		if not _main_power_is_out:
+			msg = "Acho que não preciso mexer nisso agora."
+		else:
+			msg = "Está escuro demais para mexer nisso."
+		
+		if not msg.is_empty():
+			emit_notification_requested(msg)
+			emit_signal("interaction_denied", msg)
 		return false
 
 	return true
 
-func add_to_inventory(new_item_data: ItemData):
+func add_to_inventory(new_item_data: ItemData, notify: bool = true):
 	if new_item_data.id == "cellphone" and has_flashlight:
-		print("Celular bloqueado porque a lanterna está ativa")
 		return
 		
 	for slot_data in inventory:
 		if slot_data.item.id == new_item_data.id:
 			slot_data.quantity += 1
-			emit_signal("inventory_updated")
+			if notify:
+				emit_signal("inventory_updated")
 			return
 
 	var new_slot_data = InventorySlotData.new(new_item_data, 1)
 	inventory.append(new_slot_data)
-	emit_signal("inventory_updated")
+	if notify:
+		emit_signal("inventory_updated")
 
-func remove_from_inventory(item_id_to_remove: String):
+func remove_from_inventory(item_id_to_remove: String, notify: bool = true):
 	for i in range(inventory.size() - 1, -1, -1):
 		var slot_data = inventory[i]
 		if slot_data.item.id == item_id_to_remove:
 			slot_data.quantity -= 1
 			if slot_data.quantity <= 0:
 				inventory.remove_at(i)
-			emit_signal("inventory_updated")
+			if notify:
+				emit_signal("inventory_updated")
 			return
 
 func has_in_inventory(item_id: String) -> bool:

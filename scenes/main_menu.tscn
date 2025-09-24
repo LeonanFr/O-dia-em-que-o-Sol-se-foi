@@ -1,28 +1,83 @@
-[gd_scene format=3 uid="uid://b6qtcrha7pgbs"]
+[gd_scene load_steps=6 format=3 uid="uid://b6qtcrha7pgbs"]
+
+[ext_resource type="Texture2D" uid="uid://phlpvrd3ik1t" path="res://assets/images/cor.png" id="1_bqqt6"]
+[ext_resource type="Script" uid="uid://ddwavl0y4drj7" path="res://scripts/main_menu.gd" id="1_wu84c"]
+[ext_resource type="Texture2D" uid="uid://be7e7ou3jbopo" path="res://assets/images/tip.png" id="2_wu84c"]
+[ext_resource type="FontFile" uid="uid://dgsyllvf1cdrv" path="res://assets/fonts/Oceanside Typewriter.ttf" id="3_8ln24"]
+[ext_resource type="AudioStream" uid="uid://6a6bbelywx3g" path="res://assets/sound/main_music.mp3" id="5_8ln24"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wu84c")
 
 [node name="BookCover" type="TextureRect" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+modulate = Color(1, 1, 1, 0.47058824)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -1752.25
+offset_right = 1752.25
+offset_bottom = 1184.0
+grow_horizontal = 2
+texture = ExtResource("1_bqqt6")
+expand_mode = 1
+stretch_mode = 6
 
-[node name="Logo" type="TextureRect" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -310.5
+offset_right = 310.5
+offset_bottom = 358.0
+grow_horizontal = 2
 
-[node name="MenuButtons" type="HBoxContainer" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="StartButton" type="Button" parent="MenuButtons"]
+[node name="Logo" type="TextureRect" parent="MarginContainer2"]
 layout_mode = 2
+texture = ExtResource("2_wu84c")
+expand_mode = 1
+stretch_mode = 6
 
-[node name="QuitButton" type="Button" parent="MenuButtons"]
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -241.0
+offset_top = -120.0
+offset_right = 241.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_bottom = 20
+
+[node name="MenuButtons" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="StartButton" type="Button" parent="MarginContainer/MenuButtons"]
+custom_minimum_size = Vector2(250, 100)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_8ln24")
+theme_override_font_sizes/font_size = 32
+text = "Iniciar jogo"
+
+[node name="QuitButton" type="Button" parent="MarginContainer/MenuButtons"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_8ln24")
+theme_override_font_sizes/font_size = 32
+text = "Sair"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_8ln24")
+autoplay = true

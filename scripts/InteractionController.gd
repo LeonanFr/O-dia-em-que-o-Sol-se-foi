@@ -23,7 +23,8 @@ var _inspected_object_original_parent: Node = null
 var _inspected_object_original_transform: Transform3D
 
 func _ready():
-	GameManager.reset()
+	GameManager.initialize_new_game()
+	Hud.show()
 	focused_object_stack.clear()
 	focus_stack_transforms.clear()
 	GameManager.cellphone_light_toggled.connect(_on_cellphone_light_toggled)
@@ -82,70 +83,53 @@ func _handle_mouse_click(mouse_position: Vector2):
 	var ray_end = ray_origin + camera_controller.project_ray_normal(mouse_position) * 1000
 	var query := PhysicsRayQueryParameters3D.create(ray_origin, ray_end)
 	var result := space_state.intersect_ray(query)
-
+	
 	if not result.has("collider"):
-		print("Mouse click não atingiu nenhum collider.")
 		return
-
+		
 	var obj = result.collider
-	print("Collider atingido:", obj)
-
 	var interactive_obj = _get_interactive_parent(obj)
 	if not interactive_obj:
-		print("Nenhum InteractiveObject pai encontrado.")
 		return
-	print("InteractiveObject encontrado:", interactive_obj)
-
+		
+	if not debug_mode and not GameManager.request_interaction(interactive_obj):
+		return
+		
 	if not interactive_obj.is_light_requirement_met():
-		print("Objeto não pode ser visto devido à luz.")
-		GameManager.emit_notification_requested("Está escuro demais para ver.")
+		if not GameManager._main_power_is_out:
+			GameManager.emit_notification_requested("Acho que não preciso mexer nisso agora.")
+		else:
+			GameManager.emit_notification_requested("Está escuro demais para ver.")
 		return
-	print("Requisito de luz atendido.")
 
+	
 	if is_inspecting:
-		print("Estado: inspeção ativa.")
 		if interactive_obj == inspected_object or inspected_object.is_ancestor_of(interactive_obj):
 			if interactive_obj == inspected_object:
-				print("Clique no objeto sendo inspecionado.")
 				inspected_object.handle_inspection_click(result)
 			else:
-				print("Objeto filho coletado durante inspeção.")
 				inspected_object.child_item_was_collected(interactive_obj)
 		return
-
+		
 	if GameManager.active_tool:
-		print("Usando ferramenta ativa no objeto:", GameManager.active_tool)
 		interactive_obj.use_tool(GameManager.active_tool)
 		return
-
+		
 	if is_focused:
-		print("Estado: foco ativo.")
 		if focused_object == interactive_obj or focused_object.is_ancestor_of(interactive_obj):
 			if interactive_obj.get_focus_transform():
-				print("Foco aplicado no objeto.")
 				_focus_on_object(interactive_obj)
 			elif interactive_obj.is_inspectable:
-				print("Iniciando inspeção do objeto focado.")
 				_start_inspection(interactive_obj)
 			else:
-				print("Disparando interação no objeto focado.")
 				_trigger_interaction(interactive_obj)
 	else:
-		print("Estado: foco inativo.")
-		if not debug_mode and not GameManager.request_interaction(interactive_obj):
-			print("Interação bloqueada pelo GameManager.")
-			return
-
 		if interactive_obj.is_inspectable:
-			print("Iniciando inspeção do objeto.")
 			_start_inspection(interactive_obj)
 		elif interactive_obj.get_focus_transform():
-			print("Aplicando foco no objeto.")
 			_focus_on_object(interactive_obj)
 		else:
-			print("Disparando interação no objeto.")
 			_trigger_interaction(interactive_obj)
-
 			
 func _trigger_interaction(obj: InteractiveObject):
 	if not obj.item_data:
@@ -155,6 +139,8 @@ func _trigger_interaction(obj: InteractiveObject):
 		GameManager.emit_notification_requested("Não sei se devo pegar isso agora.")
 		return
 	if obj.item_data.is_collectible:
+		if obj.collision_shape:
+			obj.collision_shape.disabled = true
 		GameManager.add_to_inventory(obj.item_data)
 		obj.queue_free()
 		return
@@ -181,7 +167,9 @@ func _focus_on_object(obj: InteractiveObject):
 		
 	focused_object_stack.append(focused_object)
 	focus_stack_transforms.append(camera_controller.global_transform)
-		
+	
+	GameManager.current_focus = obj
+	
 	if obj.item_data and obj.item_data.id == "tv":
 		GameManager.emit_quest_updated("")
 	
@@ -224,11 +212,11 @@ func _unfocus_current_object():
 				focused_object.close_all_drawers()
 	
 	var tween: Tween
-	
 	if not focus_stack_transforms.is_empty():
 		var previous_transform = focus_stack_transforms.pop_back()
 		var previous_focused_object = focused_object_stack.pop_back()
 		
+		GameManager.current_focus = previous_focused_object
 		tween = camera_controller.unfocus(previous_transform)
 		if(focused_object_stack.is_empty()):
 			is_focused = false

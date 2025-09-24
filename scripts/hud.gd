@@ -12,6 +12,7 @@ signal ui_toggled(is_open: bool)
 var password_screen_scene = preload("res://scenes/password_screen.tscn")
 
 func _ready():
+	hide()
 	GameManager.quest_updated.connect(update_quest)
 	GameManager.notification_requested.connect(show_notification)
 	GameManager.timer_updated.connect(_on_timer_updated)
@@ -89,19 +90,20 @@ func _update_all_slot_styles(_payload = null):
 	var active_tool_id = GameManager.active_tool.id if GameManager.active_tool else ""
 	
 	for slot in inventory_slots_container.get_children():
-		if not (slot is InventorySlot and slot.slot_data and slot.slot_data.item):
+		if not (slot is InventorySlot):
 			continue
 			
-		var item_data = slot.slot_data.item
 		var is_active = false
-		var current_item_id = item_data.id
-		
-		if current_item_id == active_tool_id:
-			is_active = true
-		elif item_data.type == ItemData.ItemType.DIRECT_USE:
-			var direct_use_is_active = GameManager.is_direct_use_item_active(current_item_id)
-			if direct_use_is_active:
+		if slot.slot_data and slot.slot_data.item:
+			var item_data = slot.slot_data.item
+			var current_item_id = item_data.id
+			
+			if current_item_id == active_tool_id:
 				is_active = true
+			elif item_data.type == ItemData.ItemType.DIRECT_USE:
+				var direct_use_is_active = GameManager.is_direct_use_item_active(current_item_id)
+				if direct_use_is_active:
+					is_active = true
 		
 		var new_stylebox = slot.get_theme_stylebox("panel").duplicate() as StyleBoxFlat
 		if is_active:

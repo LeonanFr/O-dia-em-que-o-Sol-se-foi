@@ -1,0 +1,64 @@
+[gd_scene load_steps=6 format=3 uid="uid://dkh5ocmucca8g"]
+
+[ext_resource type="FontFile" uid="uid://dgsyllvf1cdrv" path="res://assets/fonts/Oceanside Typewriter.ttf" id="1_hprjd"]
+[ext_resource type="Script" uid="uid://dgs1afn0sb2vd" path="res://scripts/loading_screen.gd" id="1_ku3bi"]
+[ext_resource type="AudioStream" uid="uid://b3l7y58qwk438" path="res://assets/sound/crow.mp3" id="2_ku3bi"]
+[ext_resource type="Texture2D" uid="uid://cddykt48nnt36" path="res://assets/icons/loading-circle.png" id="4_5phy8"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_5phy8"]
+font = ExtResource("1_hprjd")
+font_size = 32
+
+[node name="LoadingScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ku3bi")
+
+[node name="BackgroundColor" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.12225228, 0.12225222, 0.12225223, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="BackgroundColor"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 200
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 200
+
+[node name="QuoteLabel" type="Label" parent="BackgroundColor/MarginContainer"]
+custom_minimum_size = Vector2(250, 250)
+layout_mode = 2
+label_settings = SubResource("LabelSettings_5phy8")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="CrowSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_ku3bi")
+autoplay = true
+
+[node name="LoadingCircle" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 918.0
+offset_top = 946.0
+offset_right = 1002.0
+offset_bottom = 1030.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("4_5phy8")
+expand_mode = 5
+stretch_mode = 5
