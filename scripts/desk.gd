@@ -34,6 +34,8 @@ func get_focus_transform():
 	return null
 	
 func _on_drawer_clicked(_camera, event, _position, _normal, _shape_idx, drawer_node):
+	if GameManager.player_is_inspecting:
+		return
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		var data = drawer_data.get(drawer_node)
 		if not data: return

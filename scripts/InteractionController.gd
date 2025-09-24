@@ -48,16 +48,34 @@ func _ready():
 			obj.input_lock_requested.connect(lock_input)
 
 func _unhandled_input(event: InputEvent):
+	
 	if is_inspecting:
+		
 		if event.is_action_pressed("ui_down"):
 			_stop_inspection()
 			return
+			
 		if event is InputEventMouseMotion and event.button_mask == MOUSE_BUTTON_MASK_LEFT:
 			if inspected_object:
 				inspected_object.rotate_y(deg_to_rad(-event.relative.x * 0.4))
 				inspected_object.rotate_x(deg_to_rad(-event.relative.y * 0.4))
+			return
+			
 		if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-			_handle_mouse_click(event.position)
+			var space_state = get_world_3d().direct_space_state
+			var ray_origin = camera_controller.project_ray_origin(event.position)
+			var ray_end = ray_origin + camera_controller.project_ray_normal(event.position) * 1000
+			var query := PhysicsRayQueryParameters3D.create(ray_origin, ray_end)
+			var result := space_state.intersect_ray(query)
+
+			if result.has("collider"):
+				var interactive_hit = _get_interactive_parent(result.collider)
+				
+				if interactive_hit == inspected_object:
+					inspected_object.handle_inspection_click(result)
+				elif inspected_object.is_ancestor_of(interactive_hit):
+					inspected_object.child_item_was_collected(interactive_hit)
+			return 
 		return
 
 	if GameManager.is_in_darkness:
@@ -232,6 +250,7 @@ func _unfocus_current_object():
 func _start_inspection(obj: InteractiveObject):
 	if camera_controller.is_busy() or is_transitioning: return
 
+	GameManager.player_is_inspecting = true
 	is_inspecting = true
 	input_locked = true
 	is_transitioning = true
@@ -264,7 +283,9 @@ func _start_inspection(obj: InteractiveObject):
 func _stop_inspection():
 	if not is_inspecting or not is_instance_valid(inspected_object): return
 
+	GameManager.player_is_inspecting = false
 	is_transitioning = true
+	is_inspecting = false
 	
 	inspected_object.on_inspection_stop()
 	inspected_object.reparent(_inspected_object_original_parent)
@@ -275,7 +296,6 @@ func _stop_inspection():
 	tween.tween_property(inspected_object, "global_transform", _inspected_object_original_transform, inspection_tween_duration)
 	await tween.finished
 	
-	is_inspecting = false
 	input_locked = false
 	inspected_object = null
 	_inspected_object_original_parent = null

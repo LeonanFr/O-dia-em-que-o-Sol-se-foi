@@ -26,6 +26,7 @@ var has_flashlight: bool = false
 var is_cellphone_light_on: bool = false
 var is_flashlight_on: bool = false
 var _cellphone_is_unlocked: bool = false
+var player_is_inspecting: bool = false
 var inventory: Array[InventorySlotData] = []
 
 @export var find_cellphone_timer_seconds: float = 60.0
@@ -72,6 +73,7 @@ func initialize_new_game():
 	has_flashlight = false
 	is_flashlight_on = false
 	current_focus = null
+	player_is_inspecting = false
 	_update_darkness_state()
 	emit_signal("inventory_updated")
 	
